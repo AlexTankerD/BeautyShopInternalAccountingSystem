@@ -1,0 +1,33 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <SolidColorBrush x:Key="MainBackground">
+        <SolidColorBrush.Color>
+            <Color A="255" G="255" R="255" B="255"/>
+        </SolidColorBrush.Color>
+    </SolidColorBrush>
+    <SolidColorBrush x:Key="AdditionalBackground">
+        <SolidColorBrush.Color>
+            <Color A="255" G="228" R="225" B="255"/>
+        </SolidColorBrush.Color>
+    </SolidColorBrush>
+    <SolidColorBrush x:Key="AccentuatedAttention">
+        <SolidColorBrush.Color>
+            <Color A="255" G="74" R="255" B="109"/>
+        </SolidColorBrush.Color>
+    </SolidColorBrush>
+    <SolidColorBrush x:Key="AccentuatedFocusedColor">
+        <SolidColorBrush.Color>
+            <Color A="255" G="43" R="229" B="80"/>
+        </SolidColorBrush.Color>
+    </SolidColorBrush>
+    <SolidColorBrush x:Key="BlackColor">
+        <SolidColorBrush.Color>
+            <Color A="255" G="0" R="0" B="0"/>
+        </SolidColorBrush.Color>
+    </SolidColorBrush>
+    <SolidColorBrush x:Key="TrafficBlue">
+        <SolidColorBrush.Color>
+            <Color A="255" G="57" R="6" B="113"/>
+        </SolidColorBrush.Color>
+    </SolidColorBrush>
+</ResourceDictionary>

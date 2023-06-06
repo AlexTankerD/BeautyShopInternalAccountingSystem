@@ -1,0 +1,40 @@
+﻿<Window x:Class="BeautyShopInternalAccountingSystem.View.AuthorizationWindows.AuthorizationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BeautyShopInternalAccountingSystem.View.AuthorizationWindows"
+        xmlns:ui="http://schemas.modernwpf.com/2019" xmlns:viewmodel="clr-namespace:BeautyShopInternalAccountingSystem.ViewModel"
+        mc:Ignorable="d"
+        Title="Authorization" Height="450" Width="400" WindowStartupLocation="CenterScreen" ui:WindowHelper.UseModernWindowStyle="True" >
+    <Window.DataContext>
+        <viewmodel:AuthorizationViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition/>
+            <RowDefinition />
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <TextBox x:Name="LoginBox" Grid.Row="0" Margin="15,15,15,15" 
+                 Height="70" 
+                 ui:ControlHelper.PlaceholderText="adawd"
+                 Style="{StaticResource TextBoxStyle}" 
+                 ></TextBox>
+        <TextBox x:Name="PasswordBox" Grid.Row="1" Height="70" 
+                 Margin="15,15,15,15" 
+                 ui:ControlHelper.PlaceholderText="aAWDAWD"
+                 Style="{StaticResource TextBoxStyle}"></TextBox>
+        <Button VerticalAlignment="Bottom" Margin="15" Height="50" 
+                Grid.Row="2" Width="150" 
+                Style="{StaticResource ButtonStyle}" 
+                HorizontalAlignment="Center">Войти</Button>
+        <Button Grid.Row="3" Margin="15,0,0,0" 
+                HorizontalAlignment="Left" 
+                Style="{StaticResource ButtonStringStyle}">Зарегистрироваться</Button>
+        <Button Grid.Row="3" Margin="0,0,15,0"
+                HorizontalAlignment="Right" 
+                Style="{StaticResource ButtonStringStyle}">Забыли пароль</Button>
+    </Grid>
+</Window>
