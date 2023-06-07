@@ -17,10 +17,11 @@ namespace BeautyShopInternalAccountingSystem.View.AuthorizationWindows
     /// <summary>
     /// Логика взаимодействия для Authorization.xaml
     /// </summary>
-    public partial class AuthorizationWindow : Window
+    public partial class ForgotPasswordWindow : Window
     {
-        public AuthorizationWindow()
+        public ForgotPasswordWindow()
         {
+            DataContext = this;
             InitializeComponent();
             
         }

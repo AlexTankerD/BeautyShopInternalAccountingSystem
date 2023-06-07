@@ -17,7 +17,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="bin\Debug\net7.0-windows\Resources\ClientImages\" />
     <Folder Include="DB\" />
+    <Folder Include="Resources\Styles\" />
+    <Folder Include="Resources\ClientImages\" />
     <Folder Include="View\ManagerWindows\" />
     <Folder Include="View\ClientWindows\" />
     <Folder Include="View\EmployeeWindows\" />
@@ -30,6 +33,12 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="ModernWpfUI" Version="0.9.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="View\AuthorizationWindows\ForgotPasswordWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 
 </Project>

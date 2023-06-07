@@ -12,19 +12,23 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace BeautyShopInternalAccountingSystem.View.AuthorizationWindows
+namespace BeautyShopInternalAccountingSystem.View
 {
     /// <summary>
-    /// Логика взаимодействия для Authorization.xaml
+    /// Логика взаимодействия для MessageView.xaml
     /// </summary>
-    public partial class AuthorizationWindow : Window
+    public partial class MessageWindow : Window
     {
-        public AuthorizationWindow()
+        public MessageWindow(string message)
         {
             InitializeComponent();
-            
+
+            MessageText.Text = message;
         }
 
-        
+        private void okbtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

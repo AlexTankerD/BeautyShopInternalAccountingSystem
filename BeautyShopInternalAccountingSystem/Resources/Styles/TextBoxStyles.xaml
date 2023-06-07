@@ -2,20 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:ui="http://schemas.modernwpf.com/2019">
     <Style BasedOn="{StaticResource {x:Type TextBox}}" x:Key="TextBoxStyle" TargetType="TextBox">
-        <Setter Property="SnapsToDevicePixels"
-          Value="True" />
-        <Setter Property="OverridesDefaultStyle"
-          Value="True" />
-        <Setter Property="KeyboardNavigation.TabNavigation"
-          Value="None" />
-        <Setter Property="FocusVisualStyle"
-          Value="{x:Null}" />
-        <Setter Property="MinWidth"
-          Value="120" />
-        <Setter Property="MinHeight"
-          Value="20" />
-        <Setter Property="AllowDrop"
-          Value="true" />
+        
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate x:Name="control" TargetType="{x:Type TextBox}">
@@ -24,12 +11,16 @@
                             BorderBrush="{StaticResource BlackColor}"
                             CornerRadius="3"
                             Background="{StaticResource AdditionalBackground}">
-                        <TextBox ui:ControlHelper.PlaceholderText="{TemplateBinding ui:ControlHelper.PlaceholderText}"/>
+                        <TextBox FontFamily="Tahoma"  x:Name="box" Text="{Binding Path=Text,
+                                                RelativeSource={RelativeSource TemplatedParent}, 
+                                                Mode=TwoWay,
+                                                UpdateSourceTrigger=PropertyChanged}" Background="Transparent" ui:ControlHelper.PlaceholderText="{TemplateBinding ui:ControlHelper.PlaceholderText}"/>
 
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="border" Property="Background" Value="{StaticResource AccentuatedFocusedColor}"/>
+                            <Setter TargetName="border" Property="Background" Value="{StaticResource AccentuatedAttention}"/>
+                            <Setter TargetName="box" Property="TextBox.Foreground" Value="{StaticResource MainBackground}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

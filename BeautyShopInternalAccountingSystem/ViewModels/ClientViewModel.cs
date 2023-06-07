@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BeautyShopInternalAccountingSystem.ViewModel
+namespace BeautyShopInternalAccountingSystem.ViewModels
 {
     internal class ClientViewModel
     {

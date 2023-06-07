@@ -1,0 +1,14 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style x:Key="RadioButtonStyle" TargetType="{x:Type RadioButton}">
+        <Style.Setters>
+            <Setter Property="Foreground" Value="{StaticResource AccentuatedAttention}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource AccentuatedAttention}"/>
+        </Style.Setters>
+        <Style.Triggers>
+        <Trigger Property="IsPressed" Value="True">
+            <Setter Property="Foreground" Value="{StaticResource AccentuatedFocusedColor}"/>
+        </Trigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>

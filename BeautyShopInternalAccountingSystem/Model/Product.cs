@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BeautyShopInternalAccountingSystem.ViewModel
+namespace BeautyShopInternalAccountingSystem.Model
 {
-    public class AuthorizationViewModel
+    public class Product
     {
     }
 }
