@@ -25,6 +25,7 @@
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
             <Border CornerRadius="3" BorderThickness="2" BorderBrush="{StaticResource BlackColor}" Margin="10"  
                     Width="200" HorizontalAlignment="Left" Grid.Row="0" Grid.RowSpan="3" Height="200">
@@ -39,32 +40,37 @@
                      Text="{Binding Username}"  ui:ControlHelper.PlaceholderText="Имя пользователя" 
                      Width="350" Style="{StaticResource TextBoxStyle}"></TextBox>
             <TextBox HorizontalAlignment="Right" Grid.Row="1" Margin="10" Height="50" 
-                     Text="{Binding Name}" ui:ControlHelper.PlaceholderText="Имя" 
+                     Text="{Binding Password}"  ui:ControlHelper.PlaceholderText="Пароль" 
                      Width="350" Style="{StaticResource TextBoxStyle}"></TextBox>
             <TextBox HorizontalAlignment="Right" Grid.Row="2" Margin="10" Height="50" 
-                     Text="{Binding Surname}" ui:ControlHelper.PlaceholderText="Фамилия"  
+                     Text="{Binding Name}" ui:ControlHelper.PlaceholderText="Имя" 
                      Width="350" Style="{StaticResource TextBoxStyle}"></TextBox>
             <TextBox HorizontalAlignment="Right" Grid.Row="3" Margin="10" Height="50" 
-                     Text="{Binding Patronymic}" ui:ControlHelper.PlaceholderText="Отчество"  
+                     Text="{Binding Surname}" ui:ControlHelper.PlaceholderText="Фамилия"  
                      Width="350" Style="{StaticResource TextBoxStyle}"></TextBox>
             <TextBox HorizontalAlignment="Right" Grid.Row="4" Margin="10" Height="50" 
-                     Text="{Binding Birthaday}"  ui:ControlHelper.PlaceholderText="Дата рождения"  
+                     Text="{Binding Patronymic}" ui:ControlHelper.PlaceholderText="Отчество"  
                      Width="350" Style="{StaticResource TextBoxStyle}"></TextBox>
             <TextBox HorizontalAlignment="Right" Grid.Row="5" Margin="10" Height="50" 
-                     Text="{Binding Email}" ui:ControlHelper.PlaceholderText="Email"  
+                     Text="{Binding Birthday}"  ui:ControlHelper.PlaceholderText="Дата рождения"  
                      Width="350" Style="{StaticResource TextBoxStyle}"></TextBox>
             <TextBox HorizontalAlignment="Right" Grid.Row="6" Margin="10" Height="50" 
-                     Text="{Binding Phonenumber}" ui:ControlHelper.PlaceholderText="Номер телефона"  
+                     Text="{Binding Email}" ui:ControlHelper.PlaceholderText="Email"  
+                     Width="350" Style="{StaticResource TextBoxStyle}"></TextBox>
+            <TextBox HorizontalAlignment="Right" Grid.Row="7" Margin="10" Height="50" 
+                     Text="{Binding PhoneNumber}" ui:ControlHelper.PlaceholderText="Номер телефона"  
                      Width="350" Style="{StaticResource TextBoxStyle}"></TextBox>
             <ComboBox FontFamily="Tahoma"  Margin="0,10,260,0" HorizontalAlignment="Right" Height="50" 
-                      Width="100" SelectedValue="{Binding Sex}" ui:ControlHelper.PlaceholderText="Пол" Grid.Row="7">
+                      Width="100" SelectedValue="{Binding Sex}" ui:ControlHelper.PlaceholderText="Пол" Grid.Row="8">
                 <sys:Char>М</sys:Char>
                 <sys:Char>Ж</sys:Char>
             </ComboBox>
-            <Button Grid.Row="8" Height="50" Width="200" Margin="10" HorizontalAlignment="Center"  
-                    Style="{StaticResource ButtonStyle}">Зарегистрироваться</Button>
             <Button Grid.Row="9" Height="50" Width="200" Margin="10" HorizontalAlignment="Center"  
-                    Style="{StaticResource ButtonStringStyle}" Command="{Binding OpenAuthorizationWindowCommand}" CommandParameter="{Binding ElementName=regwnd}">Уже зарегистрированы? Войти</Button>
+                    Style="{StaticResource ButtonStyle}"
+                    Command="{Binding RegistrationCommand}" CommandParameter="{Binding ElementName=regwnd}">Зарегистрироваться</Button>
+            <Button Grid.Row="10" Height="50" Width="200" Margin="10" HorizontalAlignment="Center"  
+                    Style="{StaticResource ButtonStringStyle}" Command="{Binding OpenAuthorizationWindowCommand}" 
+                    CommandParameter="{Binding ElementName=regwnd}">Уже зарегистрированы? Войти</Button>
         </Grid>
     </ScrollViewer>
 </Window>

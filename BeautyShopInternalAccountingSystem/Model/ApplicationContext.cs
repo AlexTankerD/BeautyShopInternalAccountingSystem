@@ -20,6 +20,7 @@ namespace BeautyShopInternalAccountingSystem.Model
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlite($"Data Source=DB\\ApplicationDataBase.db; Foreign Keys=True");
+            
         }
     }
 }

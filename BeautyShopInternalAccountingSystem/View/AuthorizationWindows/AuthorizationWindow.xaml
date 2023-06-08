@@ -19,12 +19,12 @@
             <RowDefinition />
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <TextBox x:Name="LoginBox" Grid.Row="0" Margin="15,15,15,15" 
+        <TextBox Text="{Binding Login}" x:Name="LoginBox" Grid.Row="0" Margin="15,15,15,15" 
                  Height="60" 
                  ui:ControlHelper.PlaceholderText="Логин"
                  Style="{StaticResource TextBoxStyle}" 
                  ></TextBox>
-        <TextBox x:Name="PasswordBox" Grid.Row="1" Height="60" 
+        <TextBox Text="{Binding Password}" x:Name="PasswordBox" Grid.Row="1" Height="60" 
                  Margin="15,15,15,15" 
                  ui:ControlHelper.PlaceholderText="Пароль"
                  Style="{StaticResource TextBoxStyle}"></TextBox>
@@ -36,7 +36,9 @@
         <Button VerticalAlignment="Bottom" Margin="15" Height="50" 
                 Grid.Row="3" Width="150" 
                 Style="{StaticResource ButtonStyle}" 
-                HorizontalAlignment="Center">Войти</Button>
+                HorizontalAlignment="Center"
+                Command="{Binding AuthorizationCommand}" 
+                CommandParameter="{Binding ElementName = authwnd}">Войти</Button>
         <Button Grid.Row="4" Margin="15,0,0,0" 
                 HorizontalAlignment="Left" 
                 Style="{StaticResource ButtonStringStyle}"
