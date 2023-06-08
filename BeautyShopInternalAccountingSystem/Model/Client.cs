@@ -21,7 +21,7 @@ namespace BeautyShopInternalAccountingSystem.Model
         public string PhoneNumber { get; set; }
         public string Password { get; set; }
         public string ClientImageDirectory { get; set; }
-
+        public string sosi { get; set; }
 
     }
 }

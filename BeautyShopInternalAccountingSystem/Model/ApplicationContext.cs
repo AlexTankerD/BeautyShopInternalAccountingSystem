@@ -15,12 +15,11 @@ namespace BeautyShopInternalAccountingSystem.Model
         public DbSet<Manager> Manager { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Service> Services { get; set; }
-        string folderpath = Path.Combine(Directory.GetCurrentDirectory(), @"DB/ApplicationDataBase.db");
         public ApplicationContext() => Database.EnsureCreated();
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite($"Data Source=DB/ApplicationDataBase.db; Foreign Keys=True");
+            optionsBuilder.UseSqlite($"Data Source=DB\\ApplicationDataBase.db; Foreign Keys=True");
         }
     }
 }
