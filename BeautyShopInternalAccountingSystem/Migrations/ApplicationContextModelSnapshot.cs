@@ -87,7 +87,7 @@ namespace BeautyShopInternalAccountingSystem.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("PassportNumber")
+                    b.Property<string>("PassportData")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -178,6 +178,10 @@ namespace BeautyShopInternalAccountingSystem.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("EmployeeKey")
                         .IsRequired()
                         .HasColumnType("TEXT");
 

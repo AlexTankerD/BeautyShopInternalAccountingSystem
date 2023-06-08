@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BeautyShopInternalAccountingSystem.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20230608114354_Insert")]
+    [Migration("20230608115155_Insert")]
     partial class Insert
     {
         /// <inheritdoc />
@@ -90,7 +90,7 @@ namespace BeautyShopInternalAccountingSystem.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("PassportNumber")
+                    b.Property<string>("PassportData")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -181,6 +181,10 @@ namespace BeautyShopInternalAccountingSystem.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("EmployeeKey")
                         .IsRequired()
                         .HasColumnType("TEXT");
 

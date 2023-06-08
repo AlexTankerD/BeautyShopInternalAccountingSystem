@@ -49,8 +49,8 @@ namespace BeautyShopInternalAccountingSystem.Migrations
                     PhoneNumber = table.Column<string>(type: "TEXT", nullable: false),
                     Position = table.Column<string>(type: "TEXT", nullable: false),
                     SellaryRatio = table.Column<double>(type: "REAL", nullable: false),
-                    PassportNumber = table.Column<string>(type: "TEXT", nullable: false),
-                    EmployeeImageDirectory = table.Column<string>(type: "TEXT", nullable: false)
+                    EmployeeImageDirectory = table.Column<string>(type: "TEXT", nullable: false),
+                    PassportData = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -97,7 +97,8 @@ namespace BeautyShopInternalAccountingSystem.Migrations
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     Description = table.Column<string>(type: "TEXT", nullable: false),
                     Type = table.Column<string>(type: "TEXT", nullable: false),
-                    Price = table.Column<double>(type: "REAL", nullable: false)
+                    Price = table.Column<double>(type: "REAL", nullable: false),
+                    EmployeeKey = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {

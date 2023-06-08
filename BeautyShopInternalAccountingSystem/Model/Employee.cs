@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +22,7 @@ namespace BeautyShopInternalAccountingSystem.Model
         public string PhoneNumber { get; set; }
         public string Position { get; set; }
         public double SellaryRatio { get; set; }
-        public string PassportNumber { get; set; }
         public string EmployeeImageDirectory { get; set; }
+        public string PassportData { get; set; }
     }
 }
