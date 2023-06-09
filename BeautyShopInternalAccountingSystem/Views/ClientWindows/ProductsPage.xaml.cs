@@ -10,24 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace BeautyShopInternalAccountingSystem.Views
+namespace BeautyShopInternalAccountingSystem.Views.ClientWindows
 {
     /// <summary>
-    /// Логика взаимодействия для MessageView.xaml
+    /// Логика взаимодействия для ProductsPage.xaml
     /// </summary>
-    public partial class MessageWindow : Window
+    public partial class ProductsPage : ModernWpf.Controls.Page
     {
-        public MessageWindow(string message)
+        public ProductsPage()
         {
             InitializeComponent();
-            MessageText.Text = message;
-        }
-
-        private void okbtn_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
         }
     }
 }

@@ -131,6 +131,7 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
                 );
             }
         }
+
         private void AuthorizationCommandMethod(Window window)
         {
             if(ClientBtnIsChecked) 

@@ -1,0 +1,33 @@
+﻿<Window x:Class="BeautyShopInternalAccountingSystem.Views.ClientWindows.ClientWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ui="http://schemas.modernwpf.com/2019" 
+        xmlns:viewmodel="clr-namespace:BeautyShopInternalAccountingSystem.ViewModels"
+        xmlns:local="clr-namespace:BeautyShopInternalAccountingSystem.Views.ClientWindows"
+        mc:Ignorable="d"
+        Title="ClientWindow" FontFamily="Tahoma" Height="720" Width="1300" 
+        WindowStartupLocation="CenterScreen" ui:WindowHelper.UseModernWindowStyle="True" 
+        ResizeMode="NoResize" Background="{StaticResource MainBackground}" >
+    <Window.DataContext>
+        <viewmodel:ClientViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Button Command="{Binding OpenClientDataPageCommand}" CommandParameter="{Binding ElementName=MainFrame}" 
+                FontSize="11" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Left"  
+                Margin="350,0,0,0" Height="40" Width="150">Пользовательские данные</Button>
+        <Button Command="{Binding OpenProductsPageCommand}" CommandParameter="{Binding ElementName=MainFrame}" 
+                HorizontalAlignment="Left" Style="{StaticResource ButtonStyle}" 
+                Margin="180,0,0,0" Height="40" Width="150">Услуги</Button>
+        <Button Command="{Binding OpenServicesPageCommand}" CommandParameter="{Binding ElementName=MainFrame}" 
+                HorizontalAlignment="Left" Style="{StaticResource ButtonStyle}" 
+                Margin="10,0,0,0" Height="40" Width="150">Продукты</Button>
+        <Frame NavigationUIVisibility="Hidden" Grid.Row="1" x:Name="MainFrame"></Frame>
+    </Grid>
+    
+</Window>

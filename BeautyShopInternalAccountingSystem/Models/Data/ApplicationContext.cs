@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,11 +17,20 @@ namespace BeautyShopInternalAccountingSystem.Models.Data
         public DbSet<Manager> Manager { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Service> Services { get; set; }
-        public ApplicationContext() => Database.EnsureCreated();
+        public ApplicationContext()
+        {
+
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite($"Data Source=DB\\ApplicationDataBase.db; Foreign Keys=True");
+            var builder = new ConfigurationBuilder();
+            builder.SetBasePath(Directory.GetCurrentDirectory());
+            builder.AddJsonFile("DatabaseSettings.json");
+            var config = builder.Build();
+            string connectionString = config.GetConnectionString("DefaultConnection");
+            optionsBuilder.UseSqlServer(connectionString);
+            
 
         }
     }

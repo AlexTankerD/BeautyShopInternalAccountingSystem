@@ -9,35 +9,35 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="DB\ApplicationDataBase.db" />
+    <None Remove="DatabaseSettings.json" />
+    <None Remove="Resources\Images\1781670-1.jpg" />
     <None Remove="Resources\Logo\beauty_logo.ico" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="DB\ApplicationDataBase.db">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <Content Include="DatabaseSettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
+    <Content Include="Resources\Images\1781670-1.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Logo\beauty_logo.ico" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="bin\Debug\net7.0-windows\" />
-    <Folder Include="Resources\Styles\" />
+    <Folder Include="bin\Debug\net7.0-windows\Resources\Images\" />
     <Folder Include="Resources\ClientImages\" />
     <Folder Include="Views\ManagerWindows\" />
-    <Folder Include="Views\ClientWindows\" />
     <Folder Include="Views\EmployeeWindows\" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.5">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
     <PackageReference Include="ModernWpfUI" Version="0.9.6" />
   </ItemGroup>
 

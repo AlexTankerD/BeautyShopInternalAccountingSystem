@@ -12,22 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace BeautyShopInternalAccountingSystem.Views
+namespace BeautyShopInternalAccountingSystem.Views.ClientWindows
 {
     /// <summary>
-    /// Логика взаимодействия для MessageView.xaml
+    /// Логика взаимодействия для ClientWindow.xaml
     /// </summary>
-    public partial class MessageWindow : Window
+    public partial class ClientWindow : Window
     {
-        public MessageWindow(string message)
+        public ClientWindow()
         {
             InitializeComponent();
-            MessageText.Text = message;
-        }
-
-        private void okbtn_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
+            MainFrame.Navigate(new ProductsPage());
         }
     }
 }
