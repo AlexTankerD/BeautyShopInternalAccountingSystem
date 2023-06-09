@@ -1,7 +1,9 @@
-﻿using BeautyShopInternalAccountingSystem.Model;
-using BeautyShopInternalAccountingSystem.View;
-using BeautyShopInternalAccountingSystem.View.AuthorizationWindows;
-using KulaginExamenApplication.Model;
+﻿using BeautyShopInternalAccountingSystem.Models;
+using BeautyShopInternalAccountingSystem.Models.DataWorkers;
+using BeautyShopInternalAccountingSystem.Models.RegularExpressions;
+using BeautyShopInternalAccountingSystem.Models.RelayCommands;
+using BeautyShopInternalAccountingSystem.Views;
+using BeautyShopInternalAccountingSystem.Views.AuthorizationWindows;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -131,28 +133,87 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
         }
         private void AuthorizationCommandMethod(Window window)
         {
-            var auth = AuthorizationDataWorker.Authorization(Login, Password, ClientBtnIsChecked, EmployeeBtnIsChecked, ManagerBtnIsChecked);
-            switch (auth)
+            if(ClientBtnIsChecked) 
             {
-                case "ClientLoginSuccesful":
+                Client client = new Client();
+                var auth = AuthorizationDataWorker.AuthorizationAsClient(Login, Password, ref client);
+                if(auth)
+                {
                     OpenMessageWindow("Авторизация прошла успешно");
                     CloseWindow(window);
                     return;
-                case "EmployeeLoginSuccesful":
-                    OpenMessageWindow("Авторизация прошла успешно");
-                    CloseWindow(window);
-                    return;
-                case "ManagerLoginSuccesful":
-                    OpenMessageWindow("Авторизация прошла успешно");
-                    CloseWindow(window);
-                    return;
-                case "LoginFail":
-                    OpenMessageWindow("Неправильный логин или пароль");
-                    return;
-                case "TheButtonIsNotSelected":
-                    OpenMessageWindow("Не выбран вид входа");
-                    return;
+                }
+                OpenMessageWindow("Неправильный логин или пароль");
+                return;
             }
+            if (EmployeeBtnIsChecked)
+            {
+                Employee employee = new Employee();
+                var auth = AuthorizationDataWorker.AuthorizationAsEmployee(Login, Password, ref employee);
+                if (auth)
+                {
+                    OpenMessageWindow("Авторизация прошла успешно");
+                    CloseWindow(window);
+                    return;
+                }
+                OpenMessageWindow("Неправильный логин или пароль");
+                return;
+            }
+            if (ManagerBtnIsChecked)
+            {
+                Manager manager = new Manager();
+                var auth = AuthorizationDataWorker.AuthorizationAsManager(Login, Password, ref manager);
+                if (auth)
+                {
+                    OpenMessageWindow("Авторизация прошла успешно");
+                    CloseWindow(window);
+                    return;
+                }
+                OpenMessageWindow("Неправильный логин или пароль");
+                return;
+            }
+            OpenMessageWindow("Не выбран вид входа");
+            return;
+
+        }
+
+        #endregion
+
+        #region Команды и методы смены пароля
+        private AsyncRelayCommand _changepasswordcommand;
+        public AsyncRelayCommand ChangePasswordCommand
+        {
+            get
+            {
+                return _changepasswordcommand ?? new AsyncRelayCommand(async (obj) =>
+                {
+                    Window window = obj as Window;
+                    await Task.Run(() => ChangePasswordCommandMethod(window));
+                }
+                );
+            }
+        }
+        public void ChangePasswordCommandMethod(Window window)
+        {
+            if(string.IsNullOrEmpty(Username)) 
+            {
+                OpenMessageWindow("Введите имя пользователя");
+            }
+            if(!ClientRegexp.IsNewPasswordValid(Password, ConfirmPassword)) 
+            {
+                OpenMessageWindow("Пароли должны совпадать");
+                return;
+            }
+            var chgpsw = AuthorizationDataWorker.ChangePassword(Username, Password);
+            if (!chgpsw)
+            {
+                OpenMessageWindow("Пользователя с таким именем не существует");
+                return;
+            }
+            OpenMessageWindow("Пароль успешно изменен");
+            OpenAuthorizationWindow();
+            CloseWindow(window);
+            return;
         }
         #endregion
 

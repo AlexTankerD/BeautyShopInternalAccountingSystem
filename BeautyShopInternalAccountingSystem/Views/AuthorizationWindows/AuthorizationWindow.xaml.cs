@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace BeautyShopInternalAccountingSystem.View.AuthorizationWindows
+namespace BeautyShopInternalAccountingSystem.Views.AuthorizationWindows
 {
     /// <summary>
     /// Логика взаимодействия для Authorization.xaml

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BeautyShopInternalAccountingSystem.Model
+namespace BeautyShopInternalAccountingSystem.Models.Data
 {
     public class ApplicationContext : DbContext
     {
@@ -20,7 +20,7 @@ namespace BeautyShopInternalAccountingSystem.Model
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlite($"Data Source=DB\\ApplicationDataBase.db; Foreign Keys=True");
-            
+
         }
     }
 }

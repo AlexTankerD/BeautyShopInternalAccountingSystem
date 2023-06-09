@@ -1,4 +1,4 @@
-﻿using BeautyShopInternalAccountingSystem.View.AuthorizationWindows;
+﻿using BeautyShopInternalAccountingSystem.Views.AuthorizationWindows;
 using System;
 using System.Collections.Generic;
 using System.Configuration;

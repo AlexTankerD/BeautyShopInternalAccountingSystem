@@ -17,6 +17,9 @@
     <Content Include="DB\ApplicationDataBase.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="Resources\Logo\beauty_logo.ico" />
   </ItemGroup>
 
@@ -24,9 +27,9 @@
     <Folder Include="bin\Debug\net7.0-windows\" />
     <Folder Include="Resources\Styles\" />
     <Folder Include="Resources\ClientImages\" />
-    <Folder Include="View\ManagerWindows\" />
-    <Folder Include="View\ClientWindows\" />
-    <Folder Include="View\EmployeeWindows\" />
+    <Folder Include="Views\ManagerWindows\" />
+    <Folder Include="Views\ClientWindows\" />
+    <Folder Include="Views\EmployeeWindows\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -39,7 +42,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="View\AuthorizationWindows\ForgotPasswordWindow.xaml.cs">
+    <Compile Update="Views\AuthorizationWindows\ForgotPasswordWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

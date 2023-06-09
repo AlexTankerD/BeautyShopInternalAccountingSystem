@@ -25,6 +25,7 @@ namespace BeautyShopInternalAccountingSystem.Migrations
                     Sex = table.Column<char>(type: "TEXT", nullable: false),
                     Email = table.Column<string>(type: "TEXT", nullable: false),
                     PhoneNumber = table.Column<string>(type: "TEXT", nullable: false),
+                    Tag = table.Column<string>(type: "TEXT", nullable: false),
                     ClientImageDirectory = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>

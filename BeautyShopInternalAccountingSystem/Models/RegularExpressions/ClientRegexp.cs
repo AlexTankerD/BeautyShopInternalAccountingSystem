@@ -7,19 +7,19 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace KulaginExamenApplication.Model
+namespace BeautyShopInternalAccountingSystem.Models.RegularExpressions
 {
     public static class ClientRegexp
     {
         public static bool IsPasswordValid(string Password)
         {
-            if(string.IsNullOrEmpty(Password) || Password.Length < 10)
+            if (string.IsNullOrEmpty(Password) || Password.Length < 10)
                 return false;
             return true;
         }
-        public static bool IsNewPasswordValid(string Password, string NewPassword)
+        public static bool IsNewPasswordValid(string NewPassword, string ConfirmPassword)
         {
-            if(NewPassword != Password)
+            if (ConfirmPassword != NewPassword)
                 return false;
             return true;
         }
@@ -49,7 +49,7 @@ namespace KulaginExamenApplication.Model
         }
         public static bool IsEmailValid(string Email)
         {
-            if(!MailAddress.TryCreate(Email, out _))
+            if (!MailAddress.TryCreate(Email, out _))
                 return false;
             return true;
         }

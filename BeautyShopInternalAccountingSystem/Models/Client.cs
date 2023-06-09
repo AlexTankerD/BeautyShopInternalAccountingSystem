@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BeautyShopInternalAccountingSystem.Model
+namespace BeautyShopInternalAccountingSystem.Models
 {
     public class Client
     {
@@ -20,6 +20,7 @@ namespace BeautyShopInternalAccountingSystem.Model
         public char Sex { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
+        public string Tag { get; set; }
         public string? ClientImageDirectory { get; set; }
         public Client()
         { }

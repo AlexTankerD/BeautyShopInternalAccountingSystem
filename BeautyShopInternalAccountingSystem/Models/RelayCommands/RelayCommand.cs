@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace BeautyShopInternalAccountingSystem.Model
+namespace BeautyShopInternalAccountingSystem.Models.RelayCommands
 {
     public class RelayCommand : ICommand
     {
@@ -16,7 +16,7 @@ namespace BeautyShopInternalAccountingSystem.Model
             add { CommandManager.RequerySuggested += value; }
             remove { CommandManager.RequerySuggested -= value; }
         }
-        public RelayCommand(Action<object> execute,Func<object, bool> canExecute = null)
+        public RelayCommand(Action<object> execute, Func<object, bool> canExecute = null)
         {
             _execute = execute;
             _canExecute = canExecute;

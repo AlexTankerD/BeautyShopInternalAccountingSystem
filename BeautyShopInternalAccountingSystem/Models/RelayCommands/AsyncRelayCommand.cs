@@ -6,7 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace BeautyShopInternalAccountingSystem.Model
+namespace BeautyShopInternalAccountingSystem.Models.RelayCommands
 {
     public class AsyncRelayCommand : ICommand
     {

@@ -12,20 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace BeautyShopInternalAccountingSystem.View.AuthorizationWindows
+namespace BeautyShopInternalAccountingSystem.Views.AuthorizationWindows
 {
     /// <summary>
-    /// Логика взаимодействия для Authorization.xaml
+    /// Логика взаимодействия для RegistrationWindow.xaml
     /// </summary>
-    public partial class ForgotPasswordWindow : Window
+    public partial class RegistrationWindow : Window
     {
-        public ForgotPasswordWindow()
+        public RegistrationWindow()
         {
-            DataContext = this;
-            InitializeComponent();
-            
-        }
 
-        
+            InitializeComponent();
+        }
     }
 }
