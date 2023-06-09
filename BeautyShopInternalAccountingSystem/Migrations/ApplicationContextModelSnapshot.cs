@@ -65,7 +65,6 @@ namespace BeautyShopInternalAccountingSystem.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Tag")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Username")
@@ -186,6 +185,9 @@ namespace BeautyShopInternalAccountingSystem.Migrations
 
                     b.Property<double>("Price")
                         .HasColumnType("float");
+
+                    b.Property<string>("ProductImageDirectory")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

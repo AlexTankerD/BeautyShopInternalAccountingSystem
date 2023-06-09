@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BeautyShopInternalAccountingSystem.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,10 +20,13 @@ namespace BeautyShopInternalAccountingSystem.Views.ClientWindows
     /// </summary>
     public partial class ClientWindow : Window
     {
+        public ClientViewModel vm { get; set; }
         public ClientWindow()
         {
             InitializeComponent();
-            MainFrame.Navigate(new ProductsPage());
+            vm ??= new ClientViewModel();
+            DataContext = vm;
+            MainFrame.Navigate(new ProductsPage(vm));
         }
     }
 }

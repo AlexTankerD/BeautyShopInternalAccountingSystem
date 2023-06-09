@@ -16,6 +16,7 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
 {
     public class ClientViewModel : INotifyPropertyChanged
     {
+        public Client Client { get; set; }
         private ObservableCollection<Product> _allproducts = ProductsDataWorker.GetProducts();
         public ObservableCollection<Product> AllProducts
         {
@@ -67,15 +68,15 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
         }
         private void OpenProductsPage(Frame frame)
         {
-            frame.Navigate(new ProductsPage());
+            frame.Navigate(new ProductsPage(this));
         }
         private void OpenServicesPage(Frame frame)
         {
-            frame.Navigate(new ServicesPage());
+            frame.Navigate(new ServicesPage(this));
         }
         private void OpenClientDataPage(Frame frame)
         {
-            frame.Navigate(new ClientDataPage());
+            frame.Navigate(new ClientDataPage(this));
         }
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged(String propertyName)

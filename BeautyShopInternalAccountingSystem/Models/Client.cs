@@ -20,7 +20,7 @@ namespace BeautyShopInternalAccountingSystem.Models
         public char Sex { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
-        public string Tag { get; set; }
+        public string? Tag { get; set; }
         public string? ClientImageDirectory { get; set; }
         public Client()
         { }

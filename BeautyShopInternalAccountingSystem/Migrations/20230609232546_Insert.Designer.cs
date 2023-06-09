@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BeautyShopInternalAccountingSystem.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20230609163620_Insert")]
+    [Migration("20230609232546_Insert")]
     partial class Insert
     {
         /// <inheritdoc />
@@ -68,7 +68,6 @@ namespace BeautyShopInternalAccountingSystem.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Tag")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Username")
@@ -189,6 +188,9 @@ namespace BeautyShopInternalAccountingSystem.Migrations
 
                     b.Property<double>("Price")
                         .HasColumnType("float");
+
+                    b.Property<string>("ProductImageDirectory")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

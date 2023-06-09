@@ -5,37 +5,45 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:ui="http://schemas.modernwpf.com/2019"
       xmlns:local="clr-namespace:BeautyShopInternalAccountingSystem.Views.ClientWindows"
+      xmlns:local1="clr-namespace:BeautyShopInternalAccountingSystem.Models"
       xmlns:viewmodel="clr-namespace:BeautyShopInternalAccountingSystem.ViewModels"
-         mc:Ignorable="d" 
-      d:DesignHeight="720" d:DesignWidth="1300"
-      Title="ProductsPage">
-    <Page.DataContext>
-        <viewmodel:ClientViewModel/>
-    </Page.DataContext>
+      mc:Ignorable="d" 
+      d:DesignHeight="630" d:DesignWidth="1100"
+      Title="ProductsPage" Background="White" FontFamily="Tahoma">
+    <ui:Page.Resources>
+        <local1:PathConverter x:Key="PathConverter"/>
+    </ui:Page.Resources>
     <Grid>
-        <ListView x:Name="ProductsListBox" ItemsSource="{Binding Path=AllProducts}" SelectedItem="{Binding SelectedProduct}">
-            <ListView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <UniformGrid Rows="2" Columns="3"/>
-                </ItemsPanelTemplate>
-            </ListView.ItemsPanel>
-            <ListView.ItemTemplate>
+        <ListBox x:Name="ProductsListBox" ItemContainerStyle="{StaticResource ListBoxItemStyle}"  ItemsSource="{Binding Path=AllProducts}" SelectedItem="{Binding SelectedProduct}">
+           
+            <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="100"/>
-                            <RowDefinition Height="50"/>
-                            <RowDefinition Height="50"/>
-                        </Grid.RowDefinitions>
-                        <ListBox>
-                            <Image Grid.Row="0" Width="100" Source="{Binding Path=ProductImageDirectory}"></Image>
-                        </ListBox>
-                        <TextBlock Grid.Row="1" Text="{Binding Path=Name}"></TextBlock>
-                        <TextBlock Grid.Row="2" Text="{Binding Path=Price}"></TextBlock>
-                    </Grid>
+                    <Border CornerRadius="3"  x:Name="border"  Height="250" Width="250"  
+                            BorderThickness="5" Margin="10" BorderBrush="Black">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                            </Grid.RowDefinitions>
+                            <Border Background="White" Width="150"  Height="150" CornerRadius="3" BorderThickness="5" BorderBrush="Black">
+                                <Image Width="{Binding RelativeSource={RelativeSource FindAncestor, 
+                                AncestorType={x:Type Border}},Path=ActualWidth}" Height="{Binding RelativeSource={RelativeSource FindAncestor, 
+                                AncestorType={x:Type Border}},Path=ActualHeight}" Source="{Binding Path=ProductImageDirectory, Converter={StaticResource PathConverter}}"></Image>
+                            </Border>
+                            <TextBlock FontSize="20"  TextAlignment="Center" Grid.Row="1" Text="{Binding Path=Name}"></TextBlock>
+                            <TextBlock FontSize="20"  TextAlignment="Center" Grid.Row="2" Text="{Binding Path=Price, StringFormat='{}{0} рублей'}"></TextBlock>
+                        </Grid>
+                    </Border>
                 </DataTemplate>
                 
-            </ListView.ItemTemplate>
-        </ListView>
+            </ListBox.ItemTemplate>
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="3" HorizontalAlignment="Center">
+                    </UniformGrid>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
     </Grid>
 </ui:Page>

@@ -17,10 +17,7 @@ namespace BeautyShopInternalAccountingSystem.Models.Data
         public DbSet<Manager> Manager { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Service> Services { get; set; }
-        public ApplicationContext()
-        {
-
-        }
+        public ApplicationContext() => Database.EnsureCreated();
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -30,8 +27,7 @@ namespace BeautyShopInternalAccountingSystem.Models.Data
             var config = builder.Build();
             string connectionString = config.GetConnectionString("DefaultConnection");
             optionsBuilder.UseSqlServer(connectionString);
-            
-
         }
+
     }
 }

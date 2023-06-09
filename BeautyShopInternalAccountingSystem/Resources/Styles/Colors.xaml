@@ -15,6 +15,16 @@
             <Color A="255" G="74" R="255" B="109"/>
         </SolidColorBrush.Color>
     </SolidColorBrush>
+    <SolidColorBrush x:Key="AccentuatedTransparentColor1">
+        <SolidColorBrush.Color>
+            <Color A="130" G="74" R="255" B="109"/>
+        </SolidColorBrush.Color>
+    </SolidColorBrush>
+    <SolidColorBrush x:Key="AccentuatedTransparentColor2">
+        <SolidColorBrush.Color>
+            <Color A="180" G="74" R="255" B="109"/>
+        </SolidColorBrush.Color>
+    </SolidColorBrush>
     <SolidColorBrush x:Key="AccentuatedFocusedColor">
         <SolidColorBrush.Color>
             <Color A="255" G="43" R="229" B="80"/>

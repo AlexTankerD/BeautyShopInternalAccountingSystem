@@ -4,6 +4,7 @@ using BeautyShopInternalAccountingSystem.Models.RegularExpressions;
 using BeautyShopInternalAccountingSystem.Models.RelayCommands;
 using BeautyShopInternalAccountingSystem.Views;
 using BeautyShopInternalAccountingSystem.Views.AuthorizationWindows;
+using BeautyShopInternalAccountingSystem.Views.ClientWindows;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -141,6 +142,7 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
                 if(auth)
                 {
                     OpenMessageWindow("Авторизация прошла успешно");
+                    OpenClientWindow(client);
                     CloseWindow(window);
                     return;
                 }
@@ -252,10 +254,10 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
             image.EndInit();
             SetImageInWindow(wnd, image.UriSource);
             FileInfo imagepath = new FileInfo(openFileDialog.FileName);
-            if (!Directory.Exists("Resources\\ClientImages"))
-                Directory.CreateDirectory("Resources\\ClientImages");
-            imagepath.CopyTo($"Resources\\ClientImages\\{Path.GetFileNameWithoutExtension(openFileDialog.FileName)}", true);
-            ClientImageDirectory = $"Resources\\ClientImages\\{Path.GetFileNameWithoutExtension(openFileDialog.FileName)}";
+            if (!Directory.Exists(@"Resources\ClientImages"))
+                Directory.CreateDirectory(@"Resources\ClientImages");
+            imagepath.CopyTo($@"Resources\ClientImages\{Path.GetFileName(openFileDialog.FileName)}", true);
+            ClientImageDirectory = $@"Resources\ClientImages\{Path.GetFileName(openFileDialog.FileName)}";
         }
         public void SetImageInWindow(Window wnd, Uri uri)
         {
@@ -342,6 +344,15 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
                 authorizationwindow.Show();
             });
             
+        }
+        private void OpenClientWindow(object obj)
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                ClientWindow clientwindow = new ClientWindow() {vm = obj as ClientViewModel };
+                clientwindow.Show();
+            });
+
         }
         private void OpenMessageWindow(string message)
         {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BeautyShopInternalAccountingSystem.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,10 @@ namespace BeautyShopInternalAccountingSystem.Views.ClientWindows
     /// </summary>
     public partial class ProductsPage : ModernWpf.Controls.Page
     {
-        public ProductsPage()
+        public ProductsPage(ClientViewModel vm)
         {
             InitializeComponent();
+            DataContext = vm;
         }
     }
 }

@@ -7,27 +7,24 @@
         xmlns:viewmodel="clr-namespace:BeautyShopInternalAccountingSystem.ViewModels"
         xmlns:local="clr-namespace:BeautyShopInternalAccountingSystem.Views.ClientWindows"
         mc:Ignorable="d"
-        Title="ClientWindow" FontFamily="Tahoma" Height="720" Width="1300" 
+        Title="ClientWindow" FontFamily="Tahoma" Height="620" Width="1100" 
         WindowStartupLocation="CenterScreen" ui:WindowHelper.UseModernWindowStyle="True" 
         ResizeMode="NoResize" Background="{StaticResource MainBackground}" >
-    <Window.DataContext>
-        <viewmodel:ClientViewModel/>
-    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <Button Command="{Binding OpenClientDataPageCommand}" CommandParameter="{Binding ElementName=MainFrame}" 
                 FontSize="11" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Left"  
-                Margin="350,0,0,0" Height="40" Width="150">Пользовательские данные</Button>
-        <Button Command="{Binding OpenProductsPageCommand}" CommandParameter="{Binding ElementName=MainFrame}" 
-                HorizontalAlignment="Left" Style="{StaticResource ButtonStyle}" 
-                Margin="180,0,0,0" Height="40" Width="150">Услуги</Button>
+                Margin="350,0,0,0" Height="40" Width="150" Grid.Row="1">Пользовательские данные</Button>
         <Button Command="{Binding OpenServicesPageCommand}" CommandParameter="{Binding ElementName=MainFrame}" 
                 HorizontalAlignment="Left" Style="{StaticResource ButtonStyle}" 
-                Margin="10,0,0,0" Height="40" Width="150">Продукты</Button>
-        <Frame NavigationUIVisibility="Hidden" Grid.Row="1" x:Name="MainFrame"></Frame>
+                Margin="180,0,0,0" Height="40" Width="150" Grid.Row="1">Услуги</Button>
+        <Button Command="{Binding OpenProductsPageCommand}" CommandParameter="{Binding ElementName=MainFrame}" 
+                HorizontalAlignment="Left" Style="{StaticResource ButtonStyle}" 
+                Margin="10,0,0,0" Height="40" Width="150" Grid.Row="1">Продукты</Button>
+        <Frame NavigationUIVisibility="Hidden" Grid.Row="0" x:Name="MainFrame"></Frame>
     </Grid>
     
 </Window>
