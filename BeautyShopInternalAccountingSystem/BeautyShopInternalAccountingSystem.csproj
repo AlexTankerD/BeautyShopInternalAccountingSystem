@@ -10,25 +10,129 @@
 
   <ItemGroup>
     <None Remove="DatabaseSettings.json" />
-    <None Remove="Resources\Images\1781670-1.jpg" />
+    <None Remove="Resources\ProductImages\1781670-1.jpg" />
     <None Remove="Resources\Logo\beauty_logo.ico" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="bin\Debug\net7.0-windows\Resources\ProductImages\1781670-1.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="DatabaseSettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\1781670-1.jpg">
+    <Content Include="Resources\ProductImages\1781670-1.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Logo\beauty_logo.ico" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="bin\Debug\net7.0-windows\Resources\Images\" />
     <Folder Include="Resources\ClientImages\" />
     <Folder Include="Views\ManagerWindows\" />
     <Folder Include="Views\EmployeeWindows\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\1781674-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\1781675-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\1781676-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\1781678-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\1781679-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\1781680-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\1781693-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\1781695-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\1781696-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\1781711-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\1953276-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\2008486-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\2008488-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\2262226-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\2351755-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\2697576-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\2697586-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\3388879-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\3432442-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\3432453-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\3432465-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\3472591-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\3472601-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\3472602-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\3472604-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\3472608-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\5427580-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\5625224-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\6433979-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\6433981-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\6433982-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\6433984-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\6556449-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\6556451-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\6556452-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\6556453-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\6556454-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\6556455-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\6556457-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\6556458-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\6556459-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\6556460-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\6556461-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\6556462-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\6556463-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\6556464-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\6556465-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\6556466-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\6556469-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\6691687-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\6691688-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\6953158-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\6953159-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\6953160-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\6953169-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\6953176-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\6953177-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\6964195-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\6964196-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\6964197-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\6964198-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\6964199-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\7064314-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\7064315-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\7064320-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\7064322-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\7064323-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\7064324-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\7064326-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\7064330-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\7064333-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\7064334-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\7064335-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\7293278-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\7299376-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\7299377-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\7299378-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\7528031-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\7528032-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\7528034-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\7847905-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\7847906-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\7889950-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\9631437-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\9631438-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\9631439-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\9631442-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\9631443-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\9631445-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\9631446-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\9631447-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\9631448-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\9939700-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\9939701-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\9939704-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\9939709-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\9939710-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\9939714-1.jpg" />
+    <None Include="bin\Debug\net7.0-windows\Resources\ProductImages\9939719-1.jpg" />
   </ItemGroup>
 
   <ItemGroup>

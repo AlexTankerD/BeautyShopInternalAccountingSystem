@@ -19,7 +19,7 @@ namespace BeautyShopInternalAccountingSystem
         protected override void OnStartup(StartupEventArgs e)
         {
 
-            AuthorizationWindow wnd = new AuthorizationWindow();
+            ClientWindow wnd = new ClientWindow();
             wnd.Show();
                 
         }

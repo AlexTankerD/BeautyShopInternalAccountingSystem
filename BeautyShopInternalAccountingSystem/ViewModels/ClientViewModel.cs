@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,16 +18,35 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
     public class ClientViewModel : INotifyPropertyChanged
     {
         public Client Client { get; set; }
-        private ObservableCollection<Product> _allproducts = ProductsDataWorker.GetProducts();
-        public ObservableCollection<Product> AllProducts
+        public Product SelectedProduct { get; set; }
+        public ObservableCollection<Product> AllProducts = ProductsDataWorker.GetProducts();
+        private string _searchtext;
+        public string SearchText
         {
-            get { return _allproducts; }
+            get
+            {
+                return _searchtext;
+            }
             set
             {
-                _allproducts = value;
-                OnPropertyChanged("AllProducts");
+                _searchtext = value;
+                OnPropertyChanged("FilteredProducts");
             }
         }
+        public IEnumerable<Product> FilteredProducts
+        {
+            get
+            { 
+                if(SearchText != null)
+                {
+                    var SearchName = AllProducts.Where(x => x.Name.ToUpper().StartsWith(SearchText.ToUpper()));
+                    return SearchName;
+                }
+                else { return AllProducts; }
+                
+            }
+        }
+  
         private RelayCommand _openproductspagecommand;
         public RelayCommand OpenProductsPageCommand
         {
