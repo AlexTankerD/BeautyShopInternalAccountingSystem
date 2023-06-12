@@ -18,8 +18,7 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
     public class ClientViewModel : INotifyPropertyChanged
     {
         public Client Client { get; set; }
-        public Product SelectedProduct { get; set; }
-        public ObservableCollection<Product> AllProducts = ProductsDataWorker.GetProducts();
+        public ObservableCollection<Service> AllServices = ServiceDataWorker.GetServices();
         private string _searchtext;
         public string SearchText
         {
@@ -28,38 +27,26 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
                 return _searchtext;
             }
             set
-            {
+            { 
                 _searchtext = value;
-                OnPropertyChanged("FilteredProducts");
+                OnPropertyChanged("FilteredServices");
             }
         }
-        public IEnumerable<Product> FilteredProducts
+        public IEnumerable<Service> FilteredServices
         {
             get
             { 
                 if(SearchText != null)
                 {
-                    var SearchName = AllProducts.Where(x => x.Name.ToUpper().StartsWith(SearchText.ToUpper()));
+                    var SearchName = AllServices.Where(x => x.Name.ToUpper().StartsWith(SearchText.ToUpper()));
                     return SearchName;
                 }
-                else { return AllProducts; }
+                else { return AllServices; }
                 
             }
         }
   
-        private RelayCommand _openproductspagecommand;
-        public RelayCommand OpenProductsPageCommand
-        {
-            get
-            {
-
-                return _openproductspagecommand ?? new RelayCommand(obj =>
-                {
-                    Frame frame = obj as Frame;
-                    OpenProductsPage(frame);
-                });
-            }
-        }
+        
         private RelayCommand _openservicespagecommand;
         public RelayCommand OpenServicesPageCommand
         {
@@ -85,10 +72,6 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
                     OpenClientDataPage(frame);
                 });
             }
-        }
-        private void OpenProductsPage(Frame frame)
-        {
-            frame.Navigate(new ProductsPage(this));
         }
         private void OpenServicesPage(Frame frame)
         {

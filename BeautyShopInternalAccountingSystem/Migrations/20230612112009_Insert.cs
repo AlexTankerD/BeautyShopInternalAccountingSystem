@@ -59,7 +59,7 @@ namespace BeautyShopInternalAccountingSystem.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Manager",
+                name: "Managers",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -69,7 +69,7 @@ namespace BeautyShopInternalAccountingSystem.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Manager", x => x.Id);
+                    table.PrimaryKey("PK_Managers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -82,7 +82,7 @@ namespace BeautyShopInternalAccountingSystem.Migrations
                     Category = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Price = table.Column<double>(type: "float", nullable: false),
                     Specifications = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Weight = table.Column<double>(type: "float", nullable: true),
                     Height = table.Column<double>(type: "float", nullable: true),
                     Width = table.Column<double>(type: "float", nullable: true),
@@ -151,7 +151,7 @@ namespace BeautyShopInternalAccountingSystem.Migrations
                 name: "EmployeeService");
 
             migrationBuilder.DropTable(
-                name: "Manager");
+                name: "Managers");
 
             migrationBuilder.DropTable(
                 name: "Products");

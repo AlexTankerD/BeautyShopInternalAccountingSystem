@@ -13,8 +13,8 @@ namespace BeautyShopInternalAccountingSystem.Models.DataWorkers
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                Client clientdb = db.Clients.Where(x => x.Username == Login || x.Email == Login ||
-                x.PhoneNumber == Login && x.Password == Password).FirstOrDefault();
+                Client clientdb = db.Clients.Where(x => (x.Username == Login || x.Email == Login ||
+                x.PhoneNumber == Login) && x.Password == Password).FirstOrDefault();
                 if (clientdb != null)
                 {
                     client = clientdb;
@@ -28,8 +28,8 @@ namespace BeautyShopInternalAccountingSystem.Models.DataWorkers
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                Employee employeedb = db.Employees.Where(x => x.Username == Login || x.Email == Login ||
-                    x.PhoneNumber == Login && x.Password == Password).FirstOrDefault();
+                Employee employeedb = db.Employees.Where(x => (x.Username == Login || x.Email == Login ||
+                    x.PhoneNumber == Login) && x.Password == Password).FirstOrDefault();
                 if (employeedb != null)
                 {
                     employee = employeedb;
@@ -43,7 +43,7 @@ namespace BeautyShopInternalAccountingSystem.Models.DataWorkers
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                Manager managerdb = db.Manager.Where(x => x.Username == Login && x.Password == Password).FirstOrDefault();
+                Manager managerdb = db.Managers.Where(x => (x.Username == Login) && x.Password == Password).FirstOrDefault();
                 if (managerdb != null)
                 {
                     manager = managerdb;

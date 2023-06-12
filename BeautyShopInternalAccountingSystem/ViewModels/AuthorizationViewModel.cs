@@ -5,6 +5,7 @@ using BeautyShopInternalAccountingSystem.Models.RelayCommands;
 using BeautyShopInternalAccountingSystem.Views;
 using BeautyShopInternalAccountingSystem.Views.AuthorizationWindows;
 using BeautyShopInternalAccountingSystem.Views.ClientWindows;
+using BeautyShopInternalAccountingSystem.Views.EmployeeWindows;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -156,6 +157,7 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
                 if (auth)
                 {
                     OpenMessageWindow("Авторизация прошла успешно");
+                    OpenEmployeeWindow(employee);
                     CloseWindow(window);
                     return;
                 }
@@ -349,8 +351,17 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
-                ClientWindow clientwindow = new ClientWindow() {vm = obj as ClientViewModel };
+                ClientWindow clientwindow = new ClientWindow(new ClientViewModel() { Client = obj as Client });
                 clientwindow.Show();
+            });
+
+        }
+        private void OpenEmployeeWindow(object obj)
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                EmployeeWindow employeewindow = new EmployeeWindow(new EmployeeViewModel() { Employee = obj as Employee });
+                employeewindow.Show();
             });
 
         }

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BeautyShopInternalAccountingSystem.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20230610182743_Insert")]
+    [Migration("20230612112009_Insert")]
     partial class Insert
     {
         /// <inheritdoc />
@@ -161,7 +161,7 @@ namespace BeautyShopInternalAccountingSystem.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Manager");
+                    b.ToTable("Managers");
                 });
 
             modelBuilder.Entity("BeautyShopInternalAccountingSystem.Models.Product", b =>
@@ -176,7 +176,6 @@ namespace BeautyShopInternalAccountingSystem.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<double?>("Height")

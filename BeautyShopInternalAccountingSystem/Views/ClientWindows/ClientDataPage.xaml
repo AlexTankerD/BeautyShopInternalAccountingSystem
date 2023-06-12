@@ -10,6 +10,18 @@
       Title="ClientDataPage" Background="{StaticResource MainBackground}">
 
     <Grid>
-        
+        <Border>
+            <Grid>
+                <TextBlock Text="{Binding Path=Client.Username}"></TextBlock>
+                <TextBlock Text="{Binding Path=Client.Password}"></TextBlock>
+                <TextBlock Text="{Binding Path=Client.Name}"></TextBlock>
+                <TextBlock Text="{Binding Path=Client.Surname}"></TextBlock>
+                <TextBlock Text="{Binding Path=Client.Patronymic}"></TextBlock>
+                <TextBlock Text="{Binding Path=Client.Birthday}"></TextBlock>
+                <TextBlock Text="{Binding Path=Client.Sex}"></TextBlock>
+                <TextBlock Text="{Binding Path=Client.Email}"></TextBlock>
+                <TextBlock Text="{Binding Path=Client.Surname}"></TextBlock>
+            </Grid>
+        </Border>
     </Grid>
 </ui:Page>

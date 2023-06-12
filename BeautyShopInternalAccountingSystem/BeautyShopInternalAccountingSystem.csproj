@@ -30,7 +30,6 @@
   <ItemGroup>
     <Folder Include="Resources\ClientImages\" />
     <Folder Include="Views\ManagerWindows\" />
-    <Folder Include="Views\EmployeeWindows\" />
   </ItemGroup>
 
   <ItemGroup>

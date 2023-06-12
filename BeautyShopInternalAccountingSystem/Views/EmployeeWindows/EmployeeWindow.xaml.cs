@@ -1,4 +1,5 @@
 ﻿using BeautyShopInternalAccountingSystem.ViewModels;
+using BeautyShopInternalAccountingSystem.Views.ClientWindows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,18 +14,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace BeautyShopInternalAccountingSystem.Views.ClientWindows
+namespace BeautyShopInternalAccountingSystem.Views.EmployeeWindows
 {
-    /// <summary>
-    /// Логика взаимодействия для ClientWindow.xaml
-    /// </summary>
-    public partial class ClientWindow : Window
+    public partial class EmployeeWindow : Window
     {
-        public ClientWindow(ClientViewModel vm)
+        public EmployeeWindow(EmployeeViewModel vm)
         {
             InitializeComponent();
             DataContext = vm;
-            MainFrame.Navigate(new ServicesPage(vm));
+            MainFrame.Navigate(new ProductsPage(vm));
         }
     }
+    
 }

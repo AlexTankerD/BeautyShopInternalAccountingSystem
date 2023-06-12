@@ -11,20 +11,20 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace BeautyShopInternalAccountingSystem.Views.ClientWindows
+namespace BeautyShopInternalAccountingSystem.Views.EmployeeWindows
 {
     /// <summary>
-    /// Логика взаимодействия для ClientWindow.xaml
+    /// Логика взаимодействия для EmployeeDataPage.xaml
     /// </summary>
-    public partial class ClientWindow : Window
+    public partial class EmployeeDataPage : Page
     {
-        public ClientWindow(ClientViewModel vm)
+        public EmployeeDataPage(EmployeeViewModel vm)
         {
             InitializeComponent();
             DataContext = vm;
-            MainFrame.Navigate(new ServicesPage(vm));
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using BeautyShopInternalAccountingSystem.Views.AuthorizationWindows;
 using BeautyShopInternalAccountingSystem.Views.ClientWindows;
+using BeautyShopInternalAccountingSystem.Views.EmployeeWindows;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -19,7 +20,7 @@ namespace BeautyShopInternalAccountingSystem
         protected override void OnStartup(StartupEventArgs e)
         {
 
-            ClientWindow wnd = new ClientWindow();
+            AuthorizationWindow wnd = new AuthorizationWindow();
             wnd.Show();
                 
         }

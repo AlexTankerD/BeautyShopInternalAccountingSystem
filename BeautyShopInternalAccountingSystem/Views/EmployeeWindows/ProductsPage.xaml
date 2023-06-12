@@ -13,18 +13,18 @@
     <ui:Page.Resources>
         <local1:PathConverter x:Key="PathConverter"/>
     </ui:Page.Resources>
-    <Grid>
+    <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <TextBox Margin="3" Text="{Binding SearchText,UpdateSourceTrigger=PropertyChanged}" ui:ControlHelper.PlaceholderText="Поиск: "  Style="{StaticResource TextBoxStyle}"/>
-        <ListBox Grid.Row="1" x:Name="ProductsListBox" ItemContainerStyle="{StaticResource ListBoxItemStyle}"  
-                 ItemsSource="{Binding FilteredProducts}" SelectedItem="{Binding SelectedProduct}">
+        <ListBox Grid.Row="1" x:Name="ProductsListBox" ItemContainerStyle="{StaticResource ListBoxItemStyle}"
+                 ItemsSource="{Binding FilteredProducts}" SelectedItem="{Binding SelectedProduct}" >
            
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Border CornerRadius="3"  x:Name="border"  Height="260" Width="260"  
+                    <Border Background="{StaticResource AdditionalBackground}" CornerRadius="3"  x:Name="border"  Height="260" Width="260"  
                             BorderThickness="5" Margin="10" BorderBrush="Black">
                         <Grid>
                             <Grid.RowDefinitions>
@@ -32,7 +32,7 @@
                                 <RowDefinition Height="50"/>
                                 <RowDefinition Height="30"/>
                             </Grid.RowDefinitions>
-                            <Border Background="White" Width="150"  Height="150" CornerRadius="3" BorderThickness="5" BorderBrush="Black">
+                            <Border Background="{StaticResource MainBackground}" Width="150"  Height="150" CornerRadius="3" BorderThickness="5" BorderBrush="Black">
                                 <Image Width="{Binding RelativeSource={RelativeSource FindAncestor, 
                                 AncestorType={x:Type Border}},Path=ActualWidth}" Height="{Binding RelativeSource={RelativeSource FindAncestor, 
                                 AncestorType={x:Type Border}},Path=ActualHeight}" Source="{Binding Path=ProductImageDirectory, Converter={StaticResource PathConverter}}"></Image>
@@ -41,6 +41,7 @@
                             <TextBlock FontSize="15"  TextAlignment="Center" Grid.Row="2" Text="{Binding Path=Price, StringFormat='{}{0} рублей'}"></TextBlock>
                         </Grid>
                     </Border>
+                    
                 </DataTemplate>
                 
             </ListBox.ItemTemplate>
