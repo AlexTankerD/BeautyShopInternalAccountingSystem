@@ -4,7 +4,7 @@ namespace CompanyCoreLib
 {
     public class Analytics
     {
-        public static List<DateTime> PopularMonths(List<DateTime> purchaseDates)
+        public List<DateTime> PopularMonths(List<DateTime> purchaseDates)
         {
             Dictionary<DateTime, int> monthCounts = new Dictionary<DateTime, int>();
 
@@ -31,10 +31,6 @@ namespace CompanyCoreLib
             }
 
             return popularMonths;
-        }
-        public static void Main()
-        {
-           
         }
     }
     
