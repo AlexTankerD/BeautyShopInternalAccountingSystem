@@ -1,5 +1,7 @@
 ﻿using BeautyShopInternalAccountingSystem.Models;
+using BeautyShopInternalAccountingSystem.Models.Data;
 using BeautyShopInternalAccountingSystem.Models.DataWorkers;
+using BeautyShopInternalAccountingSystem.Models.RegularExpressions;
 using BeautyShopInternalAccountingSystem.Models.RelayCommands;
 using BeautyShopInternalAccountingSystem.Views;
 using BeautyShopInternalAccountingSystem.Views.AuthorizationWindows;
@@ -27,7 +29,7 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
         public string Surname { get; set; }
         public string Patronymic { get; set; }
         public string Birthday { get; set; }
-        public char Sex { get; set; }
+        public string? Sex { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
         public string ClientImageDirectory { get; set; }
@@ -65,8 +67,126 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
                 
             }
         }
-  
-        
+        private AsyncRelayCommand _changeclientdatacommand;
+        public AsyncRelayCommand ChangeClientDataCommand
+        {
+            get
+            {
+                return _changeclientdatacommand ?? new AsyncRelayCommand(async (obj) =>
+                {
+                    Window window = obj as Window;
+                    await Task.Run(() => ChangeClientDataCommandMethod(window));
+                }
+                );
+            }
+        }
+
+        private void ChangeClientDataCommandMethod(Window window)
+        {
+            if (!ClientRegexp.IsUsernameValid(Username))
+            {
+                OpenMessageWindow("Неправильное имя пользователя");
+                return;
+            }
+            if (!ClientRegexp.IsPasswordValid(Password))
+            {
+                OpenMessageWindow("Неправильный пароль");
+                return;
+            }
+            if (!ClientRegexp.IsNameValid(Name))
+            {
+                OpenMessageWindow("Неправильное имя");
+                return;
+            }
+            if (!ClientRegexp.IsSurnameValid(Surname))
+            {
+                OpenMessageWindow("Неправильная фамилия");
+                return;
+            }
+            if (!ClientRegexp.IsPatronymicValid(Patronymic))
+            {
+                OpenMessageWindow("Неправильное отчество");
+                return;
+            }
+            if (!ClientRegexp.IsBirthdayValid(Birthday))
+            {
+                OpenMessageWindow("Неправильная дата рождения");
+                return;
+            }
+            if (!ClientRegexp.IsEmailValid(Email))
+            {
+                OpenMessageWindow("Неправильный Email");
+                return;
+            }
+            if (!ClientRegexp.IsPhoneNumberValid(PhoneNumber))
+            {
+                OpenMessageWindow("Неправильный номер телефона");
+                return;
+            }
+            if (!ClientRegexp.IsSexValid(Sex))
+            {
+                OpenMessageWindow("Окно 'пол' не может быть пустым");
+                return;
+            }
+            if (ClientImageDirectory == null)
+                ClientImageDirectory = @"Resources\ClientImages\user.png";
+            var reg = ClientDataWorker.ChangeClientData(Client, Username, Password, Name, Surname, Patronymic, Birthday,
+                       Sex, Email, PhoneNumber, ClientImageDirectory);
+            if (reg)
+            {
+                OpenMessageWindow("Данные успешно изменены");
+                using(ApplicationContext db = new ApplicationContext())
+                {
+                    Client = db.Clients.Where(x => x.Username == Username && x.Name == Name &&
+                    x.Surname == Surname && x.Patronymic == Patronymic &&
+                    x.Birthday == Birthday && x.Sex == Sex &&
+                    x.PhoneNumber == PhoneNumber && x.Email == Email).FirstOrDefault();
+                }
+                CloseWindow(window);
+                SetNullValueProperties();
+                return;
+            }
+            else
+            {
+                OpenMessageWindow("Пользователь с таким именем пользователя, Email или номером телефона уже существует");
+                return;
+            }
+        }
+        private void SetNullValueProperties()
+        {
+            Username = null;
+            Password = null;
+            Name = null;
+            Surname = null;
+            Patronymic = null;
+            Birthday = null;
+            Sex = null;
+            Email = null;
+            PhoneNumber = null;
+            ClientImageDirectory = null;
+        }
+
+        #region Команды добавления изображения
+        private RelayCommand _addimagecommand;
+        public RelayCommand AddImageCommand
+        {
+            get
+            {
+                return _addimagecommand ?? new RelayCommand(obj =>
+                {
+                    Window window = obj as Window;
+                    ClientImageDirectory = ClientDataWorker.AddImage(window);
+                    if (string.IsNullOrEmpty(ClientImageDirectory))
+                        OpenMessageWindow("Неправильный путь к изображению");
+
+                }
+                );
+
+            }
+        }
+        #endregion
+
+        #region Команды открытия окон и страниц
         private RelayCommand _openservicespagecommand;
         public RelayCommand OpenServicesPageCommand
         {
@@ -105,28 +225,9 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
                 });
             }
         }
-        #region Команды добавления изображения
-        private RelayCommand _addimagecommand;
-        public RelayCommand AddImageCommand
-        {
-            get
-            {
-                return _addimagecommand ?? new RelayCommand(obj =>
-                {
-                    Window window = obj as Window;
-                    Client.ClientImageDirectory = null;
-                    ClientImageDirectory = ClientDataWorker.AddImage(window);
-                    if (string.IsNullOrEmpty(ClientImageDirectory))
-                        OpenMessageWindow("Неправильный путь к изображению");
-
-                }
-                );
-
-            }
-        }
         #endregion
 
-
+        #region Методы открытия окон
         private void OpenServicesPage(Frame frame)
         {
             frame.Navigate(new ServicesPage(this));
@@ -148,6 +249,15 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
                 SetCenterPositionAndOwner(messagewindow);
             });
         }
+        private void CloseWindow(Window window)
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                window.Close();
+            });
+
+        }
+        #endregion
         private void SetCenterPositionAndOwner(Window window)
         {
             window.Owner = Application.Current.MainWindow;

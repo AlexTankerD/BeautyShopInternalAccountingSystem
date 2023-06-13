@@ -17,15 +17,16 @@ namespace BeautyShopInternalAccountingSystem.Models
         public string Surname { get; set; }
         public string Patronymic { get; set; }
         public string Birthday { get; set; }
-        public char Sex { get; set; }
+        [MaxLength(1)]
+        public string Sex { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
         public string? Tag { get; set; }
-        public string? ClientImageDirectory { get; set; }
+        public string ClientImageDirectory { get; set; }
         public Client()
         { }
         public Client(string Username, string Password, string Name, string Surname, string Patronymic, string Birthday,
-            char Sex, string Email, string PhoneNumber, string? ClientImageDirectory)
+            string Sex, string Email, string PhoneNumber, string? ClientImageDirectory)
         {
             this.Username = Username;
             this.Password = Password;

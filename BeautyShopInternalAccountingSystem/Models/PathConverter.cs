@@ -12,6 +12,8 @@ namespace BeautyShopInternalAccountingSystem.Models
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
+            if (value == null)
+                return null;
             var path = Path.Combine(Directory.GetCurrentDirectory(), value.ToString());
             return path;
         }

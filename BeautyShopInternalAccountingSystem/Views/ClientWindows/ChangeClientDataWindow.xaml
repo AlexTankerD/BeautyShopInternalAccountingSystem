@@ -65,7 +65,7 @@
             </ComboBox>
             <Button Grid.Row="9" Height="50" Width="200" Margin="10" HorizontalAlignment="Center"  
                     Style="{StaticResource ButtonStyle}"
-                    Command="{Binding ChangeClientDataCommand}" CommandParameter="{Binding ElementName=regwnd}">Изменить данные</Button>
+                    Command="{Binding ChangeClientDataCommand}" CommandParameter="{Binding ElementName=changeclientdatawnd}">Изменить данные</Button>
         </Grid>
     </ScrollViewer>
 </Window>

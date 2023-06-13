@@ -65,9 +65,9 @@ namespace BeautyShopInternalAccountingSystem.Models.RegularExpressions
                 return false;
             return true;
         }
-        public static bool IsSexValid(char Sex)
+        public static bool IsSexValid(string Sex)
         {
-            if (!Regex.IsMatch(Sex.ToString(), @"(М|Ж)"))
+            if (string.IsNullOrEmpty(Sex) || !Regex.IsMatch(Sex.ToString(), @"(М|Ж)"))
                 return false;
             return true;
         }

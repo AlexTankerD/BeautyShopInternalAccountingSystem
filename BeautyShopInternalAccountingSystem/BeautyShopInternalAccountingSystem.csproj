@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <None Remove="DatabaseSettings.json" />
+    <None Remove="Resources\ClientImages\user.png" />
     <None Remove="Resources\ProductImages\1781670-1.jpg" />
     <None Remove="Resources\Logo\beauty_logo.ico" />
   </ItemGroup>
@@ -21,6 +22,9 @@
     <Content Include="DatabaseSettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\ClientImages\user.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\ProductImages\1781670-1.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -28,7 +32,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Resources\ClientImages\" />
     <Folder Include="Views\ManagerWindows\" />
   </ItemGroup>
 

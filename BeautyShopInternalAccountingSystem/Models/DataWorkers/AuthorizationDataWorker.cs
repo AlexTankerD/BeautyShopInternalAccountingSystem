@@ -54,22 +54,22 @@ namespace BeautyShopInternalAccountingSystem.Models.DataWorkers
             }
         }
 
-        public static string Registration(string Username, string Password, string Name, string Surname, string Patronymic, string Birthday,
-            char Sex, string Email, string PhoneNumber, string? ClientImageDirectory)
+        public static bool Registration(string Username, string Password, string Name, string Surname, string Patronymic, string Birthday,
+            string Sex, string Email, string PhoneNumber, string? ClientImageDirectory)
         {
             using (ApplicationContext db = new ApplicationContext())
             {
                 Client clientdb = db.Clients.Where(x => x.Username == Username || x.PhoneNumber == PhoneNumber ||
                 x.Email == Email).FirstOrDefault();
                 if (clientdb != null)
-                    return "RegistrationFail";
+                    return false;
                 else
                 {
                     Client newclient = new Client(Username, Password, Name, Surname, Patronymic, Birthday, Sex,
                         Email, PhoneNumber, ClientImageDirectory);
                     db.Clients.Add(newclient);
                     db.SaveChanges();
-                    return "RegistrationSuccesful";
+                    return true;
                 }
             }
 

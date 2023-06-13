@@ -28,7 +28,7 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
         public string Surname { get; set; }
         public string Patronymic { get; set; }
         public string Birthday { get; set; }
-        public char Sex { get; set; }
+        public string Sex { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
         public string ClientImageDirectory { get; set; }
@@ -103,18 +103,21 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
                 OpenMessageWindow("Окно 'пол' не может быть пустым");
                 return;
             }
+            if (ClientImageDirectory == null)
+                ClientImageDirectory = @"Resources\ClientImages\user.png";
             var reg = AuthorizationDataWorker.Registration(Username, Password, Name, Surname, Patronymic, Birthday,
                        Sex, Email, PhoneNumber, ClientImageDirectory);
-            switch (reg)
+            if (reg)
             {
-                case "RegistrationSuccesful":
-                    OpenMessageWindow("Регистрация прошла успешно");
-                    OpenAuthorizationWindow();
-                    CloseWindow(window);
-                    return;
-                case "RegistrationFail":
-                    OpenMessageWindow("Пользователь с таким именем пользователя, Email или номером телефона уже существует");
-                    return;
+                OpenMessageWindow("Регистрация прошла успешно");
+                OpenAuthorizationWindow();
+                CloseWindow(window);
+                return;
+            }
+            else
+            {
+                OpenMessageWindow("Пользователь с таким именем пользователя, Email или номером телефона уже существует");
+                return;
             }
         }
         #endregion
@@ -147,8 +150,11 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
                     CloseWindow(window);
                     return;
                 }
-                OpenMessageWindow("Неправильный логин или пароль");
-                return;
+                else
+                {
+                    OpenMessageWindow("Неправильный логин или пароль");
+                    return;
+                }
             }
             if (EmployeeBtnIsChecked)
             {
@@ -161,8 +167,11 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
                     CloseWindow(window);
                     return;
                 }
-                OpenMessageWindow("Неправильный логин или пароль");
-                return;
+                else
+                {
+                    OpenMessageWindow("Неправильный логин или пароль");
+                    return;
+                }
             }
             if (ManagerBtnIsChecked)
             {
@@ -174,8 +183,11 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
                     CloseWindow(window);
                     return;
                 }
-                OpenMessageWindow("Неправильный логин или пароль");
-                return;
+                else
+                {
+                    OpenMessageWindow("Неправильный логин или пароль");
+                    return;
+                }
             }
             OpenMessageWindow("Не выбран вид входа");
             return;
@@ -231,7 +243,7 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
                 return _addimagecommand ?? new RelayCommand(obj =>
                 {
                     Window window = obj as Window;
-                    AddImage(window);
+                    ClientImageDirectory = ClientDataWorker.AddImage(window);
                     if (string.IsNullOrEmpty(ClientImageDirectory))
                         OpenMessageWindow("Неправильный путь к изображению");
 
@@ -242,31 +254,7 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
         }
         #endregion
 
-        #region Методы добавления с изображениями
-        private void AddImage(Window wnd)
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Png files (*.png)|*.png| Jpg files (*.jpg)|*.jpg";
-            openFileDialog.ShowDialog();
-            if (string.IsNullOrEmpty(openFileDialog.FileName))
-                return;
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(openFileDialog.FileName);
-            image.EndInit();
-            SetImageInWindow(wnd, image.UriSource);
-            FileInfo imagepath = new FileInfo(openFileDialog.FileName);
-            if (!Directory.Exists(@"Resources\ClientImages"))
-                Directory.CreateDirectory(@"Resources\ClientImages");
-            imagepath.CopyTo($@"Resources\ClientImages\{Path.GetFileName(openFileDialog.FileName)}", true);
-            ClientImageDirectory = $@"Resources\ClientImages\{Path.GetFileName(openFileDialog.FileName)}";
-        }
-        public void SetImageInWindow(Window wnd, Uri uri)
-        {
-            Image image = wnd.FindName("ClientImage") as Image;
-            image.Source = new BitmapImage(uri);
-        }
-        #endregion
+
 
         #region Команды открытия окон
         private RelayCommand _openregistrationwindowcommand;
