@@ -35,6 +35,7 @@ namespace BeautyShopInternalAccountingSystem.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ClientImageDirectory")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
@@ -59,6 +60,7 @@ namespace BeautyShopInternalAccountingSystem.Migrations
 
                     b.Property<string>("Sex")
                         .IsRequired()
+                        .HasMaxLength(1)
                         .HasColumnType("nvarchar(1)");
 
                     b.Property<string>("Surname")

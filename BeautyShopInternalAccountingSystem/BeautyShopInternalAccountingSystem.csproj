@@ -34,6 +34,7 @@
   <ItemGroup>
     <Folder Include="bin\Debug\net7.0-windows\Images\" />
     <Folder Include="Images\ServiceImages\" />
+    <Folder Include="Images\EmployeeImages\" />
     <Folder Include="Views\ManagerWindows\" />
   </ItemGroup>
 

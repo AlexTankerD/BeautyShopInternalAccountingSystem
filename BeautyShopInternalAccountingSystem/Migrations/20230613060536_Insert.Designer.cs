@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BeautyShopInternalAccountingSystem.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20230612112009_Insert")]
+    [Migration("20230613060536_Insert")]
     partial class Insert
     {
         /// <inheritdoc />
@@ -38,6 +38,7 @@ namespace BeautyShopInternalAccountingSystem.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ClientImageDirectory")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
@@ -62,6 +63,7 @@ namespace BeautyShopInternalAccountingSystem.Migrations
 
                     b.Property<string>("Sex")
                         .IsRequired()
+                        .HasMaxLength(1)
                         .HasColumnType("nvarchar(1)");
 
                     b.Property<string>("Surname")

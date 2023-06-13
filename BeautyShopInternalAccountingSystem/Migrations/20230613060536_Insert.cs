@@ -22,11 +22,11 @@ namespace BeautyShopInternalAccountingSystem.Migrations
                     Surname = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Patronymic = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Birthday = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Sex = table.Column<string>(type: "nvarchar(1)", nullable: false),
+                    Sex = table.Column<string>(type: "nvarchar(1)", maxLength: 1, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Tag = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ClientImageDirectory = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    ClientImageDirectory = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
