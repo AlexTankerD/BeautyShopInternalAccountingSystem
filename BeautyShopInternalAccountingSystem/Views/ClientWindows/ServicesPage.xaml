@@ -7,7 +7,7 @@
       xmlns:local="clr-namespace:BeautyShopInternalAccountingSystem.Views.ClientWindows"
       mc:Ignorable="d" 
       d:DesignHeight="570" d:DesignWidth="1100"
-      Title="ServicesPage" Background="{StaticResource MainBackground}">
+      Title="ServicesPage" FontFamily="Tahoma" Background="{StaticResource MainBackground}">
 
     <Grid>
         

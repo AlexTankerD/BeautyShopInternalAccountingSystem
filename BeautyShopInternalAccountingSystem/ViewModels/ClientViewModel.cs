@@ -129,7 +129,7 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
                 return;
             }
             if (ClientImageDirectory == null)
-                ClientImageDirectory = @"Resources\ClientImages\user.png";
+                ClientImageDirectory = @"Images\ClientImages\user.png";
             var reg = ClientDataWorker.ChangeClientData(Client, Username, Password, Name, Surname, Patronymic, Birthday,
                        Sex, Email, PhoneNumber, ClientImageDirectory);
             if (reg)
@@ -149,6 +149,7 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
             else
             {
                 OpenMessageWindow("Пользователь с таким именем пользователя, Email или номером телефона уже существует");
+                SetNullValueProperties();
                 return;
             }
         }
@@ -187,41 +188,41 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
         #endregion
 
         #region Команды открытия окон и страниц
-        private RelayCommand _openservicespagecommand;
-        public RelayCommand OpenServicesPageCommand
+        private AsyncRelayCommand _openservicespagecommand;
+        public AsyncRelayCommand OpenServicesPageCommand
         {
             get
             {
 
-                return _openservicespagecommand ?? new RelayCommand(obj =>
+                return _openservicespagecommand ?? new AsyncRelayCommand(async(obj) =>
                 {
                     Frame frame = obj as Frame;
-                    OpenServicesPage(frame);
+                    await Task.Run(() => OpenServicesPage(frame));
                 });
             }
         }
-        private RelayCommand _openclientdatapagecommand;
-        public RelayCommand OpenClientDataPageCommand
+        private AsyncRelayCommand _openclientdatapagecommand;
+        public AsyncRelayCommand OpenClientDataPageCommand
         {
             get
             {
 
-                return _openclientdatapagecommand ?? new RelayCommand(obj =>
+                return _openclientdatapagecommand ?? new AsyncRelayCommand(async (obj) =>
                 {
                     Frame frame = obj as Frame;
-                    OpenClientDataPage(frame);
+                    await Task.Run(() => OpenClientDataPage(frame));
                 });
             }
         }
-        private RelayCommand _openchangeclientdatawindowcommand;
-        public RelayCommand OpenChangeClientDataWindowCommand
+        private AsyncRelayCommand _openchangeclientdatawindowcommand;
+        public AsyncRelayCommand OpenChangeClientDataWindowCommand
         {
             get
             {
 
-                return _openchangeclientdatawindowcommand ?? new RelayCommand(obj =>
+                return _openchangeclientdatawindowcommand ?? new AsyncRelayCommand(async (obj) =>
                 {
-                    OpenChangeClientDataWindow();
+                    await Task.Run(() =>OpenChangeClientDataWindow());
                 });
             }
         }
@@ -230,16 +231,25 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
         #region Методы открытия окон
         private void OpenServicesPage(Frame frame)
         {
-            frame.Navigate(new ServicesPage(this));
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                frame.Navigate(new ServicesPage(this));
+            });
         }
         private void OpenClientDataPage(Frame frame)
         {
-            frame.Navigate(new ClientDataPage(this));
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                frame.Navigate(new ClientDataPage(this));
+            });
         }
         private void OpenChangeClientDataWindow()
-        {
-            ChangeClientDataWindow changeclientdatawindow = new ChangeClientDataWindow(this);
-            changeclientdatawindow.Show();
+        { 
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                ChangeClientDataWindow changeclientdatawindow = new ChangeClientDataWindow(this);
+                changeclientdatawindow.Show();
+            });
         }
         private void OpenMessageWindow(string message)
         {

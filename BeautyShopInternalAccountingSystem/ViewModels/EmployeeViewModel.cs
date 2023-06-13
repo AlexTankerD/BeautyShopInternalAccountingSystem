@@ -1,6 +1,7 @@
 ﻿using BeautyShopInternalAccountingSystem.Models;
 using BeautyShopInternalAccountingSystem.Models.DataWorkers;
 using BeautyShopInternalAccountingSystem.Models.RelayCommands;
+using BeautyShopInternalAccountingSystem.Views.AuthorizationWindows;
 using BeautyShopInternalAccountingSystem.Views.ClientWindows;
 using BeautyShopInternalAccountingSystem.Views.EmployeeWindows;
 using System;
@@ -48,39 +49,45 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
             }
         }
 
-        private RelayCommand _openproductspagecommand;
-        public RelayCommand OpenProductsPageCommand
+        private AsyncRelayCommand _openproductspagecommand;
+        public AsyncRelayCommand OpenProductsPageCommand
         {
             get
             {
 
-                return _openproductspagecommand ?? new RelayCommand(obj =>
+                return _openproductspagecommand ?? new AsyncRelayCommand(async(obj) =>
                 {
                     Frame frame = obj as Frame;
-                    OpenProductsPage(frame);
+                    await Task.Run(()=>OpenProductsPage(frame));
                 });
             }
         }
-        private RelayCommand _openemployeedatapagecommand;
-        public RelayCommand OpenEmployeeDataPageCommand
+        private AsyncRelayCommand _openemployeedatapagecommand;
+        public AsyncRelayCommand OpenEmployeeDataPageCommand
         {
             get
             {
 
-                return _openemployeedatapagecommand ?? new RelayCommand(obj =>
+                return _openemployeedatapagecommand ?? new AsyncRelayCommand(async(obj) =>
                 {
                     Frame frame = obj as Frame;
-                    OpenEmployeeDataPage(frame);
+                    await Task.Run(() => OpenEmployeeDataPage(frame));
                 });
             }
         }
         private void OpenProductsPage(Frame frame)
         {
-            frame.Navigate(new ProductsPage(this));
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                frame.Navigate(new ProductsPage(this));
+            });
         }
         private void OpenEmployeeDataPage(Frame frame)
         {
-            frame.Navigate(new EmployeeDataPage(this));
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                frame.Navigate(new EmployeeDataPage(this));
+            });
         }
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged(String propertyName)

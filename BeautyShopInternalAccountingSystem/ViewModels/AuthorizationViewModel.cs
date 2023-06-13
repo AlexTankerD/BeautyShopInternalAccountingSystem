@@ -104,7 +104,7 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
                 return;
             }
             if (ClientImageDirectory == null)
-                ClientImageDirectory = @"Resources\ClientImages\user.png";
+                ClientImageDirectory = @"Images\ClientImages\user.png";
             var reg = AuthorizationDataWorker.Registration(Username, Password, Name, Surname, Patronymic, Birthday,
                        Sex, Email, PhoneNumber, ClientImageDirectory);
             if (reg)
@@ -257,44 +257,44 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
 
 
         #region Команды открытия окон
-        private RelayCommand _openregistrationwindowcommand;
-        public RelayCommand OpenRegistrationWindowCommand
+        private AsyncRelayCommand _openregistrationwindowcommand;
+        public AsyncRelayCommand OpenRegistrationWindowCommand
         {
             get
             {
                 
-                return _openregistrationwindowcommand ?? new RelayCommand(obj =>
+                return _openregistrationwindowcommand ?? new AsyncRelayCommand(async(obj) =>
                 {
                     Window wnd = obj as Window;
-                    OpenRegistrationWindow();
+                    await Task.Run(() => OpenRegistrationWindow());
                     wnd.Close();
                 });
             }
         }
-        private RelayCommand _openauthorizationwindowcommand;
-        public RelayCommand OpenAuthorizationWindowCommand
+        private AsyncRelayCommand _openauthorizationwindowcommand;
+        public AsyncRelayCommand OpenAuthorizationWindowCommand
         {
             get
             {
 
-                return _openauthorizationwindowcommand ?? new RelayCommand(obj =>
+                return _openauthorizationwindowcommand ?? new AsyncRelayCommand(async(obj) =>
                 {
                     Window wnd = obj as Window;
-                    OpenAuthorizationWindow();
+                    await Task.Run(() => OpenAuthorizationWindow());
                     wnd.Close();
                 });
             }
         }
-        private RelayCommand _openforgotpasswordwindowcommand;
-        public RelayCommand OpenForgotPasswordWindowCommand
+        private AsyncRelayCommand _openforgotpasswordwindowcommand;
+        public AsyncRelayCommand OpenForgotPasswordWindowCommand
         {
             get
             {
 
-                return _openforgotpasswordwindowcommand ?? new RelayCommand(obj =>
+                return _openforgotpasswordwindowcommand ?? new AsyncRelayCommand(async(obj) =>
                 {
                     Window wnd = obj as Window;
-                    OpenForgotPasswordWindow();
+                    await Task.Run(() =>OpenForgotPasswordWindow());
                     wnd.Close();
                 });
             }

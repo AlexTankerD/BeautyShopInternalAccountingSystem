@@ -21,9 +21,9 @@ namespace BeautyShopInternalAccountingSystem.Models.DataWorkers
             openFileDialog.ShowDialog();
             if (string.IsNullOrEmpty(openFileDialog.FileName)) 
                 return null;
-            string pathtocopy = $@"Resources\ClientImages\{Path.GetFileName(openFileDialog.FileName)}";
-            if (!Directory.Exists(@"Resources\ClientImages"))
-                Directory.CreateDirectory(@"Resources\ClientImages");
+            string pathtocopy = $@"Images\ClientImages\{Path.GetFileName(openFileDialog.FileName)}";
+            if (!Directory.Exists(@"Images\ClientImages"))
+                Directory.CreateDirectory(@"Images\ClientImages");
             try
             {
                 FileInfo imagepath = new FileInfo(openFileDialog.FileName);
@@ -48,7 +48,6 @@ namespace BeautyShopInternalAccountingSystem.Models.DataWorkers
         public static bool ChangeClientData(Client client, string Username, string Password, string Name, string Surname, string Patronymic, string Birthday,
             string Sex, string Email, string PhoneNumber, string ClientImageDirectory)
         {
-            string clientdefaultimagepath = @"Resources\ClientImages\user.png";
             using (ApplicationContext db = new ApplicationContext())
             {
                 Client clientdb = db.Clients.Where(x => (x.Username == Username && Username != client.Username) || 

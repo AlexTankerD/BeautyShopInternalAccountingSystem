@@ -19,7 +19,7 @@ namespace BeautyShopInternalAccountingSystem.Views.EmployeeWindows
     /// <summary>
     /// Логика взаимодействия для EmployeeDataPage.xaml
     /// </summary>
-    public partial class EmployeeDataPage : Page
+    public partial class EmployeeDataPage : ModernWpf.Controls.Page
     {
         public EmployeeDataPage(EmployeeViewModel vm)
         {
