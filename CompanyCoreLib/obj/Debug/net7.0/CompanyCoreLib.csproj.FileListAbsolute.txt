@@ -1,0 +1,12 @@
+C:\Users\Gamer\source\repos\CompanyCoreLib\CompanyCoreLib\bin\Debug\net7.0\CompanyCoreLib.deps.json
+C:\Users\Gamer\source\repos\CompanyCoreLib\CompanyCoreLib\bin\Debug\net7.0\CompanyCoreLib.dll
+C:\Users\Gamer\source\repos\CompanyCoreLib\CompanyCoreLib\bin\Debug\net7.0\CompanyCoreLib.pdb
+C:\Users\Gamer\source\repos\CompanyCoreLib\CompanyCoreLib\obj\Debug\net7.0\CompanyCoreLib.csproj.AssemblyReference.cache
+C:\Users\Gamer\source\repos\CompanyCoreLib\CompanyCoreLib\obj\Debug\net7.0\CompanyCoreLib.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Gamer\source\repos\CompanyCoreLib\CompanyCoreLib\obj\Debug\net7.0\CompanyCoreLib.AssemblyInfoInputs.cache
+C:\Users\Gamer\source\repos\CompanyCoreLib\CompanyCoreLib\obj\Debug\net7.0\CompanyCoreLib.AssemblyInfo.cs
+C:\Users\Gamer\source\repos\CompanyCoreLib\CompanyCoreLib\obj\Debug\net7.0\CompanyCoreLib.csproj.CoreCompileInputs.cache
+C:\Users\Gamer\source\repos\CompanyCoreLib\CompanyCoreLib\obj\Debug\net7.0\CompanyCoreLib.dll
+C:\Users\Gamer\source\repos\CompanyCoreLib\CompanyCoreLib\obj\Debug\net7.0\refint\CompanyCoreLib.dll
+C:\Users\Gamer\source\repos\CompanyCoreLib\CompanyCoreLib\obj\Debug\net7.0\CompanyCoreLib.pdb
+C:\Users\Gamer\source\repos\CompanyCoreLib\CompanyCoreLib\obj\Debug\net7.0\ref\CompanyCoreLib.dll
