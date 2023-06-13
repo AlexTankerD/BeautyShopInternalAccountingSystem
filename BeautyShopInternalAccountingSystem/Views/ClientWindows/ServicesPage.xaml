@@ -6,7 +6,7 @@
          xmlns:ui="http://schemas.modernwpf.com/2019"
       xmlns:local="clr-namespace:BeautyShopInternalAccountingSystem.Views.ClientWindows"
       mc:Ignorable="d" 
-      d:DesignHeight="720" d:DesignWidth="1300"
+      d:DesignHeight="570" d:DesignWidth="1100"
       Title="ServicesPage" Background="{StaticResource MainBackground}">
 
     <Grid>

@@ -4,24 +4,63 @@
       xmlns:ui="http://schemas.modernwpf.com/2019"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:BeautyShopInternalAccountingSystem.Views.ClientWindows"
-      mc:Ignorable="d" 
-      d:DesignHeight="720" d:DesignWidth="1300"
+      xmlns:local="clr-namespace:BeautyShopInternalAccountingSystem.Views.ClientWindows" xmlns:local1="clr-namespace:BeautyShopInternalAccountingSystem.Models"
+         mc:Ignorable="d" 
+      d:DesignHeight="570" d:DesignWidth="1100"
       Title="ClientDataPage" Background="{StaticResource MainBackground}">
-
+    <ui:Page.Resources>
+        <local1:PathConverter x:Key="PathConverter"/>
+    </ui:Page.Resources>
     <Grid>
-        <Border>
+        <ScrollViewer VerticalScrollBarVisibility="Hidden">
             <Grid>
-                <TextBlock Text="{Binding Path=Client.Username}"></TextBlock>
-                <TextBlock Text="{Binding Path=Client.Password}"></TextBlock>
-                <TextBlock Text="{Binding Path=Client.Name}"></TextBlock>
-                <TextBlock Text="{Binding Path=Client.Surname}"></TextBlock>
-                <TextBlock Text="{Binding Path=Client.Patronymic}"></TextBlock>
-                <TextBlock Text="{Binding Path=Client.Birthday}"></TextBlock>
-                <TextBlock Text="{Binding Path=Client.Sex}"></TextBlock>
-                <TextBlock Text="{Binding Path=Client.Email}"></TextBlock>
-                <TextBlock Text="{Binding Path=Client.Surname}"></TextBlock>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Border CornerRadius="3" BorderThickness="2" BorderBrush="{StaticResource BlackColor}" Margin="10"  
+                    Width="300" HorizontalAlignment="Right" Grid.Row="0" Grid.RowSpan="4" Height="300">
+                    <Image Source="{Binding Path=Client.ClientImageDirectory, Converter={StaticResource PathConverter}}" Width="{Binding RelativeSource={RelativeSource FindAncestor, 
+                       AncestorType={x:Type Border}},Path=ActualWidth}" Height="{Binding RelativeSource={RelativeSource FindAncestor, 
+                       AncestorType={x:Type Border}},Path=ActualHeight}" x:Name="ClientImage"></Image>
+                </Border>
+                <TextBox Margin="10" Height="60" IsReadOnly="True" HorizontalAlignment="Left" 
+                         Width="700" Style="{StaticResource TextBoxStyle}" Grid.Row="0" 
+                         Text="{Binding Path=Client.Username, StringFormat='Имя пользователя: {0}'}"></TextBox>
+                <TextBox Margin="10" Height="60" IsReadOnly="True" HorizontalAlignment="Left" 
+                         Width="700" Style="{StaticResource TextBoxStyle}" Grid.Row="1" 
+                         Text="{Binding Path=Client.Password, StringFormat='Пароль: {0}'}"></TextBox>
+                <TextBox Margin="10" Height="60" IsReadOnly="True" HorizontalAlignment="Left" 
+                         Width="700" Style="{StaticResource TextBoxStyle}" Grid.Row="2" 
+                         Text="{Binding Path=Client.Name, StringFormat='Имя: {0}'}"></TextBox>
+                <TextBox Margin="10" Height="60" IsReadOnly="True" HorizontalAlignment="Left" 
+                         Width="700" Style="{StaticResource TextBoxStyle}" Grid.Row="3" 
+                         Text="{Binding Path=Client.Surname, StringFormat='Фамилия: {0}'}"></TextBox>
+                <TextBox Margin="10" Height="60" IsReadOnly="True" HorizontalAlignment="Left" 
+                         Width="700" Style="{StaticResource TextBoxStyle}" Grid.Row="4" 
+                         Text="{Binding Path=Client.Patronymic, StringFormat='Отчество: {0}'}"></TextBox>
+                <TextBox Margin="10" Height="60" IsReadOnly="True" HorizontalAlignment="Left" 
+                         Width="700" Style="{StaticResource TextBoxStyle}" Grid.Row="5" 
+                         Text="{Binding Path=Client.Birthday, StringFormat='День рождения: {0}'}"></TextBox>
+                <TextBox Margin="10" Height="60" IsReadOnly="True" HorizontalAlignment="Left" 
+                         Width="700" Style="{StaticResource TextBoxStyle}" Grid.Row="6" 
+                         Text="{Binding Path=Client.Sex, StringFormat='Пол: {0}'}"></TextBox>
+                <TextBox Margin="10" Height="60" IsReadOnly="True" HorizontalAlignment="Left" 
+                         Width="700" Style="{StaticResource TextBoxStyle}" Grid.Row="7" 
+                         Text="{Binding Path=Client.Email, StringFormat='Email: {0}'}"></TextBox>
+                <TextBox Margin="10" Height="60" IsReadOnly="True" HorizontalAlignment="Left" 
+                         Width="700" Style="{StaticResource TextBoxStyle}" Grid.Row="8" 
+                         Text="{Binding Path=Client.PhoneNumber, StringFormat='Номер телефона: {0}'}"></TextBox>
+                <Button FontSize="15" Style="{StaticResource ButtonStyle}" Command="{Binding OpenChangeClientDataWindowCommand}" Grid.Row="4" HorizontalAlignment="Right" Margin="10" Width="300" >Изменить данные</Button>
             </Grid>
-        </Border>
+        </ScrollViewer>
     </Grid>
 </ui:Page>
