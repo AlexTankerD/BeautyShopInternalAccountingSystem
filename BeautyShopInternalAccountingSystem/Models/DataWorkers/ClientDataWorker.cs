@@ -9,6 +9,7 @@ using System.Windows.Media.Imaging;
 using System.Windows;
 using System.Windows.Controls;
 using BeautyShopInternalAccountingSystem.Models.Data;
+using System.Collections.ObjectModel;
 
 namespace BeautyShopInternalAccountingSystem.Models.DataWorkers
 {
@@ -24,14 +25,10 @@ namespace BeautyShopInternalAccountingSystem.Models.DataWorkers
             string pathtocopy = $@"Images\ClientImages\{Path.GetFileName(openFileDialog.FileName)}";
             if (!Directory.Exists(@"Images\ClientImages"))
                 Directory.CreateDirectory(@"Images\ClientImages");
-            try
+            if(!File.Exists(pathtocopy))
             {
                 FileInfo imagepath = new FileInfo(openFileDialog.FileName);
-                imagepath.CopyTo(pathtocopy, true);
-            }
-            catch (Exception ex)
-            {
-                return null;
+                imagepath.CopyTo(pathtocopy);
             }
             BitmapImage image = new BitmapImage();
             image.BeginInit();
@@ -76,6 +73,13 @@ namespace BeautyShopInternalAccountingSystem.Models.DataWorkers
                 }
             }
 
+        }
+        public static ObservableCollection<Client> GetClients()
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                return new ObservableCollection<Client>(db.Clients.ToList());
+            }
         }
     }
 }

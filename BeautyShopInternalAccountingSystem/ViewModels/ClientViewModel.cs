@@ -40,6 +40,7 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
             get { return _client; }
             set { _client = value; OnPropertyChanged(nameof(Client)); }
         }
+        public Service SelectedService { get; set; }
         public ObservableCollection<Service> AllServices = ServiceDataWorker.GetServices();
         private string _searchtext;
         public string SearchText
@@ -228,7 +229,7 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
         }
         #endregion
 
-        #region Методы открытия окон
+        #region Методы открытия окон и страниц
         private void OpenServicesPage(Frame frame)
         {
             Application.Current.Dispatcher.Invoke(() =>
@@ -267,13 +268,14 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
             });
 
         }
-        #endregion
+        
         private void SetCenterPositionAndOwner(Window window)
         {
             window.Owner = Application.Current.MainWindow;
             window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             window.ShowDialog();
         }
+        #endregion
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged(String propertyName)
         {

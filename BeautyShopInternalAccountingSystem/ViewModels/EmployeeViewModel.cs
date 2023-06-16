@@ -21,7 +21,7 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
     {
         public Employee Employee { get; set; } 
         public Product SelectedProduct { get; set; }
-        public ObservableCollection<Product> AllProducts = ProductsDataWorker.GetProducts();
+        public ObservableCollection<Product> AllProducts = ProductDataWorker.GetProducts();
         private string _searchtext;
         public string SearchText
         {

@@ -5,11 +5,52 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
          xmlns:ui="http://schemas.modernwpf.com/2019"
       xmlns:local="clr-namespace:BeautyShopInternalAccountingSystem.Views.ClientWindows"
+         xmlns:local1="clr-namespace:BeautyShopInternalAccountingSystem.Models"
       mc:Ignorable="d" 
       d:DesignHeight="570" d:DesignWidth="1100"
       Title="ServicesPage" FontFamily="Tahoma" Background="{StaticResource MainBackground}">
 
-    <Grid>
-        
+    <ui:Page.Resources>
+        <local1:PathConverter x:Key="PathConverter"/>
+    </ui:Page.Resources>
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBox Margin="3" Text="{Binding SearchText,UpdateSourceTrigger=PropertyChanged}" ui:ControlHelper.PlaceholderText="Поиск: "  Style="{StaticResource TextBoxStyle}"/>
+        <ListBox Grid.Row="1" x:Name="ProductsListBox" ItemContainerStyle="{StaticResource ListBoxItemStyle}"
+                 ItemsSource="{Binding FilteredServices}" SelectedItem="{Binding SelectedService}" >
+
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border Background="{StaticResource AdditionalBackground}" CornerRadius="3"  x:Name="border"  Height="260" Width="260"  
+                            BorderThickness="5" Margin="10" BorderBrush="Black">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="30"/>
+                            </Grid.RowDefinitions>
+                            <Border Background="{StaticResource MainBackground}" Width="150"  Height="150" CornerRadius="3" BorderThickness="5" BorderBrush="Black">
+                                <Image Width="{Binding RelativeSource={RelativeSource FindAncestor, 
+                                AncestorType={x:Type Border}},Path=ActualWidth}" Height="{Binding RelativeSource={RelativeSource FindAncestor, 
+                                AncestorType={x:Type Border}},Path=ActualHeight}" Source="{Binding Path=ProductImageDirectory, Converter={StaticResource PathConverter}}"></Image>
+                            </Border>
+                            <TextBlock FontSize="15" TextWrapping="Wrap" Margin="5"  TextAlignment="Center" Grid.Row="1" Text="{Binding Path=Name}"></TextBlock>
+                            <TextBlock FontSize="15"  TextAlignment="Center" Grid.Row="2" Text="{Binding Path=Price, StringFormat='{}{0} рублей'}"></TextBlock>
+                        </Grid>
+                    </Border>
+
+                </DataTemplate>
+
+            </ListBox.ItemTemplate>
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="3" HorizontalAlignment="Center">
+                    </UniformGrid>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
     </Grid>
 </ui:Page>

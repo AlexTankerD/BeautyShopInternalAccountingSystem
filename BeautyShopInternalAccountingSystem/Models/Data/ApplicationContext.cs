@@ -12,6 +12,7 @@ namespace BeautyShopInternalAccountingSystem.Models.Data
 {
     public class ApplicationContext : DbContext
     {
+        public DbSet<Manufacturer> Manufacturers { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Client> Clients { get; set; }
         public DbSet<Manager> Managers { get; set; }

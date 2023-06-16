@@ -8,7 +8,7 @@
       xmlns:local1="clr-namespace:BeautyShopInternalAccountingSystem.Models"
       xmlns:viewmodel="clr-namespace:BeautyShopInternalAccountingSystem.ViewModels"
       mc:Ignorable="d" 
-      d:DesignHeight="630" d:DesignWidth="1100"
+      d:DesignHeight="570" d:DesignWidth="1100"
       Title="ProductsPage" Background="White" FontFamily="Tahoma">
     <ui:Page.Resources>
         <local1:PathConverter x:Key="PathConverter"/>
@@ -19,7 +19,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <TextBox Margin="3" Text="{Binding SearchText,UpdateSourceTrigger=PropertyChanged}" ui:ControlHelper.PlaceholderText="Поиск: "  Style="{StaticResource TextBoxStyle}"/>
-        <ListBox Grid.Row="1" x:Name="ProductsListBox" ItemContainerStyle="{StaticResource ListBoxItemStyle}"
+        <ListBox Grid.Row="1" x:Name="ProductsListBox" ItemContainerStyle="{StaticResource ProductListBoxItemStyle}"
                  ItemsSource="{Binding FilteredProducts}" SelectedItem="{Binding SelectedProduct}" >
            
             <ListBox.ItemTemplate>

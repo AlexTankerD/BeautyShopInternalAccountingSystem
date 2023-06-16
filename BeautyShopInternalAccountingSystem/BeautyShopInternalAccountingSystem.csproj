@@ -11,8 +11,10 @@
   <ItemGroup>
     <None Remove="DatabaseSettings.json" />
     <None Remove="Images\ClientImages\user.png" />
-    <None Remove="Товары для салона красоты\1781670-1.jpg" />
+    <None Remove="Images\ServiceImages\servicedefaultimage.png" />
+    <None Remove="Товары салона красоты\1781670-1.jpg" />
     <None Remove="Resources\Logo\beauty_logo.ico" />
+    <None Remove="Товары салона красоты\productdefaultimage.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,17 +27,21 @@
     <Content Include="Images\ClientImages\user.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Товары для салона красоты\1781670-1.jpg">
+    <Content Include="Images\ServiceImages\servicedefaultimage.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Товары салона красоты\1781670-1.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Logo\beauty_logo.ico" />
+    <Content Include="Товары салона красоты\productdefaultimage.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="bin\Debug\net7.0-windows\Images\" />
-    <Folder Include="Images\ServiceImages\" />
     <Folder Include="Images\EmployeeImages\" />
-    <Folder Include="Views\ManagerWindows\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -152,6 +158,9 @@
 
   <ItemGroup>
     <Compile Update="Views\AuthorizationWindows\ForgotPasswordWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ManagerWindows\ProductWindows\EditProductWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace BeautyShopInternalAccountingSystem.Models.DataWorkers
 {
-    public class ProductsDataWorker
+    public static class ManufacturerDataWorker
     {
-        public static ObservableCollection<Product> GetProducts()
+        public static ObservableCollection<Manufacturer> GetManufacturers()
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                return new ObservableCollection<Product>(db.Products.ToList());
+                return new ObservableCollection<Manufacturer>(db.Manufacturers.ToList());
             }
         }
     }

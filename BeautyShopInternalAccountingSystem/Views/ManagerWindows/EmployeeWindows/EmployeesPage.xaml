@@ -1,0 +1,30 @@
+﻿<ui:Page x:Class="BeautyShopInternalAccountingSystem.Views.ManagerWindows.EmployeeWindows.EmployeesPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:ui="http://schemas.modernwpf.com/2019" 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BeautyShopInternalAccountingSystem.Views.ManagerWindows"
+      mc:Ignorable="d" 
+      d:DesignHeight="570" d:DesignWidth="1100"
+      Title="EmployeesPage" FontFamily="Tahoma" Background="{StaticResource MainBackground}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBox Grid.Row="1" Margin="3" Text="{Binding SearchEmployeesText,UpdateSourceTrigger=PropertyChanged}" 
+                 ui:ControlHelper.PlaceholderText="Поиск: "  Style="{StaticResource TextBoxStyle}"/>
+        <Button Command="{Binding }"  
+                Style="{StaticResource ButtonStyle}" HorizontalAlignment="Left"  
+                Margin="10,0,0,0" Height="40" Width="150" Grid.Row="0">Добавить работника</Button>
+        <Button Command="{Binding }" 
+                HorizontalAlignment="Left" Style="{StaticResource ButtonStyle}" 
+                Margin="170,0,0,0" Height="40" Width="150" Grid.Row="0">Изменить работника</Button>
+        <Button Command="{Binding }" 
+                HorizontalAlignment="Left" Style="{StaticResource ButtonStyle}" 
+                Margin="330,0,0,0" Height="40" Width="150" Grid.Row="0">Удалить работника</Button>
+    </Grid>
+</ui:Page>

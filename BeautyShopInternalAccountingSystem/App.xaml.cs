@@ -1,6 +1,8 @@
-﻿using BeautyShopInternalAccountingSystem.Views.AuthorizationWindows;
+﻿using BeautyShopInternalAccountingSystem.ViewModels;
+using BeautyShopInternalAccountingSystem.Views.AuthorizationWindows;
 using BeautyShopInternalAccountingSystem.Views.ClientWindows;
 using BeautyShopInternalAccountingSystem.Views.EmployeeWindows;
+using BeautyShopInternalAccountingSystem.Views.ManagerWindows;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -20,7 +22,7 @@ namespace BeautyShopInternalAccountingSystem
         protected override void OnStartup(StartupEventArgs e)
         {
 
-            AuthorizationWindow wnd = new AuthorizationWindow();
+            ManagerWindow wnd = new ManagerWindow(new ManagerViewModel());
             wnd.Show();
                 
         }

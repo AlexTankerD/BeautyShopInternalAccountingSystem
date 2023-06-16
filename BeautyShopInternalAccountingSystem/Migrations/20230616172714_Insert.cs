@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -73,6 +74,42 @@ namespace BeautyShopInternalAccountingSystem.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Manufacturers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Manufacturers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Services",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Price = table.Column<double>(type: "float", nullable: false),
+                    ServiceImageDirectory = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EmployeeId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Services", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Services_Employees_EmployeeId",
+                        column: x => x.EmployeeId,
+                        principalTable: "Employees",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Products",
                 columns: table => new
                 {
@@ -87,58 +124,30 @@ namespace BeautyShopInternalAccountingSystem.Migrations
                     Height = table.Column<double>(type: "float", nullable: true),
                     Width = table.Column<double>(type: "float", nullable: true),
                     Length = table.Column<double>(type: "float", nullable: true),
-                    Manufacturer = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ManufacturerId = table.Column<int>(type: "int", nullable: false),
                     ProductImageDirectory = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Products", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Services",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Price = table.Column<double>(type: "float", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Services", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "EmployeeService",
-                columns: table => new
-                {
-                    EmployeesId = table.Column<int>(type: "int", nullable: false),
-                    ServicesId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_EmployeeService", x => new { x.EmployeesId, x.ServicesId });
                     table.ForeignKey(
-                        name: "FK_EmployeeService_Employees_EmployeesId",
-                        column: x => x.EmployeesId,
-                        principalTable: "Employees",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_EmployeeService_Services_ServicesId",
-                        column: x => x.ServicesId,
-                        principalTable: "Services",
+                        name: "FK_Products_Manufacturers_ManufacturerId",
+                        column: x => x.ManufacturerId,
+                        principalTable: "Manufacturers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_EmployeeService_ServicesId",
-                table: "EmployeeService",
-                column: "ServicesId");
+                name: "IX_Products_ManufacturerId",
+                table: "Products",
+                column: "ManufacturerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Services_EmployeeId",
+                table: "Services",
+                column: "EmployeeId");
         }
 
         /// <inheritdoc />
@@ -148,19 +157,19 @@ namespace BeautyShopInternalAccountingSystem.Migrations
                 name: "Clients");
 
             migrationBuilder.DropTable(
-                name: "EmployeeService");
-
-            migrationBuilder.DropTable(
                 name: "Managers");
 
             migrationBuilder.DropTable(
                 name: "Products");
 
             migrationBuilder.DropTable(
-                name: "Employees");
+                name: "Services");
 
             migrationBuilder.DropTable(
-                name: "Services");
+                name: "Manufacturers");
+
+            migrationBuilder.DropTable(
+                name: "Employees");
         }
     }
 }
