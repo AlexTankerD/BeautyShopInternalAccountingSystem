@@ -1,0 +1,91 @@
+﻿<Window x:Class="BeautyShopInternalAccountingSystem.Views.ManagerWindows.EmployeeWindows.AddEmployeeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ui="http://schemas.modernwpf.com/2019" 
+        xmlns:local="clr-namespace:BeautyShopInternalAccountingSystem.Views.ManagerWindows.EmployeeWindows"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        mc:Ignorable="d"
+        Title="Добавить работника" FontFamily="Tahoma" ResizeMode="NoResize" 
+        ui:WindowHelper.UseModernWindowStyle="True" Height="600" Width="600" 
+        WindowStartupLocation="CenterScreen" x:Name="addemployeewnd" >
+    <Grid>
+        <ScrollViewer VerticalScrollBarVisibility="Hidden">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Border CornerRadius="3" BorderThickness="2" BorderBrush="{StaticResource BlackColor}" Margin="10"  
+                    Width="200" HorizontalAlignment="Left" Grid.Row="0" Grid.RowSpan="3" Height="200">
+                    <Image Width="{Binding RelativeSource={RelativeSource FindAncestor, 
+                       AncestorType={x:Type Border}},Path=ActualWidth}" Height="{Binding RelativeSource={RelativeSource FindAncestor, 
+                       AncestorType={x:Type Border}},Path=ActualHeight}" x:Name="EmployeeImage"></Image>
+                </Border>
+                <Button Command="{Binding AddEmployeeImageCommand}" CommandParameter="{Binding ElementName=addemployeewnd}" 
+                     Grid.Row="3" Height="50" Width="200" Margin="10" HorizontalAlignment="Left"  
+                     Style="{StaticResource ButtonStyle}">Добавить изображение</Button>
+                <TextBox HorizontalAlignment="Right" Grid.Row="0" Margin="10" Height="50" 
+                     Text="{Binding EmployeeUsername}"  ui:ControlHelper.PlaceholderText="Имя пользователя" 
+                     Width="350" Style="{StaticResource TextBoxStyle}"></TextBox>
+                <TextBox HorizontalAlignment="Right" Grid.Row="1" Margin="10" Height="50" 
+                     Text="{Binding EmployeePassword}"  ui:ControlHelper.PlaceholderText="Пароль" 
+                     Width="350" Style="{StaticResource TextBoxStyle}"></TextBox>
+                <TextBox HorizontalAlignment="Right" Grid.Row="2" Margin="10" Height="50" 
+                     Text="{Binding EmployeeName}" ui:ControlHelper.PlaceholderText="Имя" 
+                     Width="350" Style="{StaticResource TextBoxStyle}"></TextBox>
+                <TextBox HorizontalAlignment="Right" Grid.Row="3" Margin="10" Height="50" 
+                     Text="{Binding EmployeeSurname}" ui:ControlHelper.PlaceholderText="Фамилия"  
+                     Width="350" Style="{StaticResource TextBoxStyle}"></TextBox>
+                <TextBox HorizontalAlignment="Right" Grid.Row="4" Margin="10" Height="50" 
+                     Text="{Binding EmployeePatronymic}" ui:ControlHelper.PlaceholderText="Отчество"  
+                     Width="350" Style="{StaticResource TextBoxStyle}"></TextBox>
+                <TextBox HorizontalAlignment="Right" Grid.Row="5" Margin="10" Height="50" 
+                     Text="{Binding EmployeeBirthday}"  ui:ControlHelper.PlaceholderText="Дата рождения"  
+                     Width="350" Style="{StaticResource TextBoxStyle}"></TextBox>
+                <ComboBox FontFamily="Tahoma"  Margin="0,10,260,0" HorizontalAlignment="Right" Height="50" 
+                      Width="100" SelectedValue="{Binding EmployeeSex}" ui:ControlHelper.PlaceholderText="Пол" Grid.Row="6">
+                    <sys:Char>М</sys:Char>
+                    <sys:Char>Ж</sys:Char>
+                </ComboBox>
+                <TextBox HorizontalAlignment="Right" Grid.Row="7" Margin="10" Height="50" 
+                     Text="{Binding EmployeeEmail}" ui:ControlHelper.PlaceholderText="Email"  
+                     Width="350" Style="{StaticResource TextBoxStyle}"></TextBox>
+                <TextBox HorizontalAlignment="Right" Grid.Row="8" Margin="10" Height="50" 
+                     Text="{Binding EmployeePhoneNumber}" ui:ControlHelper.PlaceholderText="Номер телефона"  
+                     Width="350" Style="{StaticResource TextBoxStyle}"></TextBox>
+                <TextBox HorizontalAlignment="Right" Grid.Row="9" Margin="10" Height="50" 
+                     Text="{Binding EmployeePosition}" ui:ControlHelper.PlaceholderText="Позиция"  
+                     Width="350" Style="{StaticResource TextBoxStyle}"></TextBox>
+                <TextBox HorizontalAlignment="Right" Grid.Row="10" Margin="10" Height="50" 
+                     Text="{Binding EmployeeSellaryRatio}" ui:ControlHelper.PlaceholderText="Коэффициент оплаты"  
+                     Width="350" Style="{StaticResource TextBoxStyle}"></TextBox>
+                <TextBox HorizontalAlignment="Right" Grid.Row="11" Margin="10" Height="50" 
+                     Text="{Binding EmployeePassportData}" ui:ControlHelper.PlaceholderText="Номер паспорта"  
+                     Width="350" Style="{StaticResource TextBoxStyle}"></TextBox>
+                <TextBox Grid.Row="12" HorizontalAlignment="Left" Margin="10" Width="200" 
+                         TextWrapping="Wrap" Text="{Binding EmployeeServices.Count, StringFormat='Количество услуг: {0}', Mode=OneWay}" 
+                         Style="{StaticResource TextBoxStyle}" IsReadOnly="True"/>
+                <Button Grid.Row="12" Height="50" Width="200" Margin="0,10,85,10" HorizontalAlignment="Right"
+                    Style="{StaticResource ButtonStyle}"
+                    Command="{Binding OpenAddEmployeeServiceWindowCommand}">Добавить услуги</Button>
+                <Button Grid.Row="13" Height="50" Width="200" Margin="10" HorizontalAlignment="Center"  
+                    Style="{StaticResource ButtonStyle}"
+                    Command="{Binding AddEmployeeCommand}" CommandParameter="{Binding ElementName=addemployeewnd}">Добавить работника</Button>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</Window>

@@ -11,22 +11,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace BeautyShopInternalAccountingSystem.Views.ManagerWindows.EmployeeWindows
 {
     /// <summary>
-    /// Логика взаимодействия для EmployeesPage.xaml
+    /// Логика взаимодействия для EmployeeServiceWindow.xaml
     /// </summary>
-    public partial class EmployeesPage : ModernWpf.Controls.Page
+    public partial class AddEmployeeServiceWindow : Window
     {
-        public static ListBox ListEmployeesBox; 
-        public EmployeesPage(ManagerViewModel vm)
+        public AddEmployeeServiceWindow(ManagerViewModel vm)
         {
             InitializeComponent();
             DataContext = vm;
-            ListEmployeesBox = EmployeesListBox;
         }
     }
 }

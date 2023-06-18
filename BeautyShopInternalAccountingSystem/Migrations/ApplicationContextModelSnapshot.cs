@@ -127,7 +127,7 @@ namespace BeautyShopInternalAccountingSystem.Migrations
 
                     b.Property<string>("Sex")
                         .IsRequired()
-                        .HasColumnType("nvarchar(1)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Surname")
                         .IsRequired()
@@ -248,7 +248,10 @@ namespace BeautyShopInternalAccountingSystem.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("EmployeeId")
+                    b.Property<double>("Discount")
+                        .HasColumnType("float");
+
+                    b.Property<int>("Duration")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -264,9 +267,22 @@ namespace BeautyShopInternalAccountingSystem.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EmployeeId");
-
                     b.ToTable("Services");
+                });
+
+            modelBuilder.Entity("EmployeeService", b =>
+                {
+                    b.Property<int>("EmployeesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ServicesId")
+                        .HasColumnType("int");
+
+                    b.HasKey("EmployeesId", "ServicesId");
+
+                    b.HasIndex("ServicesId");
+
+                    b.ToTable("EmployeeService");
                 });
 
             modelBuilder.Entity("BeautyShopInternalAccountingSystem.Models.Product", b =>
@@ -280,16 +296,19 @@ namespace BeautyShopInternalAccountingSystem.Migrations
                     b.Navigation("Manufacturer");
                 });
 
-            modelBuilder.Entity("BeautyShopInternalAccountingSystem.Models.Service", b =>
+            modelBuilder.Entity("EmployeeService", b =>
                 {
                     b.HasOne("BeautyShopInternalAccountingSystem.Models.Employee", null)
-                        .WithMany("Services")
-                        .HasForeignKey("EmployeeId");
-                });
+                        .WithMany()
+                        .HasForeignKey("EmployeesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-            modelBuilder.Entity("BeautyShopInternalAccountingSystem.Models.Employee", b =>
-                {
-                    b.Navigation("Services");
+                    b.HasOne("BeautyShopInternalAccountingSystem.Models.Service", null)
+                        .WithMany()
+                        .HasForeignKey("ServicesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:BeautyShopInternalAccountingSystem.Views"
         xmlns:ui="http://schemas.modernwpf.com/2019"
         mc:Ignorable="d"
-        Title="Сообщение" Height="200" FontFamily="Tahoma" Width="300" ui:WindowHelper.UseModernWindowStyle="True" ResizeMode="NoResize">
+        Title="Сообщение" Height="200" FontFamily="Tahoma" Width="300" ui:WindowHelper.UseModernWindowStyle="True" 
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>

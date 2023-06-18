@@ -1,4 +1,5 @@
 ﻿using BeautyShopInternalAccountingSystem.Models;
+using BeautyShopInternalAccountingSystem.Models.Data;
 using BeautyShopInternalAccountingSystem.Models.DataWorkers;
 using BeautyShopInternalAccountingSystem.Models.RegularExpressions;
 using BeautyShopInternalAccountingSystem.Models.RelayCommands;
@@ -55,14 +56,23 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
         public string EmployeeSurname { get; set; }
         public string EmployeePatronymic { get; set; }
         public string EmployeeBirthday { get; set; }
-        public char EmployeeSex { get; set; }
+        public string EmployeeSex { get; set; }
         public string EmployeeEmail { get; set; }
         public string EmployeePhoneNumber { get; set; }
         public string EmployeePosition { get; set; }
-        public double EmployeeSellaryRatio { get; set; }
+        public double? EmployeeSellaryRatio { get; set; }
         public string? EmployeeImageDirectory { get; set; }
         public string EmployeePassportData { get; set; }
-        public List<Service> EmployeeServices { get; set; }
+        private ObservableCollection<Service> _employeeservices;
+        public ObservableCollection<Service> EmployeeServices
+        {
+            get { return _employeeservices; }
+            set
+            {
+                _employeeservices = value;
+                OnPropertyChanged("EmployeeServices");
+            }
+        }
         #endregion
 
         #region Все товары, услуги, работники, клиенты
@@ -103,6 +113,7 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
         #region Выбранные товары, услуги, работники, клиенты
         public Product SelectedProduct { get; set; }
         public Service SelectedService { get; set; }
+        public Service SelectedEmployeeService { get; set; }
         #endregion
 
         #region Поиск товаров, услуг, работников, клиентов
@@ -222,77 +233,82 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
                 return _addproductcommand ?? new AsyncRelayCommand(async (obj) =>
                 {
                     Window wnd = obj as Window;
-                    if (!ProductRegexp.IsNameValid(ProductName))
-                    {
-                        OpenMessageWindow("Неправильное название товара");
-                        return;
-                    }
-                    if (!ProductRegexp.IsCategoryValid(ProductCategory))
-                    {
-                        OpenMessageWindow("Неправильная категория продукта");
-                        return;
-                    }
-                    if (!ProductRegexp.IsPriceValid(ProductPrice))
-                    {
-                        OpenMessageWindow("Неправильная цена продукта");
-                        return;
-                    }
-                    if (!ProductRegexp.IsSpecificationsValid(ProductSpecifications))
-                    {
-                        OpenMessageWindow("Неправильные характеристики продукта");
-                        return;
-                    }
-                    if (!ProductRegexp.IsDescriptionValid(ProductDescription))
-                    {
-                        OpenMessageWindow("Неправильное описание продукта");
-                        return;
-                    }
-                    if (!ProductRegexp.IsWeightValid(ProductWeight))
-                    {
-                        OpenMessageWindow("Неправильный вес продукта");
-                        return;
-                    }
-                    if (!ProductRegexp.IsHeightValid(ProductHeight))
-                    {
-                        OpenMessageWindow("Неправильная высота продукта");
-                        return;
-                    }
-                    if (!ProductRegexp.IsWidthValid(ProductWidth))
-                    {
-                        OpenMessageWindow("Неправильная ширина продукта");
-                        return;
-                    }
-                    if (!ProductRegexp.IsLengthValid(ProductLength))
-                    {
-                        OpenMessageWindow("Неправильная длина продукта");
-                        return;
-                    }
-                    if (!ProductRegexp.IsManufacturerValid(ProductManufacturer))
-                    {
-                        OpenMessageWindow("Неправильный производитель продукта");
-                        return;
-                    }
-                    if (!ProductRegexp.IsProductActiveValid(ProductIsActive))
-                    {
-                        OpenMessageWindow("Окно активности не должно быть пустым");
-                        return;
-                    }
-                    if (ProductImageDirectory == null)
-                        ProductImageDirectory = @"Товары салона красоты\productdefaultimage.png";
-                    var addproduct = ProductDataWorker.AddProduct(ProductName, ProductCategory, ProductPrice, 
-                        ProductSpecifications, ProductDescription, ProductWeight, ProductHeight, ProductWidth, 
-                        ProductLength, ProductManufacturer.Id, ProductImageDirectory, ProductIsActive);
-                    if(addproduct)
-                    {
-                        OpenMessageWindow("Продукт успешно добавлен");
-                        UpdateProductPage();
-                        SetNullProductValueProperties();
-                        CloseWindow(wnd);
-                    }
+                    Task.Run(() => AddProductCommandMethod(wnd));
 
                 });
             }
         }
+        public void AddProductCommandMethod(Window wnd)
+        {
+            if (!ProductRegexp.IsNameValid(ProductName))
+            {
+                OpenMessageWindow("Неправильное название товара");
+                return;
+            }
+            if (!ProductRegexp.IsCategoryValid(ProductCategory))
+            {
+                OpenMessageWindow("Неправильная категория продукта");
+                return;
+            }
+            if (!ProductRegexp.IsPriceValid(ProductPrice))
+            {
+                OpenMessageWindow("Неправильная цена продукта");
+                return;
+            }
+            if (!ProductRegexp.IsSpecificationsValid(ProductSpecifications))
+            {
+                OpenMessageWindow("Неправильные характеристики продукта");
+                return;
+            }
+            if (!ProductRegexp.IsDescriptionValid(ProductDescription))
+            {
+                OpenMessageWindow("Неправильное описание продукта");
+                return;
+            }
+            if (!ProductRegexp.IsWeightValid(ProductWeight))
+            {
+                OpenMessageWindow("Неправильный вес продукта");
+                return;
+            }
+            if (!ProductRegexp.IsHeightValid(ProductHeight))
+            {
+                OpenMessageWindow("Неправильная высота продукта");
+                return;
+            }
+            if (!ProductRegexp.IsWidthValid(ProductWidth))
+            {
+                OpenMessageWindow("Неправильная ширина продукта");
+                return;
+            }
+            if (!ProductRegexp.IsLengthValid(ProductLength))
+            {
+                OpenMessageWindow("Неправильная длина продукта");
+                return;
+            }
+            if (!ProductRegexp.IsManufacturerValid(ProductManufacturer))
+            {
+                OpenMessageWindow("Неправильный производитель продукта");
+                return;
+            }
+            if (!ProductRegexp.IsProductActiveValid(ProductIsActive))
+            {
+                OpenMessageWindow("Окно активности не должно быть пустым");
+                return;
+            }
+            if (ProductImageDirectory == null)
+                ProductImageDirectory = @"Товары салона красоты\productdefaultimage.png";
+            var addproduct = ProductDataWorker.AddProduct(ProductName, ProductCategory, ProductPrice,
+                ProductSpecifications, ProductDescription, ProductWeight, ProductHeight, ProductWidth,
+                ProductLength, ProductManufacturer.Id, ProductImageDirectory, ProductIsActive);
+            if (addproduct)
+            {
+                OpenMessageWindow("Продукт успешно добавлен");
+                UpdateProductPage();
+                SetNullProductValueProperties();
+                CloseWindow(wnd);
+            }
+        }
+
         private AsyncRelayCommand _editproductcommand;
         public AsyncRelayCommand EditProductCommand
         {
@@ -301,77 +317,81 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
                 return _editproductcommand ?? new AsyncRelayCommand(async (obj) =>
                 {
                     Window wnd = obj as Window;
-                    if (!ProductRegexp.IsNameValid(ProductName))
-                    {
-                        OpenMessageWindow("Неправильное название товара");
-                        return;
-                    }
-                    if (!ProductRegexp.IsCategoryValid(ProductCategory))
-                    {
-                        OpenMessageWindow("Неправильная категория продукта");
-                        return;
-                    }
-                    if (!ProductRegexp.IsPriceValid(ProductPrice))
-                    {
-                        OpenMessageWindow("Неправильная цена продукта");
-                        return;
-                    }
-                    if (!ProductRegexp.IsSpecificationsValid(ProductSpecifications))
-                    {
-                        OpenMessageWindow("Неправильные характеристики продукта");
-                        return;
-                    }
-                    if (!ProductRegexp.IsDescriptionValid(ProductDescription))
-                    {
-                        OpenMessageWindow("Неправильное описание продукта");
-                        return;
-                    }
-                    if (!ProductRegexp.IsWeightValid(ProductWeight))
-                    {
-                        OpenMessageWindow("Неправильный вес продукта");
-                        return;
-                    }
-                    if (!ProductRegexp.IsHeightValid(ProductHeight))
-                    {
-                        OpenMessageWindow("Неправильная высота продукта");
-                        return;
-                    }
-                    if (!ProductRegexp.IsWidthValid(ProductWidth))
-                    {
-                        OpenMessageWindow("Неправильная ширина продукта");
-                        return;
-                    }
-                    if (!ProductRegexp.IsLengthValid(ProductLength))
-                    {
-                        OpenMessageWindow("Неправильная длина продукта");
-                        return;
-                    }
-                    if (!ProductRegexp.IsManufacturerValid(ProductManufacturer))
-                    {
-                        OpenMessageWindow("Неправильный производитель продукта");
-                        return;
-                    }
-                    if (!ProductRegexp.IsProductActiveValid(ProductIsActive))
-                    {
-                        OpenMessageWindow("Окно активности не должно быть пустым");
-                        return;
-                    }
-                    if (ProductImageDirectory == null)
-                        ProductImageDirectory = @"Товары салона красоты\productdefaultimage.png";
-                    var editproduct = ProductDataWorker.EditProduct(SelectedProduct, ProductName, ProductCategory, ProductPrice,
-                        ProductSpecifications, ProductDescription, ProductWeight, ProductHeight, ProductWidth,
-                        ProductLength, ProductManufacturer.Id, ProductImageDirectory, ProductIsActive);
-                    if (editproduct)
-                    {
-                        OpenMessageWindow("Продукт успешно изменен");
-                        UpdateProductPage();
-                        SetNullProductValueProperties();
-                        CloseWindow(wnd);
-                    }
-
+                    Task.Run(() => EditProductCommandMethod(wnd));
                 });
             }
         }
+        public void EditProductCommandMethod(Window wnd)
+        {
+            if (!ProductRegexp.IsNameValid(ProductName))
+            {
+                OpenMessageWindow("Неправильное название товара");
+                return;
+            }
+            if (!ProductRegexp.IsCategoryValid(ProductCategory))
+            {
+                OpenMessageWindow("Неправильная категория продукта");
+                return;
+            }
+            if (!ProductRegexp.IsPriceValid(ProductPrice))
+            {
+                OpenMessageWindow("Неправильная цена продукта");
+                return;
+            }
+            if (!ProductRegexp.IsSpecificationsValid(ProductSpecifications))
+            {
+                OpenMessageWindow("Неправильные характеристики продукта");
+                return;
+            }
+            if (!ProductRegexp.IsDescriptionValid(ProductDescription))
+            {
+                OpenMessageWindow("Неправильное описание продукта");
+                return;
+            }
+            if (!ProductRegexp.IsWeightValid(ProductWeight))
+            {
+                OpenMessageWindow("Неправильный вес продукта");
+                return;
+            }
+            if (!ProductRegexp.IsHeightValid(ProductHeight))
+            {
+                OpenMessageWindow("Неправильная высота продукта");
+                return;
+            }
+            if (!ProductRegexp.IsWidthValid(ProductWidth))
+            {
+                OpenMessageWindow("Неправильная ширина продукта");
+                return;
+            }
+            if (!ProductRegexp.IsLengthValid(ProductLength))
+            {
+                OpenMessageWindow("Неправильная длина продукта");
+                return;
+            }
+            if (!ProductRegexp.IsManufacturerValid(ProductManufacturer))
+            {
+                OpenMessageWindow("Неправильный производитель продукта");
+                return;
+            }
+            if (!ProductRegexp.IsProductActiveValid(ProductIsActive))
+            {
+                OpenMessageWindow("Окно активности не должно быть пустым");
+                return;
+            }
+            if (ProductImageDirectory == null)
+                ProductImageDirectory = @"Товары салона красоты\productdefaultimage.png";
+            var editproduct = ProductDataWorker.EditProduct(SelectedProduct, ProductName, ProductCategory, ProductPrice,
+                ProductSpecifications, ProductDescription, ProductWeight, ProductHeight, ProductWidth,
+                ProductLength, ProductManufacturer.Id, ProductImageDirectory, ProductIsActive);
+            if (editproduct)
+            {
+                OpenMessageWindow("Продукт успешно изменен");
+                UpdateProductPage();
+                SetNullProductValueProperties();
+                CloseWindow(wnd);
+            }
+        }
+
         private AsyncRelayCommand _deleteproductcommand;
         public AsyncRelayCommand DeleteProductCommand
         {
@@ -379,18 +399,20 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
             {
                 return _deleteproductcommand ?? new AsyncRelayCommand(async (obj) =>
                 {
-                    if(SelectedProduct == null)
-                    {
-                        OpenMessageWindow("Не выбран продукт");
-                        return;
-                    }
-                    ProductDataWorker.DeleteProduct(SelectedProduct);
-                    OpenMessageWindow("Продукт успешно удален");
-                    UpdateProductPage();
-                    
-
+                    Task.Run(() => DeleteProductCommandMethod());
                 });
             }
+        }
+        public void DeleteProductCommandMethod()
+        {
+            if (SelectedProduct == null)
+            {
+                OpenMessageWindow("Не выбран продукт");
+                return;
+            }
+            ProductDataWorker.DeleteProduct(SelectedProduct);
+            OpenMessageWindow("Продукт успешно удален");
+            UpdateProductPage();
         }
 
         private void SetNullProductValueProperties()
@@ -426,46 +448,51 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
                 return _addservicecommand ?? new AsyncRelayCommand(async (obj) =>
                 {
                     Window wnd = obj as Window;
-                    if (!ServiceRegexp.IsNameValid(ServiceName))
-                    {
-                        OpenMessageWindow("Неправильное название услуги");
-                        return;
-                    }
-                    if (!ServiceRegexp.IsDescriptionValid(ServiceDescription))
-                    {
-                        OpenMessageWindow("Неправильное описание услуги");
-                        return;
-                    }
-                    if (!ServiceRegexp.IsPriceValid(ServicePrice))
-                    {
-                        OpenMessageWindow("Неправильная цена услуги");
-                        return;
-                    }
-                    if (!ServiceRegexp.IsDiscountValid(ServiceDiscount))
-                    {
-                        OpenMessageWindow("Неправильная скидка");
-                        return;
-                    }
-                    if (!ServiceRegexp.IsDurationValid(ServiceDuration))
-                    {
-                        OpenMessageWindow("Неправильная продолжительность услуги");
-                        return;
-                    }
-                    if (ServiceImageDirectory == null)
-                        ServiceImageDirectory = @"Images\ServiceImages\servicedefaultimage.png";
-                    var addservice = ServiceDataWorker.AddService(ServiceName, ServiceDescription, 
-                        ServicePrice, ServiceDiscount, ServiceDuration, ServiceImageDirectory);
-                    if (addservice)
-                    {
-                        OpenMessageWindow("Услуга успешно добавлен");
-                        UpdateServicePage();
-                        SetNullServiceValueProperties();
-                        CloseWindow(wnd);
-                    }
+                    Task.Run(() => AddServiceCommandMethod(wnd));
 
                 });
             }
         }
+        private void AddServiceCommandMethod(Window wnd)
+        {
+            if (!ServiceRegexp.IsNameValid(ServiceName))
+            {
+                OpenMessageWindow("Неправильное название услуги");
+                return;
+            }
+            if (!ServiceRegexp.IsDescriptionValid(ServiceDescription))
+            {
+                OpenMessageWindow("Неправильное описание услуги");
+                return;
+            }
+            if (!ServiceRegexp.IsPriceValid(ServicePrice))
+            {
+                OpenMessageWindow("Неправильная цена услуги");
+                return;
+            }
+            if (!ServiceRegexp.IsDiscountValid(ServiceDiscount))
+            {
+                OpenMessageWindow("Неправильная скидка");
+                return;
+            }
+            if (!ServiceRegexp.IsDurationValid(ServiceDuration))
+            {
+                OpenMessageWindow("Неправильная продолжительность услуги");
+                return;
+            }
+            if (ServiceImageDirectory == null)
+                ServiceImageDirectory = @"Images\ServiceImages\servicedefaultimage.png";
+            var addservice = ServiceDataWorker.AddService(ServiceName, ServiceDescription,
+                ServicePrice, ServiceDiscount, ServiceDuration, ServiceImageDirectory);
+            if (addservice)
+            {
+                OpenMessageWindow("Услуга успешно добавлен");
+                UpdateServicePage();
+                SetNullServiceValueProperties();
+                CloseWindow(wnd);
+            }
+        }
+
         private AsyncRelayCommand _editservicecommand;
         public AsyncRelayCommand EditServiceCommand
         {
@@ -474,46 +501,51 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
                 return _editservicecommand ?? new AsyncRelayCommand(async (obj) =>
                 {
                     Window wnd = obj as Window;
-                    if (!ServiceRegexp.IsNameValid(ServiceName))
-                    {
-                        OpenMessageWindow("Неправильное название услуги");
-                        return;
-                    }
-                    if (!ServiceRegexp.IsDescriptionValid(ServiceDescription))
-                    {
-                        OpenMessageWindow("Неправильное описание услуги");
-                        return;
-                    }
-                    if (!ServiceRegexp.IsPriceValid(ServicePrice))
-                    {
-                        OpenMessageWindow("Неправильная цена услуги");
-                        return;
-                    }
-                    if (!ServiceRegexp.IsDiscountValid(ServiceDiscount))
-                    {
-                        OpenMessageWindow("Неправильная скидка");
-                        return;
-                    }
-                    if (!ServiceRegexp.IsDurationValid(ServiceDuration))
-                    {
-                        OpenMessageWindow("Неправильная продолжительность услуги");
-                        return;
-                    }
-                    if (ServiceImageDirectory == null)
-                        ServiceImageDirectory = @"Images\ServiceImages\servicedefaultimage.png";
-                    var editservice = ServiceDataWorker.EditService(SelectedService, ServiceName, ServiceDescription,
-                        ServicePrice, ServiceDiscount, ServiceDuration, ServiceImageDirectory);
-                    if (editservice)
-                    {
-                        OpenMessageWindow("Услуга успешно изменена");
-                        UpdateServicePage();
-                        SetNullServiceValueProperties();
-                        CloseWindow(wnd);
-                    }
+                    Task.Run(() => EditServiceCommandMethod(wnd));
 
                 });
             }
         }
+        public void EditServiceCommandMethod(Window wnd)
+        {
+            if (!ServiceRegexp.IsNameValid(ServiceName))
+            {
+                OpenMessageWindow("Неправильное название услуги");
+                return;
+            }
+            if (!ServiceRegexp.IsDescriptionValid(ServiceDescription))
+            {
+                OpenMessageWindow("Неправильное описание услуги");
+                return;
+            }
+            if (!ServiceRegexp.IsPriceValid(ServicePrice))
+            {
+                OpenMessageWindow("Неправильная цена услуги");
+                return;
+            }
+            if (!ServiceRegexp.IsDiscountValid(ServiceDiscount))
+            {
+                OpenMessageWindow("Неправильная скидка");
+                return;
+            }
+            if (!ServiceRegexp.IsDurationValid(ServiceDuration))
+            {
+                OpenMessageWindow("Неправильная продолжительность услуги");
+                return;
+            }
+            if (ServiceImageDirectory == null)
+                ServiceImageDirectory = @"Images\ServiceImages\servicedefaultimage.png";
+            var editservice = ServiceDataWorker.EditService(SelectedService, ServiceName, ServiceDescription,
+                ServicePrice, ServiceDiscount, ServiceDuration, ServiceImageDirectory);
+            if (editservice)
+            {
+                OpenMessageWindow("Услуга успешно изменена");
+                UpdateServicePage();
+                SetNullServiceValueProperties();
+                CloseWindow(wnd);
+            }
+        }
+
         private AsyncRelayCommand _deleteservicecommand;
         public AsyncRelayCommand DeleteServiceCommand
         {
@@ -521,19 +553,22 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
             {
                 return _deleteservicecommand ?? new AsyncRelayCommand(async (obj) =>
                 {
-                    if (SelectedService == null)
-                    {
-                        OpenMessageWindow("Не выбрана услуга");
-                        return;
-                    }
-                    ServiceDataWorker.DeleteService(SelectedService);
-                    OpenMessageWindow("Услуга успешно удалена");
-                    UpdateServicePage();
-
-
+                    Task.Run(() => DeleteServiceCommandMethod());
                 });
             }
         }
+        public void DeleteServiceCommandMethod()
+        {
+            if (SelectedService == null)
+            {
+                OpenMessageWindow("Не выбрана услуга");
+                return;
+            }
+            ServiceDataWorker.DeleteService(SelectedService);
+            OpenMessageWindow("Услуга успешно удалена");
+            UpdateServicePage();
+        }
+
         private void SetNullServiceValueProperties()
         {
             ServiceName = null;
@@ -546,122 +581,192 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
         }
         private void UpdateServicePage()
         {
-            AllServices = ServiceDataWorker.GetServices();
-            ServicesPage.ListServicesBox.ItemsSource = null;
-            ServicesPage.ListServicesBox.Items.Clear();
-            ServicesPage.ListServicesBox.ItemsSource = AllServices;
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                AllServices = ServiceDataWorker.GetServices();
+                ServicesPage.ListServicesBox.ItemsSource = null;
+                ServicesPage.ListServicesBox.Items.Clear();
+                ServicesPage.ListServicesBox.ItemsSource = AllServices;
+            });
         }
         #endregion
 
-        #region Команды открытия окон и страниц
-        private AsyncRelayCommand _openproductspagecommand;
-        public AsyncRelayCommand OpenProductsPageCommand
+        #region Команды добавления, редактирования и удаления работников
+        private AsyncRelayCommand _addemployeecommand;
+        public AsyncRelayCommand AddEmployeeCommand
         {
             get
             {
-                return _openproductspagecommand ?? new AsyncRelayCommand(async (obj) =>
+                return _addemployeecommand ?? new AsyncRelayCommand(async (obj) =>
                 {
-                    Frame frame = obj as Frame;
-                    await Task.Run(() => OpenProductsPage(frame));
-                });
+                    Window window = obj as Window;
+                    await Task.Run(() => AddEmployeeCommandMethod(window));
+                }
+                );
             }
         }
-        private AsyncRelayCommand _openservicespagecommand;
-        public AsyncRelayCommand OpenServicesPageCommand
-        {
-            get
-            {
 
-                return _openservicespagecommand ?? new AsyncRelayCommand(async (obj) =>
-                {
-                    Frame frame = obj as Frame;
-                    await Task.Run(() => OpenServicesPage(frame));
-                });
+        private void AddEmployeeCommandMethod(Window window)
+        {
+            if (!EmployeeRegexp.IsUsernameValid(EmployeeUsername))
+            {
+                OpenMessageWindow("Неправильное имя пользователя");
+                return;
             }
-        }
-        private AsyncRelayCommand _openclientspagecommand;
-        public AsyncRelayCommand OpenClientsPageCommand
-        {
-            get
+            if (!EmployeeRegexp.IsPasswordValid(EmployeePassword))
             {
-
-                return _openclientspagecommand ?? new AsyncRelayCommand(async (obj) =>
-                {
-                    Frame frame = obj as Frame;
-                    await Task.Run(() => OpenClientsPage(frame));
-                });
+                OpenMessageWindow("Неправильный пароль");
+                return;
             }
-        }
-        private AsyncRelayCommand _openemployeespagecommand;
-        public AsyncRelayCommand OpenEmployeesPageCommand
-        {
-            get
+            if (!EmployeeRegexp.IsNameValid(EmployeeName))
             {
-
-                return _openemployeespagecommand ?? new AsyncRelayCommand(async (obj) =>
-                {
-                    Frame frame = obj as Frame;
-                    await Task.Run(() => OpenEmployeesPage(frame));
-                });
+                OpenMessageWindow("Неправильное имя");
+                return;
             }
-        }
-        private AsyncRelayCommand _openaddproductwindowcommand;
-        public AsyncRelayCommand OpenAddProductWindowCommand
-        {
-            get
+            if (!EmployeeRegexp.IsSurnameValid(EmployeeSurname))
             {
-
-                return _openaddproductwindowcommand ?? new AsyncRelayCommand(async (obj) =>
-                {
-                    await Task.Run(() => OpenAddProductWindow());
-                });
+                OpenMessageWindow("Неправильная фамилия");
+                return;
             }
-        }
-        private AsyncRelayCommand _openeditproductwindowcommand;
-        public AsyncRelayCommand OpenEditProductWindowCommand
-        {
-            get
+            if (!EmployeeRegexp.IsPatronymicValid(EmployeePatronymic))
             {
-
-                return _openeditproductwindowcommand ?? new AsyncRelayCommand(async (obj) =>
-                {
-                    if (SelectedProduct == null)
-                    {
-                        OpenMessageWindow("Не выбран продукт");
-                        return;
-                    }
-                    await Task.Run(() => OpenEditProductWindow());
-                });
+                OpenMessageWindow("Неправильное отчество");
+                return;
             }
-        }
-        private AsyncRelayCommand _openaddservicewindowcommand;
-        public AsyncRelayCommand OpenAddServiceWindowCommand
-        {
-            get
+            if (!EmployeeRegexp.IsBirthdayValid(EmployeeBirthday))
             {
-
-                return _openaddservicewindowcommand ?? new AsyncRelayCommand(async (obj) =>
-                {
-                    await Task.Run(() => OpenAddServiceWindow());
-                });
+                OpenMessageWindow("Неправильная дата рождения");
+                return;
             }
+            if (!EmployeeRegexp.IsEmailValid(EmployeeEmail))
+            {
+                OpenMessageWindow("Неправильный Email");
+                return;
+            }
+            if (!EmployeeRegexp.IsPhoneNumberValid(EmployeePhoneNumber))
+            {
+                OpenMessageWindow("Неправильный номер телефона");
+                return;
+            }
+            if (!EmployeeRegexp.IsSexValid(EmployeeSex))
+            {
+                OpenMessageWindow("Окно 'пол' не может быть пустым");
+                return;
+            }
+            if (!EmployeeRegexp.IsPositionValid(EmployeePosition))
+            {
+                OpenMessageWindow("Окно 'позиция не может быть пустым'");
+                return;
+            }
+            if (!EmployeeRegexp.IsSellaryRatioValid(EmployeeSellaryRatio))
+            {
+                OpenMessageWindow("Неправильный коэффициент оплаты");
+                return;
+            }
+            if (!EmployeeRegexp.IsPassportDataValid(EmployeePassportData))
+            {
+                OpenMessageWindow("Неправильный номер паспорта");
+                return;
+            }
+            if (EmployeeServices == null || EmployeeServices.Count < 1)
+            {
+                OpenMessageWindow("У работника должна быть как минимум 1 услуга");
+                return;
+            }
+            if (EmployeeImageDirectory == null)
+                EmployeeImageDirectory = @"Images\ClientImages\user.png";
+            var addemployee = EmployeeDataWorker.AddEmployee(EmployeeUsername,EmployeePassword, 
+                EmployeeName, EmployeeSurname, EmployeePatronymic, EmployeeBirthday, EmployeeSex, 
+                EmployeeEmail, EmployeePhoneNumber, EmployeePosition, EmployeeSellaryRatio, EmployeePassportData, EmployeeServices.ToList(), EmployeeImageDirectory);
+            if(addemployee)
+            {
+                OpenMessageWindow("Работник успешно добавлен");
+                UpdateEmployeeWindow();
+                CloseWindow(window);
+                SetNullEmployeeValueProperties();
+            }
+            else
+            {
+                OpenMessageWindow("Работник с таким именем пользователя, Email, номером телефона или номером паспорта уже существует");
+                return;
+            }
+           
         }
-        private AsyncRelayCommand _openeditservicewindowcommand;
-        public AsyncRelayCommand OpenEditServiceWindowCommand
+        
+        private RelayCommand _addemployeeservicecommand;
+        public RelayCommand AddEmployeeServiceCommand
         {
             get
             {
-
-                return _openeditservicewindowcommand ?? new AsyncRelayCommand(async (obj) =>
+                return _addemployeeservicecommand ?? new RelayCommand(obj =>
                 {
                     if (SelectedService == null)
                     {
-                        OpenMessageWindow("Не выбрана услуга");
+                        OpenMessageWindow("Не выбрана услуга для добавления");
                         return;
                     }
-                    await Task.Run(() => OpenEditServiceWindow());
+                    AddEmployeeServiceCommandMethod();
                 });
             }
+        }
+        public void AddEmployeeServiceCommandMethod()
+        {
+
+            if(EmployeeServices == null)
+            {
+                EmployeeServices = new ObservableCollection<Service>();
+                EmployeeServices.Add(SelectedService);
+            }
+            else
+            {
+                EmployeeServices.Add(SelectedService);
+            }
+        }
+
+        private RelayCommand _deleteemployeeservicecommand;
+        public RelayCommand DeleteEmployeeServiceCommand
+        {
+            get
+            {
+                return _deleteemployeeservicecommand ?? new RelayCommand(obj =>
+                {
+                    if (SelectedEmployeeService == null)
+                    {
+                        OpenMessageWindow("Не выбрана услуга для удаления");
+                        return;
+                    }
+                    DeleteEmployeeServiceCommandMethod();
+                });
+            }
+        }
+        public void DeleteEmployeeServiceCommandMethod()
+        {
+            EmployeeServices.Remove(SelectedEmployeeService);
+        }
+
+        public void SetNullEmployeeValueProperties()
+        {
+            EmployeeUsername = null;
+            EmployeePassword = null;
+            EmployeeName = null;
+            EmployeeSurname = null;
+            EmployeePatronymic = null;
+            EmployeeBirthday = null;
+            EmployeeSex = null;
+            EmployeeEmail = null;
+            EmployeePhoneNumber = null;
+            EmployeePosition = null;
+            EmployeeSellaryRatio = null;
+            EmployeePassportData = null;
+            EmployeeImageDirectory = null;
+            EmployeeServices = null;
+        }
+        public void UpdateEmployeeWindow()
+        {
+            AllEmployees = EmployeeDataWorker.GetEmployees();
+            EmployeesPage.ListEmployeesBox.ItemsSource = null;
+            EmployeesPage.ListEmployeesBox.Items.Clear();
+            EmployeesPage.ListEmployeesBox.ItemsSource = AllEmployees;
         }
         #endregion
 
@@ -700,6 +805,160 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
 
             }
         }
+        private RelayCommand _addemployeeimagecommand;
+        public RelayCommand AddEmployeeImageCommand
+        {
+            get
+            {
+                return _addemployeeimagecommand ?? new RelayCommand(obj =>
+                {
+                    Window window = obj as Window;
+                    EmployeeImageDirectory = EmployeeDataWorker.AddImage(window);
+                    if (string.IsNullOrEmpty(EmployeeImageDirectory))
+                        OpenMessageWindow("Неправильный путь к изображению");
+
+                }
+                );
+
+            }
+        }
+        #endregion
+
+        #region Команды открытия окон и страниц
+        private AsyncRelayCommand _openproductspagecommand;
+        public AsyncRelayCommand OpenProductsPageCommand
+        {
+            get
+            {
+                return _openproductspagecommand ?? new AsyncRelayCommand(async (obj) =>
+                {
+                    Frame frame = obj as Frame;
+                    await Task.Run(() => OpenProductsPage(frame));
+                });
+            }
+        }
+        private AsyncRelayCommand _openaddproductwindowcommand;
+        public AsyncRelayCommand OpenAddProductWindowCommand
+        {
+            get
+            {
+
+                return _openaddproductwindowcommand ?? new AsyncRelayCommand(async (obj) =>
+                {
+                    await Task.Run(() => OpenAddProductWindow());
+                });
+            }
+        }
+        private AsyncRelayCommand _openeditproductwindowcommand;
+        public AsyncRelayCommand OpenEditProductWindowCommand
+        {
+            get
+            {
+
+                return _openeditproductwindowcommand ?? new AsyncRelayCommand(async (obj) =>
+                {
+                    if (SelectedProduct == null)
+                    {
+                        OpenMessageWindow("Не выбран продукт");
+                        return;
+                    }
+                    await Task.Run(() => OpenEditProductWindow());
+                });
+            }
+        }
+        private AsyncRelayCommand _openservicespagecommand;
+        public AsyncRelayCommand OpenServicesPageCommand
+        {
+            get
+            {
+
+                return _openservicespagecommand ?? new AsyncRelayCommand(async (obj) =>
+                {
+                    Frame frame = obj as Frame;
+                    await Task.Run(() => OpenServicesPage(frame));
+                });
+            }
+        }
+        private AsyncRelayCommand _openaddservicewindowcommand;
+        public AsyncRelayCommand OpenAddServiceWindowCommand
+        {
+            get
+            {
+
+                return _openaddservicewindowcommand ?? new AsyncRelayCommand(async (obj) =>
+                {
+                    await Task.Run(() => OpenAddServiceWindow());
+                });
+            }
+        }
+        private AsyncRelayCommand _openeditservicewindowcommand;
+        public AsyncRelayCommand OpenEditServiceWindowCommand
+        {
+            get
+            {
+
+                return _openeditservicewindowcommand ?? new AsyncRelayCommand(async (obj) =>
+                {
+                    if (SelectedService == null)
+                    {
+                        OpenMessageWindow("Не выбрана услуга");
+                        return;
+                    }
+                    await Task.Run(() => OpenEditServiceWindow());
+                });
+            }
+        }
+        private AsyncRelayCommand _openemployeespagecommand;
+        public AsyncRelayCommand OpenEmployeesPageCommand
+        {
+            get
+            {
+
+                return _openemployeespagecommand ?? new AsyncRelayCommand(async (obj) =>
+                {
+                    Frame frame = obj as Frame;
+                    await Task.Run(() => OpenEmployeesPage(frame));
+                });
+            }
+        }
+        private AsyncRelayCommand _openaddemployeewindowcommand;
+        public AsyncRelayCommand OpenAddEmployeeWindowCommand
+        {
+            get
+            {
+
+                return _openaddemployeewindowcommand ?? new AsyncRelayCommand(async (obj) =>
+                {
+                    await Task.Run(() => OpenAddEmployeeWindow());
+                });
+            }
+        }
+        private AsyncRelayCommand _openaddemployeeservicewindowcommand;
+        public AsyncRelayCommand OpenAddEmployeeServiceWindowCommand
+        {
+            get
+            {
+
+                return _openaddemployeeservicewindowcommand ?? new AsyncRelayCommand(async (obj) =>
+                {
+                    await Task.Run(() => OpenAddEmployeeServiceWindow());
+                });
+            }
+        }
+        private AsyncRelayCommand _openclientspagecommand;
+        public AsyncRelayCommand OpenClientsPageCommand
+        {
+            get
+            {
+
+                return _openclientspagecommand ?? new AsyncRelayCommand(async (obj) =>
+                {
+                    Frame frame = obj as Frame;
+                    await Task.Run(() => OpenClientsPage(frame));
+                });
+            }
+        }
+
         #endregion
 
         #region Методы открытия окон и страниц
@@ -708,7 +967,7 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
             Application.Current.Dispatcher.Invoke(() =>
             {
                 MessageWindow messagewindow = new MessageWindow(message);
-                SetCenterPositionAndOwner(messagewindow);
+                messagewindow.ShowDialog();
             });
         }
         private void OpenProductsPage(Frame frame)
@@ -718,11 +977,43 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
                 frame.Navigate(new ProductsPage(this));
             });
         }
+        private void OpenAddProductWindow()
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                AddProductWindow wnd = new AddProductWindow(this);
+                wnd.ShowDialog();
+            });
+        }
+        private void OpenEditProductWindow()
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                EditProductWindow wnd = new EditProductWindow(this);
+                wnd.ShowDialog();
+            });
+        }
         private void OpenServicesPage(Frame frame)
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
                 frame.Navigate(new ServicesPage(this));
+            });
+        }
+        private void OpenAddServiceWindow()
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                AddServiceWindow wnd = new AddServiceWindow(this);
+                wnd.ShowDialog();
+            });
+        }
+        private void OpenEditServiceWindow()
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                EditServiceWindow wnd = new EditServiceWindow(this);
+                wnd.ShowDialog();
             });
         }
         private void OpenEmployeesPage(Frame frame)
@@ -732,50 +1023,28 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
                 frame.Navigate(new EmployeesPage(this));
             });
         }
+        private void OpenAddEmployeeWindow()
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                AddEmployeeWindow wnd = new AddEmployeeWindow(this);
+                wnd.ShowDialog();
+            });
+        }
+        private void OpenAddEmployeeServiceWindow()
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                AddEmployeeServiceWindow wnd = new AddEmployeeServiceWindow(this);
+                wnd.ShowDialog();
+            });
+        }
         private void OpenClientsPage(Frame frame)
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
                 frame.Navigate(new ClientsPage(this));
             });
-        }
-        private void OpenAddProductWindow()
-        {
-            Application.Current.Dispatcher.Invoke(() =>
-            {
-                AddProductWindow wnd = new AddProductWindow(this);
-                wnd.Show();
-            });
-        }
-        private void OpenEditProductWindow()
-        {
-            Application.Current.Dispatcher.Invoke(() =>
-            {
-                EditProductWindow wnd = new EditProductWindow(this);
-                wnd.Show();
-            });
-        }
-        private void OpenAddServiceWindow()
-        {
-            Application.Current.Dispatcher.Invoke(() =>
-            {
-                AddServiceWindow wnd = new AddServiceWindow(this);
-                wnd.Show();
-            });
-        }
-        private void OpenEditServiceWindow()
-        {
-            Application.Current.Dispatcher.Invoke(() =>
-            {
-                EditServiceWindow wnd = new EditServiceWindow(this);
-                wnd.Show();
-            });
-        }
-        private void SetCenterPositionAndOwner(Window window)
-        {
-            window.Owner = Application.Current.MainWindow;
-            window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-            window.ShowDialog();
         }
         private void CloseWindow(Window window)
         {
@@ -785,6 +1054,8 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
             });
 
         }
+        
+        
         #endregion
 
         public event PropertyChangedEventHandler PropertyChanged;

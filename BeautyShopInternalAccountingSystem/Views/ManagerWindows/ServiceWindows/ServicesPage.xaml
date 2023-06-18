@@ -4,8 +4,9 @@
       xmlns:ui="http://schemas.modernwpf.com/2019" 
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:BeautyShopInternalAccountingSystem.Views.ManagerWindows" xmlns:local1="clr-namespace:BeautyShopInternalAccountingSystem.Models"
-         mc:Ignorable="d" 
+      xmlns:local="clr-namespace:BeautyShopInternalAccountingSystem.Views.ManagerWindows" 
+      xmlns:local1="clr-namespace:BeautyShopInternalAccountingSystem.Models"
+      mc:Ignorable="d" 
       d:DesignHeight="570" d:DesignWidth="1100"
       Title="ServicesPage" FontFamily="Tahoma" Background="{StaticResource MainBackground}">
     <ui:Page.Resources>

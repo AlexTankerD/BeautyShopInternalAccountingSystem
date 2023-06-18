@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Net.Mail;
 using System.Text;
@@ -9,17 +8,11 @@ using System.Threading.Tasks;
 
 namespace BeautyShopInternalAccountingSystem.Models.RegularExpressions
 {
-    public static class ClientRegexp
+    public class EmployeeRegexp
     {
         public static bool IsPasswordValid(string Password)
         {
             if (string.IsNullOrEmpty(Password) || Password.Length < 10)
-                return false;
-            return true;
-        }
-        public static bool IsNewPasswordValid(string NewPassword, string ConfirmPassword)
-        {
-            if (ConfirmPassword != NewPassword)
                 return false;
             return true;
         }
@@ -68,6 +61,24 @@ namespace BeautyShopInternalAccountingSystem.Models.RegularExpressions
         public static bool IsSexValid(string Sex)
         {
             if (string.IsNullOrEmpty(Sex) || !Regex.IsMatch(Sex.ToString(), @"(М|Ж)"))
+                return false;
+            return true;
+        }
+        public static bool IsSellaryRatioValid(double? sellaryratio)
+        {
+            if(string.IsNullOrEmpty(sellaryratio.ToString()) || !double.TryParse(sellaryratio.ToString(), out _))
+                return false;
+            return true;
+        }
+        public static bool IsPositionValid(string Position)
+        {
+            if(string.IsNullOrEmpty(Position))
+                return false;
+            return true;
+        }
+        public static bool IsPassportDataValid(string PassportData)
+        {
+            if(string.IsNullOrEmpty(PassportData) || !Regex.IsMatch(PassportData,@"\d{10}"))
                 return false;
             return true;
         }

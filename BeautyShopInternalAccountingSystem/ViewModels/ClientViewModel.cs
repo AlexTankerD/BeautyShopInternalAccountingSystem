@@ -150,7 +150,6 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
             else
             {
                 OpenMessageWindow("Пользователь с таким именем пользователя, Email или номером телефона уже существует");
-                SetNullValueProperties();
                 return;
             }
         }
