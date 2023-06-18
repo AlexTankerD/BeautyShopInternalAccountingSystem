@@ -115,6 +115,7 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
         public Product SelectedProduct { get; set; }
         public Service SelectedService { get; set; }
         public Service SelectedEmployeeService { get; set; }
+        public Employee SelectedEmployee { get; set; }
         #endregion
 
         #region Поиск товаров, услуг, работников, клиентов
@@ -190,7 +191,7 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
             {
                 if (SearchEmployeesText != null)
                 {
-                    var SearchName = AllEmployees.Where(x => x.Name.ToUpper().StartsWith(SearchProductsText.ToUpper()));
+                    var SearchName = AllEmployees.Where(x => x.Name.ToUpper().StartsWith(SearchEmployeesText.ToUpper()));
                     return SearchName;
                 }
                 else { return AllEmployees; }
@@ -693,7 +694,130 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
             }
            
         }
-        
+
+        private AsyncRelayCommand _editemployeecommand;
+        public AsyncRelayCommand EditEmployeeCommand
+        {
+            get
+            {
+                return _editemployeecommand ?? new AsyncRelayCommand(async (obj) =>
+                {
+                    Window window = obj as Window;
+                    await Task.Run(() => EditEmployeeCommandMethod(window));
+                }
+                );
+            }
+        }
+        private void EditEmployeeCommandMethod(Window window)
+        {
+            if (!EmployeeRegexp.IsUsernameValid(EmployeeUsername))
+            {
+                OpenMessageWindow("Неправильное имя пользователя");
+                return;
+            }
+            if (!EmployeeRegexp.IsPasswordValid(EmployeePassword))
+            {
+                OpenMessageWindow("Неправильный пароль");
+                return;
+            }
+            if (!EmployeeRegexp.IsNameValid(EmployeeName))
+            {
+                OpenMessageWindow("Неправильное имя");
+                return;
+            }
+            if (!EmployeeRegexp.IsSurnameValid(EmployeeSurname))
+            {
+                OpenMessageWindow("Неправильная фамилия");
+                return;
+            }
+            if (!EmployeeRegexp.IsPatronymicValid(EmployeePatronymic))
+            {
+                OpenMessageWindow("Неправильное отчество");
+                return;
+            }
+            if (!EmployeeRegexp.IsBirthdayValid(EmployeeBirthday))
+            {
+                OpenMessageWindow("Неправильная дата рождения");
+                return;
+            }
+            if (!EmployeeRegexp.IsEmailValid(EmployeeEmail))
+            {
+                OpenMessageWindow("Неправильный Email");
+                return;
+            }
+            if (!EmployeeRegexp.IsPhoneNumberValid(EmployeePhoneNumber))
+            {
+                OpenMessageWindow("Неправильный номер телефона");
+                return;
+            }
+            if (!EmployeeRegexp.IsSexValid(EmployeeSex))
+            {
+                OpenMessageWindow("Окно 'пол' не может быть пустым");
+                return;
+            }
+            if (!EmployeeRegexp.IsPositionValid(EmployeePosition))
+            {
+                OpenMessageWindow("Окно 'позиция не может быть пустым'");
+                return;
+            }
+            if (!EmployeeRegexp.IsSellaryRatioValid(EmployeeSellaryRatio))
+            {
+                OpenMessageWindow("Неправильный коэффициент оплаты");
+                return;
+            }
+            if (!EmployeeRegexp.IsPassportDataValid(EmployeePassportData))
+            {
+                OpenMessageWindow("Неправильный номер паспорта");
+                return;
+            }
+            if (EmployeeServices == null || EmployeeServices.Count < 1)
+            {
+                OpenMessageWindow("У работника должна быть как минимум 1 услуга");
+                return;
+            }
+            if (EmployeeImageDirectory == null)
+                EmployeeImageDirectory = @"Images\ClientImages\user.png";
+            var editemployee = EmployeeDataWorker.EditEmployee(SelectedEmployee, EmployeeUsername, EmployeePassword,
+                EmployeeName, EmployeeSurname, EmployeePatronymic, EmployeeBirthday, EmployeeSex,
+                EmployeeEmail, EmployeePhoneNumber, EmployeePosition, EmployeeSellaryRatio, EmployeePassportData, EmployeeServices.ToList(), EmployeeImageDirectory);
+            if (editemployee)
+            {
+                OpenMessageWindow("Работник успешно изменен");
+                UpdateEmployeeWindow();
+                CloseWindow(window);
+                SetNullEmployeeValueProperties();
+            }
+            else
+            {
+                OpenMessageWindow("Работник с таким именем пользователя, Email, номером телефона или номером паспорта уже существует");
+                return;
+            }
+
+        }
+
+        private AsyncRelayCommand _deleteemployeecommand;
+        public AsyncRelayCommand DeleteEmployeeCommand
+        {
+            get
+            {
+                return _deleteemployeecommand ?? new AsyncRelayCommand(async (obj) =>
+                {
+                    await Task.Run(() => DeleteEmployeeCommandMethod());
+                }
+                );
+            }
+        }
+        private void DeleteEmployeeCommandMethod()
+        {
+            if(SelectedEmployee == null)
+            {
+                OpenMessageWindow("Не выбран работник");
+                return;
+            }
+            EmployeeDataWorker.DeleteEmployee(SelectedEmployee);
+            OpenMessageWindow("Работник успешно удален");
+            UpdateEmployeeWindow();
+        }
         private RelayCommand _addemployeeservicecommand;
         public RelayCommand AddEmployeeServiceCommand
         {
@@ -743,6 +867,7 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
         public void DeleteEmployeeServiceCommandMethod()
         {
             EmployeeServices.Remove(SelectedEmployeeService);
+            return;
         }
 
         public void SetNullEmployeeValueProperties()
@@ -937,6 +1062,23 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
                 });
             }
         }
+        private AsyncRelayCommand _openeditemployeewindowcommand;
+        public AsyncRelayCommand OpenEditEmployeeWindowCommand
+        {
+            get
+            {
+
+                return _openeditemployeewindowcommand ?? new AsyncRelayCommand(async (obj) =>
+                {
+                    if(SelectedEmployee == null)
+                    {
+                        OpenMessageWindow("Не выбран работник");
+                        return;
+                    }
+                    await Task.Run(() => OpenEditEmployeeWindow());
+                });
+            }
+        }
         private AsyncRelayCommand _openaddemployeeservicewindowcommand;
         public AsyncRelayCommand OpenAddEmployeeServiceWindowCommand
         {
@@ -1032,6 +1174,14 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
             Application.Current.Dispatcher.Invoke(() =>
             {
                 AddEmployeeWindow wnd = new AddEmployeeWindow(this);
+                wnd.ShowDialog();
+            });
+        }
+        private void OpenEditEmployeeWindow()
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                EditEmployeeWindow wnd = new EditEmployeeWindow(this);
                 wnd.ShowDialog();
             });
         }

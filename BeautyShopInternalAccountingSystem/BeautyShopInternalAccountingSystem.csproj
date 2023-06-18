@@ -160,6 +160,9 @@
     <Compile Update="Views\AuthorizationWindows\ForgotPasswordWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\ManagerWindows\EmployeeWindows\EditEmployeeWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\ManagerWindows\ProductWindows\EditProductWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

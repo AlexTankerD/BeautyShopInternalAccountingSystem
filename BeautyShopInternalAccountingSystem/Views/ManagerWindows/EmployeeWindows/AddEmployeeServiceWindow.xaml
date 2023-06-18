@@ -6,7 +6,7 @@
         xmlns:ui="http://schemas.modernwpf.com/2019"
         xmlns:local="clr-namespace:BeautyShopInternalAccountingSystem.Views.ManagerWindows.EmployeeWindows" xmlns:local1="clr-namespace:BeautyShopInternalAccountingSystem.Models"
         mc:Ignorable="d"
-        Title="EmployeeServiceWindow" FontFamily="Tahoma" ResizeMode="NoResize" 
+        Title="Добавить услуги работнику" FontFamily="Tahoma" ResizeMode="NoResize" 
         ui:WindowHelper.UseModernWindowStyle="True" Height="700" Width="900" 
         WindowStartupLocation="CenterScreen">
     <Window.Resources>

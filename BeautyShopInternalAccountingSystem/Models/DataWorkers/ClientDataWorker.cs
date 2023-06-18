@@ -54,19 +54,16 @@ namespace BeautyShopInternalAccountingSystem.Models.DataWorkers
                     return false;
                 else
                 {
-                    Client newclientdb = db.Clients.Where(x => x.Username == client.Username && x.Name == client.Name && 
-                    x.Surname == client.Surname && x.Patronymic == client.Patronymic && 
-                    x.Birthday == client.Birthday && x.Sex == client.Sex && 
-                    x.PhoneNumber == client.PhoneNumber && x.Email == client.Email).FirstOrDefault();
-                    newclientdb.Username = Username ?? client.Username;
-                    newclientdb.Password = Password ?? client.Password;
-                    newclientdb.Name = Name ?? client.Name;
-                    newclientdb.Surname = Surname ?? client.Surname;
-                    newclientdb.Patronymic = Patronymic ?? client.Patronymic;
-                    newclientdb.Birthday = Birthday ?? client.Birthday;
-                    newclientdb.Sex = Sex ?? client.Sex;
-                    newclientdb.PhoneNumber = PhoneNumber ?? client.PhoneNumber;
-                    newclientdb.Email = Email ?? client.Email;
+                    Client newclientdb = db.Clients.Where(x => x == client).FirstOrDefault();
+                    newclientdb.Username = Username;
+                    newclientdb.Password = Password;
+                    newclientdb.Name = Name;
+                    newclientdb.Surname = Surname;
+                    newclientdb.Patronymic = Patronymic;
+                    newclientdb.Birthday = Birthday;
+                    newclientdb.Sex = Sex;
+                    newclientdb.PhoneNumber = PhoneNumber;
+                    newclientdb.Email = Email;
                     newclientdb.ClientImageDirectory = ClientImageDirectory;
                     db.SaveChanges();
                     return true;

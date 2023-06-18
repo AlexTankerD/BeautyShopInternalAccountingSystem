@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BeautyShopInternalAccountingSystem.Views.ManagerWindows"
         mc:Ignorable="d"
-        Title="ManagerWindow" FontFamily="Tahoma" Height="620" Width="1100" 
+        Title="Приложение для менеджера" FontFamily="Tahoma" Height="620" Width="1100" 
         WindowStartupLocation="CenterScreen" ui:WindowHelper.UseModernWindowStyle="True" 
         ResizeMode="NoResize" Background="{StaticResource MainBackground}" >
     <Grid>

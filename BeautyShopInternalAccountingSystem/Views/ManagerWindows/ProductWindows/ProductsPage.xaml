@@ -50,7 +50,7 @@
                             <Border Background="{StaticResource MainBackground}" Grid.RowSpan="3" Grid.Column="0"
                                     Height="100" Width="100"
                                     CornerRadius="3" BorderThickness="5" BorderBrush="Black">
-                                <Image Width="{Binding RelativeSource={RelativeSource FindAncestor, 
+                                <Image HorizontalAlignment="Center" Width="{Binding RelativeSource={RelativeSource FindAncestor, 
                                 AncestorType={x:Type Border}},Path=ActualWidth}" Height="{Binding RelativeSource={RelativeSource FindAncestor, 
                                 AncestorType={x:Type Border}},Path=ActualHeight}" Source="{Binding Path=ProductImageDirectory, Converter={StaticResource PathConverter}}"></Image>
                             </Border>

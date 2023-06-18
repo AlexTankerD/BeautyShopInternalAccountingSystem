@@ -68,6 +68,55 @@ namespace BeautyShopInternalAccountingSystem.Models.DataWorkers
             }
 
         }
+        public static bool EditEmployee(Employee SelectedEmployee, string Username, string Password, string Name, string Surname, string Patronymic, string Birthday,
+           string Sex, string Email, string PhoneNumber, string Position, double? SellaryRatio, string PassportData, List<Service> Services, string? EmployeeImageDirectory)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                Employee employeedb = db.Employees.Where(x => (x.Username == Username && Username != SelectedEmployee.Username) || 
+                (x.PhoneNumber == PhoneNumber && PhoneNumber != SelectedEmployee.PhoneNumber) ||
+                (x.Email == Email && Email != SelectedEmployee.Email) || 
+                (x.PassportData == PassportData && PassportData != SelectedEmployee.PassportData)).FirstOrDefault();
+                if (employeedb != null)
+                    return false;
+                else
+                {
+                    Employee newemployee = db.Employees.Where(x => x == SelectedEmployee).FirstOrDefault();
+                    foreach (Service service in Services)
+                    {
+                        db.Services.Entry(service).State = Microsoft.EntityFrameworkCore.EntityState.Unchanged;
+                    }
+                    db.Employees.Entry(newemployee).Collection(x => x.Services).Load();
+                    newemployee.Username = Username;
+                    newemployee.Password = Password;
+                    newemployee.Name = Name;
+                    newemployee.Surname = Surname;
+                    newemployee.Patronymic = Patronymic;
+                    newemployee.Birthday = Birthday;
+                    newemployee.Sex = Sex;
+                    newemployee.Email = Email;
+                    newemployee.PhoneNumber = PhoneNumber;
+                    newemployee.Position = Position;
+                    newemployee.SellaryRatio = Convert.ToDouble(SellaryRatio);
+                    newemployee.PassportData = PassportData;
+                    newemployee.Services = Services;
+                    newemployee.EmployeeImageDirectory = EmployeeImageDirectory;
+                    db.Entry(newemployee).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return true;
+                }
+            }
+
+        }
+        public static bool DeleteEmployee(Employee SelectedEmployee)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                db.Remove(SelectedEmployee);
+                db.SaveChanges();
+                return true;
+            }
+        }
         public static ObservableCollection<Employee> GetEmployees()
         {
             using (ApplicationContext db = new ApplicationContext())

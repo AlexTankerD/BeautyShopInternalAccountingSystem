@@ -10,6 +10,7 @@
       Title="EmployeesPage"  FontFamily="Tahoma" Background="{StaticResource MainBackground}">
     <ui:Page.Resources>
         <local1:PathConverter x:Key="PathConverter"/>
+        <local1:ListToStringConverter x:Key="ListToStringConverter"/>
     </ui:Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -25,48 +26,63 @@
         <Button Command="{Binding OpenEditEmployeeWindowCommand}" 
                 HorizontalAlignment="Left" Style="{StaticResource ButtonStyle}" 
                 Margin="170,0,0,0" Height="40" Width="150" Grid.Row="0">Изменить работника</Button>
-        <Button Command="{Binding DeleteEmloyeeCommand}" 
+        <Button Command="{Binding DeleteEmployeeCommand}" 
                 HorizontalAlignment="Left" Style="{StaticResource ButtonStyle}" 
                 Margin="330,0,0,0" Height="40" Width="150" Grid.Row="0">Удалить работника</Button>
         <ListBox Grid.Row="2" x:Name="EmployeesListBox" ItemContainerStyle="{StaticResource ListBoxItemStyle}"
                  ItemsSource="{Binding FilteredEmployees}" SelectedItem="{Binding SelectedEmployee}" >
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Border Padding="5" Background="{StaticResource AdditionalBackground}" CornerRadius="3" x:Name="border" Height="150" Width="1060"
-                            BorderThickness="5" Margin="10" BorderBrush="Black">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition />
-                                <RowDefinition />
-                                <RowDefinition />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <Border Background="{StaticResource MainBackground}" Grid.RowSpan="3" Grid.Column="0"
-                                    Height="100" Width="100"
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="150"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Background="{StaticResource MainBackground}" Grid.RowSpan="3" Grid.Column="0"
+                                    Height="130" Width="130"
                                     CornerRadius="3" BorderThickness="5" BorderBrush="Black">
-                                <Image Width="{Binding RelativeSource={RelativeSource FindAncestor, 
+                            <Image HorizontalAlignment="Center" Width="{Binding RelativeSource={RelativeSource FindAncestor, 
                                 AncestorType={x:Type Border}},Path=ActualWidth}" Height="{Binding RelativeSource={RelativeSource FindAncestor, 
                                 AncestorType={x:Type Border}},Path=ActualHeight}" Source="{Binding Path=EmployeeImageDirectory, Converter={StaticResource PathConverter}}"></Image>
-                            </Border>
-                            
-                            <ListBox ItemsSource="{Binding Path=Services}" Grid.Row="0" Grid.Column="1">
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Path=Name}"/>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
-                        </Grid>
-                    </Border>
-
+                        </Border>
+                        <TextBlock Margin="10,5,0,5" TextWrapping="Wrap" FontSize="12" Grid.Row="0" Grid.Column="1"  
+                                       Text="{Binding Path=Username, StringFormat='Имя пользователя: {0}'}"></TextBlock>
+                        <TextBlock Margin="10,5,0,5" TextWrapping="Wrap" FontSize="12" Grid.Row="1" Grid.Column="1"  
+                                       Text="{Binding Path=Password, StringFormat='Пароль: {0}'}"></TextBlock>
+                        <TextBlock Margin="10,5,0,5" TextWrapping="Wrap" FontSize="12" Grid.Row="2" Grid.Column="1"  
+                                       Text="{Binding Path=Name, StringFormat='Имя: {0}'}"></TextBlock>
+                        <TextBlock Margin="5" TextWrapping="Wrap" FontSize="12" Grid.Row="0" Grid.Column="2"  
+                                       Text="{Binding Path=Surname, StringFormat='Фамилия: {0}'}"></TextBlock>
+                        <TextBlock Margin="5" TextWrapping="Wrap" FontSize="12" Grid.Row="1" Grid.Column="2"  
+                                       Text="{Binding Path=Patronymic, StringFormat='Отчество: {0}'}"></TextBlock>
+                        <TextBlock Margin="5" TextWrapping="Wrap" FontSize="12" Grid.Row="2" Grid.Column="2"  
+                                       Text="{Binding Path=Birthday, StringFormat='День рождения: {0}'}"></TextBlock>
+                        <TextBlock Margin="5" TextWrapping="Wrap" FontSize="12" Grid.Row="0" Grid.Column="3"  
+                                       Text="{Binding Path=Sex, StringFormat='Пол: {0}'}"></TextBlock>
+                        <TextBlock Margin="5" TextWrapping="Wrap" FontSize="12" Grid.Row="1" Grid.Column="3"  
+                                       Text="{Binding Path=Email, StringFormat='Email: {0}'}"></TextBlock>
+                        <TextBlock Margin="5" TextWrapping="Wrap" FontSize="12" Grid.Row="2" Grid.Column="3"  
+                                       Text="{Binding Path=PhoneNumber, StringFormat='Номер телефона: {0}'}"></TextBlock>
+                        <TextBlock Margin="5" TextWrapping="Wrap" FontSize="12" Grid.Row="0" Grid.Column="4"  
+                                       Text="{Binding Path=Position, StringFormat='Позиция: {0}'}"></TextBlock>
+                        <TextBlock Margin="5" TextWrapping="Wrap" FontSize="12" Grid.Row="1" Grid.Column="4"  
+                                       Text="{Binding Path=SellaryRatio, StringFormat='Коэффициент оплаты: {0}'}"></TextBlock>
+                        <TextBlock Margin="5" TextWrapping="Wrap" FontSize="12" Grid.Row="2" Grid.Column="4"  
+                                       Text="{Binding Path=PassportData, StringFormat='Номер паспорта: {0}'}"></TextBlock>
+                        <TextBlock Margin="5" TextWrapping="Wrap" FontSize="12" Grid.Row="0" Grid.Column="5"  
+                                       Text="{Binding Path=Services, Converter={StaticResource ListToStringConverter}, StringFormat='Услуги: {0}'}"></TextBlock>
+                    </Grid>
                 </DataTemplate>
-
             </ListBox.ItemTemplate>
 
         </ListBox>
