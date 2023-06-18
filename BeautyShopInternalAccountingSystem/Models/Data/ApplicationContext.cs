@@ -29,11 +29,6 @@ namespace BeautyShopInternalAccountingSystem.Models.Data
             string connectionString = config.GetConnectionString("DefaultConnection");
             optionsBuilder.UseSqlServer(connectionString);
         }
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Employee>().HasMany(x => x.Services).WithMany(x => x.Employees);
-            base.OnModelCreating(modelBuilder);
-        }
 
     }
 }

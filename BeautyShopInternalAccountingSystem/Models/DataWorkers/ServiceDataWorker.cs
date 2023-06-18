@@ -39,9 +39,7 @@ namespace BeautyShopInternalAccountingSystem.Models.DataWorkers
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                Service Servicedb = db.Services.Where(x => x.Name == SelectedService.Name && x.Description == SelectedService.Description &&
-                x.Price == SelectedService.Price && x.Price == SelectedService.Price &&
-                x.Discount == SelectedService.Discount && x.Duration == SelectedService.Duration).FirstOrDefault();
+                Service Servicedb = db.Services.Where(x => x == SelectedService).FirstOrDefault();
                 Servicedb.Name = Name;
                 Servicedb.Description = Description;
                 Servicedb.Price = Convert.ToDouble(Price);

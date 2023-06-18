@@ -19,7 +19,7 @@ namespace BeautyShopInternalAccountingSystem.Models
         public double Discount { get; set; }
         public int Duration { get; set; }
         public string ServiceImageDirectory { get; set; }
-        public List<Employee>? Employees { get; set; }
+        public List<Employee> Employees { get; set; }
         public Service()
         {
 

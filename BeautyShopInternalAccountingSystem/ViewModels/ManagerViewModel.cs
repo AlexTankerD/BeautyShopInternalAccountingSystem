@@ -24,6 +24,7 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
     public class ManagerViewModel : INotifyPropertyChanged
     {
         public Manager Manager { get; set; }
+        
 
         #region Поля товара
         public string ProductName { get; set; }
@@ -763,10 +764,13 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
         }
         public void UpdateEmployeeWindow()
         {
-            AllEmployees = EmployeeDataWorker.GetEmployees();
-            EmployeesPage.ListEmployeesBox.ItemsSource = null;
-            EmployeesPage.ListEmployeesBox.Items.Clear();
-            EmployeesPage.ListEmployeesBox.ItemsSource = AllEmployees;
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                AllEmployees = EmployeeDataWorker.GetEmployees();
+                EmployeesPage.ListEmployeesBox.ItemsSource = null;
+                EmployeesPage.ListEmployeesBox.Items.Clear();
+                EmployeesPage.ListEmployeesBox.ItemsSource = AllEmployees;
+            });
         }
         #endregion
 

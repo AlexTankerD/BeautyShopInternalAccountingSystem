@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BeautyShopInternalAccountingSystem.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20230618012930_Insert")]
+    [Migration("20230618071412_Insert")]
     partial class Insert
     {
         /// <inheritdoc />

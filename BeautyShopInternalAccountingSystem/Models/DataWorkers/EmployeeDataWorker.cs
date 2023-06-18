@@ -10,10 +10,11 @@ using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using System.Windows;
 using System.Windows.Controls;
+using Microsoft.EntityFrameworkCore;
 
 namespace BeautyShopInternalAccountingSystem.Models.DataWorkers
 {
-    public class EmployeeDataWorker
+    public static class EmployeeDataWorker
     {
         public static string AddImage(Window wnd)
         {
@@ -54,7 +55,12 @@ namespace BeautyShopInternalAccountingSystem.Models.DataWorkers
                 else
                 {
                     Employee employee = new Employee(Username, Password, Name, Surname, Patronymic, Birthday, Sex,
-                        Email, PhoneNumber, Position, Convert.ToDouble(SellaryRatio), PassportData, Services, EmployeeImageDirectory);
+                        Email, PhoneNumber, Position, Convert.ToDouble(SellaryRatio), PassportData,Services, EmployeeImageDirectory);
+                    foreach(Service service in Services)
+                    {
+                        db.Services.Entry(service).State = Microsoft.EntityFrameworkCore.EntityState.Unchanged;
+                    }
+                    employee.Services= Services;
                     db.Employees.Add(employee);
                     db.SaveChanges();
                     return true;
@@ -66,7 +72,10 @@ namespace BeautyShopInternalAccountingSystem.Models.DataWorkers
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                return new ObservableCollection<Employee>(db.Employees.ToList());
+                var employees = new ObservableCollection<Employee>(db.Employees.Include(x => x.Services).ToList());
+                
+                return employees;
+                
             }
         }
     }

@@ -56,11 +56,7 @@ namespace BeautyShopInternalAccountingSystem.Models.DataWorkers
         {
             using(ApplicationContext db = new ApplicationContext())
             {
-                Product productdb = db.Products.Where(x => x.Name == SelectedProduct.Name && x.Category == SelectedProduct.Category && 
-                x.Price == SelectedProduct.Price && x.Specifications == SelectedProduct.Specifications && 
-                x.Description == SelectedProduct.Description && x.Weight == SelectedProduct.Weight && x.Height == SelectedProduct.Height &&
-                x.Width == SelectedProduct.Width && x.Length == SelectedProduct.Length && x.Manufacturer == SelectedProduct.Manufacturer &&
-                x.IsActive == SelectedProduct.IsActive).FirstOrDefault();
+                Product productdb = db.Products.Where(x => x == SelectedProduct).FirstOrDefault();
                 productdb.Name = Name;
                 productdb.Category = Category;
                 productdb.Price = Convert.ToDouble(Price);
