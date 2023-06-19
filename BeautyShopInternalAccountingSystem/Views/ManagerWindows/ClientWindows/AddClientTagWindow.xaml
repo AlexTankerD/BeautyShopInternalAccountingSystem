@@ -1,0 +1,35 @@
+﻿<Window x:Class="BeautyShopInternalAccountingSystem.Views.ManagerWindows.ClientWindows.AddClientTagWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BeautyShopInternalAccountingSystem.Views.ManagerWindows.ClientWindows"
+        mc:Ignorable="d"
+        Title="Добавить тег" FontFamily="Tahoma" ResizeMode="NoResize" 
+        ui:WindowHelper.UseModernWindowStyle="True" Height="250" Width="400" 
+        WindowStartupLocation="CenterScreen" x:Name="addclienttagwnd">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBox Grid.Row="0" Height="30" Width="250" TextWrapping="Wrap" Text="{Binding ClientTag}"  
+                 Style="{StaticResource TextBoxStyle}" ui:ControlHelper.PlaceholderText="Тег"></TextBox>
+        <ComboBox Grid.Row="1" x:Name="tagcolors" Height="30" Width="250" SelectedItem="{Binding ClientTagColor}" 
+                  SelectedValuePath="{Binding Name}" HorizontalAlignment="Center" ui:ControlHelper.PlaceholderText="Цвет тега">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Ellipse HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="20" Fill="{Binding Name}">
+                        </Ellipse>
+                        <TextBlock VerticalAlignment="Center" Margin="40,0,0,0" Text="{Binding Name}"/>
+                    </Grid>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <Button Grid.Row="2"  Style="{StaticResource ButtonStyle}" Command="{Binding AddClientTagCommand}" 
+                CommandParameter="{Binding ElementName=addclienttagwnd}" Height="30" Width="250" >Добавить тег</Button>
+    </Grid>
+</Window>

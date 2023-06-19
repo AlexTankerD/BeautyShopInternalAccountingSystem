@@ -163,6 +163,12 @@
     <Compile Update="Views\ManagerWindows\EmployeeWindows\EditEmployeeWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\ManagerWindows\ManufacurerWindows\EditManufacturerWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ManagerWindows\ManufacurerWindows\AddManufacturerWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\ManagerWindows\ProductWindows\EditProductWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

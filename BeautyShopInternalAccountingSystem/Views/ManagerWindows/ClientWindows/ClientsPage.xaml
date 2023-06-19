@@ -4,16 +4,80 @@
       xmlns:ui="http://schemas.modernwpf.com/2019" 
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:BeautyShopInternalAccountingSystem.Views.ManagerWindows"
-      mc:Ignorable="d" 
+      xmlns:local="clr-namespace:BeautyShopInternalAccountingSystem.Views.ManagerWindows" xmlns:local1="clr-namespace:BeautyShopInternalAccountingSystem.Models"
+         mc:Ignorable="d" 
       d:DesignHeight="570" d:DesignWidth="1100"
       Title="ClientsPage" FontFamily="Tahoma" Background="{StaticResource MainBackground}">
-
+    <ui:Page.Resources>
+        <local1:PathConverter x:Key="PathConverter"/>
+        <local1:StringToColorConverter x:Key="StringToColorConverter"/>
+    </ui:Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBox Grid.Row="0" Margin="3" Text="{Binding SearchClientsText,UpdateSourceTrigger=PropertyChanged}" ui:ControlHelper.PlaceholderText="Поиск: "  Style="{StaticResource TextBoxStyle}"/>
-    </Grid>
+        <Button Command="{Binding OpenAddClientTagWindowCommand}"  
+                Style="{StaticResource ButtonStyle}" HorizontalAlignment="Left"  
+                Margin="10,0,0,0" Height="40" Width="150" Grid.Row="0">Добавить тег</Button>
+        <Button Command="{Binding DeleteClientTagCommand}"  
+                Style="{StaticResource ButtonStyle}" HorizontalAlignment="Left"  
+                Margin="170,0,0,0" Height="40" Width="150" Grid.Row="0">Удалить тег</Button>
+        <TextBox Grid.Row="1" Margin="3" Text="{Binding SearchClientsText,UpdateSourceTrigger=PropertyChanged}" 
+                 ui:ControlHelper.PlaceholderText="Поиск: "  Style="{StaticResource TextBoxStyle}"/>
+        <ListBox x:Name="ClientsListBox"  Grid.Row="2" ItemContainerStyle="{StaticResource ListBoxItemStyle}"
+                 ItemsSource="{Binding FilteredClients}" SelectedItem="{Binding SelectedClient}" >
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border Padding="5" Background="{StaticResource AdditionalBackground}" CornerRadius="3" x:Name="border"  Width="1060"
+                            BorderThickness="5" Margin="10" BorderBrush="Black">
+                        <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="50"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="212"/>
+                            <ColumnDefinition Width="212"/>
+                            <ColumnDefinition Width="212"/>
+                            <ColumnDefinition Width="212"/>
+                            <ColumnDefinition Width="212"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Background="{StaticResource MainBackground}" Grid.RowSpan="3" Grid.Column="0"
+                                    Height="130" Width="130"
+                                    CornerRadius="3" BorderThickness="5" BorderBrush="{Binding Path=TagColor,Converter={StaticResource StringToColorConverter}}">
+                            <Image HorizontalAlignment="Center" Width="{Binding RelativeSource={RelativeSource FindAncestor, 
+                                AncestorType={x:Type Border}},Path=ActualWidth}" Height="{Binding RelativeSource={RelativeSource FindAncestor, 
+                                AncestorType={x:Type Border}},Path=ActualHeight}" Source="{Binding Path=ClientImageDirectory, Converter={StaticResource PathConverter}}"></Image>
+                        </Border>
+                        <TextBlock Margin="5" TextWrapping="Wrap" FontSize="12" Grid.Row="0" Grid.Column="1"  
+                                       Text="{Binding Path=Username, StringFormat='Имя пользователя: {0}'}"></TextBlock>
+                        <TextBlock Margin="5" TextWrapping="Wrap" FontSize="12" Grid.Row="1" Grid.Column="1"  
+                                       Text="{Binding Path=Password, StringFormat='Пароль: {0}'}"></TextBlock>
+                        <TextBlock Margin="5" TextWrapping="Wrap" FontSize="12" Grid.Row="2" Grid.Column="1"  
+                                       Text="{Binding Path=Name, StringFormat='Имя: {0}'}"></TextBlock>
+                        <TextBlock Margin="5" TextWrapping="Wrap" FontSize="12" Grid.Row="0" Grid.Column="2"  
+                                       Text="{Binding Path=Surname, StringFormat='Фамилия: {0}'}"></TextBlock>
+                        <TextBlock Margin="5" TextWrapping="Wrap" FontSize="12" Grid.Row="1" Grid.Column="2"  
+                                       Text="{Binding Path=Patronymic, StringFormat='Отчество: {0}'}"></TextBlock>
+                        <TextBlock Margin="5" TextWrapping="Wrap" FontSize="12" Grid.Row="2" Grid.Column="2"  
+                                       Text="{Binding Path=Birthday, StringFormat='День рождения: {0}'}"></TextBlock>
+                        <TextBlock Margin="5" TextWrapping="Wrap" FontSize="12" Grid.Row="0" Grid.Column="3"  
+                                       Text="{Binding Path=Sex, StringFormat='Пол: {0}'}"></TextBlock>
+                        <TextBlock Margin="5" TextWrapping="Wrap" FontSize="12" Grid.Row="1" Grid.Column="3"  
+                                       Text="{Binding Path=Email, StringFormat='Email: {0}'}"></TextBlock>
+                        <TextBlock Margin="5" TextWrapping="Wrap" FontSize="12" Grid.Row="2" Grid.Column="3"  
+                                       Text="{Binding Path=PhoneNumber, StringFormat='Номер телефона: {0}'}"></TextBlock>
+                        <TextBlock Margin="5" TextWrapping="Wrap" FontSize="12" Grid.Row="0" Grid.Column="4">
+                            <Run Text="Тег: "></Run>
+                            <Run Text="{Binding Path=Tag}" Foreground="{Binding Path=TagColor, Converter={StaticResource StringToColorConverter}}"></Run>
+                        </TextBlock>
+                    </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        </Grid>
 </ui:Page>

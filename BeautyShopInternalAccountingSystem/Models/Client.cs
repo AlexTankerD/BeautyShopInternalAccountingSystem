@@ -22,6 +22,7 @@ namespace BeautyShopInternalAccountingSystem.Models
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
         public string? Tag { get; set; }
+        public string? TagColor { get; set; }
         public string ClientImageDirectory { get; set; }
         public Client()
         { }

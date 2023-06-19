@@ -7,6 +7,8 @@ using BeautyShopInternalAccountingSystem.Views;
 using BeautyShopInternalAccountingSystem.Views.ManagerWindows;
 using BeautyShopInternalAccountingSystem.Views.ManagerWindows.ClientWindows;
 using BeautyShopInternalAccountingSystem.Views.ManagerWindows.EmployeeWindows;
+using BeautyShopInternalAccountingSystem.Views.ManagerWindows.ManufacturerWindows;
+using BeautyShopInternalAccountingSystem.Views.ManagerWindows.ManufacurerWindows;
 using BeautyShopInternalAccountingSystem.Views.ManagerWindows.ProductWindows;
 using BeautyShopInternalAccountingSystem.Views.ManagerWindows.ServiceWindows;
 using System;
@@ -23,8 +25,6 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
 {
     public class ManagerViewModel : INotifyPropertyChanged
     {
-        public Manager Manager { get; set; }
-        
 
         #region Поля товара
         public string ProductName { get; set; }
@@ -76,6 +76,16 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
         }
         #endregion
 
+        #region Поля клиента
+        public string ClientTag { get; set; }
+        public string ClientTagColor { get; set; }
+        #endregion
+
+        #region Поля производителя
+        public string ManufacturerName { get; set; }
+        public string ManufacturerStartDate { get; set; }
+        #endregion
+
         #region Все товары, услуги, работники, клиенты
         private ObservableCollection<Product> _allproducts = ProductDataWorker.GetProducts();
         public ObservableCollection<Product> AllProducts
@@ -111,11 +121,13 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
         }
         #endregion
 
-        #region Выбранные товары, услуги, работники, клиенты
+        #region Выбранные товары, услуги, работники, клиенты, производители
         public Product SelectedProduct { get; set; }
         public Service SelectedService { get; set; }
         public Service SelectedEmployeeService { get; set; }
         public Employee SelectedEmployee { get; set; }
+        public Client SelectedClient { get; set; }
+        public Manufacturer SelectedManufacturer { get; set; }
         #endregion
 
         #region Поиск товаров, услуг, работников, клиентов
@@ -217,10 +229,36 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
             {
                 if (SearchClientsText != null)
                 {
-                    var SearchName = AllClients.Where(x => x.Name.ToUpper().StartsWith(SearchProductsText.ToUpper()));
+                    var SearchName = AllClients.Where(x => x.Name.ToUpper().StartsWith(SearchClientsText.ToUpper()));
                     return SearchName;
                 }
                 else { return AllClients; }
+
+            }
+        }
+        private string _searchmanufacturerstext;
+        public string SearchManufacturersText
+        {
+            get
+            {
+                return _searchmanufacturerstext;
+            }
+            set
+            {
+                _searchmanufacturerstext = value;
+                OnPropertyChanged("FilteredManufacturers");
+            }
+        }
+        public IEnumerable<Manufacturer> FilteredManufacturers
+        {
+            get
+            {
+                if (SearchManufacturersText != null)
+                {
+                    var SearchName = AllManufacturers.Where(x => x.Name.ToUpper().StartsWith(SearchManufacturersText.ToUpper()));
+                    return SearchName;
+                }
+                else { return AllManufacturers; }
 
             }
         }
@@ -235,7 +273,7 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
                 return _addproductcommand ?? new AsyncRelayCommand(async (obj) =>
                 {
                     Window wnd = obj as Window;
-                    Task.Run(() => AddProductCommandMethod(wnd));
+                    await Task.Run(() => AddProductCommandMethod(wnd));
 
                 });
             }
@@ -319,7 +357,7 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
                 return _editproductcommand ?? new AsyncRelayCommand(async (obj) =>
                 {
                     Window wnd = obj as Window;
-                    Task.Run(() => EditProductCommandMethod(wnd));
+                    await Task.Run(() => EditProductCommandMethod(wnd));
                 });
             }
         }
@@ -401,17 +439,17 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
             {
                 return _deleteproductcommand ?? new AsyncRelayCommand(async (obj) =>
                 {
-                    Task.Run(() => DeleteProductCommandMethod());
+                    if (SelectedProduct == null)
+                    {
+                        OpenMessageWindow("Не выбран продукт");
+                        return;
+                    }
+                    await Task.Run(() => DeleteProductCommandMethod());
                 });
             }
         }
         public void DeleteProductCommandMethod()
-        {
-            if (SelectedProduct == null)
-            {
-                OpenMessageWindow("Не выбран продукт");
-                return;
-            }
+        {  
             ProductDataWorker.DeleteProduct(SelectedProduct);
             OpenMessageWindow("Продукт успешно удален");
             UpdateProductPage();
@@ -437,7 +475,7 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
             AllProducts = ProductDataWorker.GetProducts();
             ProductsPage.ListProductsBox.ItemsSource = null;
             ProductsPage.ListProductsBox.Items.Clear();
-            ProductsPage.ListProductsBox.ItemsSource = AllProducts;
+            ProductsPage.ListProductsBox.ItemsSource = FilteredProducts;
         }
         #endregion
 
@@ -450,7 +488,7 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
                 return _addservicecommand ?? new AsyncRelayCommand(async (obj) =>
                 {
                     Window wnd = obj as Window;
-                    Task.Run(() => AddServiceCommandMethod(wnd));
+                    await Task.Run(() => AddServiceCommandMethod(wnd));
 
                 });
             }
@@ -503,7 +541,7 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
                 return _editservicecommand ?? new AsyncRelayCommand(async (obj) =>
                 {
                     Window wnd = obj as Window;
-                    Task.Run(() => EditServiceCommandMethod(wnd));
+                    await Task.Run(() => EditServiceCommandMethod(wnd));
 
                 });
             }
@@ -555,7 +593,7 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
             {
                 return _deleteservicecommand ?? new AsyncRelayCommand(async (obj) =>
                 {
-                    Task.Run(() => DeleteServiceCommandMethod());
+                    await Task.Run(() => DeleteServiceCommandMethod());
                 });
             }
         }
@@ -588,7 +626,7 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
                 AllServices = ServiceDataWorker.GetServices();
                 ServicesPage.ListServicesBox.ItemsSource = null;
                 ServicesPage.ListServicesBox.Items.Clear();
-                ServicesPage.ListServicesBox.ItemsSource = AllServices;
+                ServicesPage.ListServicesBox.ItemsSource = FilteredServices;
             });
         }
         #endregion
@@ -607,7 +645,6 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
                 );
             }
         }
-
         private void AddEmployeeCommandMethod(Window window)
         {
             if (!EmployeeRegexp.IsUsernameValid(EmployeeUsername))
@@ -683,7 +720,7 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
             if(addemployee)
             {
                 OpenMessageWindow("Работник успешно добавлен");
-                UpdateEmployeeWindow();
+                UpdateEmployeePage();
                 CloseWindow(window);
                 SetNullEmployeeValueProperties();
             }
@@ -783,7 +820,7 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
             if (editemployee)
             {
                 OpenMessageWindow("Работник успешно изменен");
-                UpdateEmployeeWindow();
+                UpdateEmployeePage();
                 CloseWindow(window);
                 SetNullEmployeeValueProperties();
             }
@@ -816,7 +853,7 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
             }
             EmployeeDataWorker.DeleteEmployee(SelectedEmployee);
             OpenMessageWindow("Работник успешно удален");
-            UpdateEmployeeWindow();
+            UpdateEmployeePage();
         }
         private RelayCommand _addemployeeservicecommand;
         public RelayCommand AddEmployeeServiceCommand
@@ -887,14 +924,201 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
             EmployeeImageDirectory = null;
             EmployeeServices = null;
         }
-        public void UpdateEmployeeWindow()
+        public void UpdateEmployeePage()
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
                 AllEmployees = EmployeeDataWorker.GetEmployees();
                 EmployeesPage.ListEmployeesBox.ItemsSource = null;
                 EmployeesPage.ListEmployeesBox.Items.Clear();
-                EmployeesPage.ListEmployeesBox.ItemsSource = AllEmployees;
+                EmployeesPage.ListEmployeesBox.ItemsSource = FilteredEmployees;
+            });
+        }
+        #endregion
+
+        #region Команды добавления и удаления тега клиента
+        private AsyncRelayCommand _addclienttagcommand;
+        public AsyncRelayCommand AddClientTagCommand
+        {
+            get
+            {
+                return _addclienttagcommand ?? new AsyncRelayCommand(async (obj) =>
+                {
+                    Window window = obj as Window;
+                    await Task.Run(() => AddClientTagCommandMethod(window));
+                }
+                );
+            }
+        }
+        private void AddClientTagCommandMethod(Window wnd)
+        {
+            if(!ClientRegexp.IsClientTagColorValid(ClientTag))
+            {
+                OpenMessageWindow("Тег не может быть пустым");
+                return;
+            }
+            var tag = ClientDataWorker.AddClientTag(SelectedClient, ClientTag, ClientTagColor);
+            OpenMessageWindow("Тег успешно добавлен");
+            UpdateClientsPage();
+            CloseWindow(wnd);
+            SetNullClientValueProperties();
+            return;
+
+        }
+        private AsyncRelayCommand _deleteclienttagcommand;
+        public AsyncRelayCommand DeleteClientTagCommand
+        {
+            get
+            {
+                return _deleteclienttagcommand ?? new AsyncRelayCommand(async (obj) =>
+                {
+                    if (SelectedClient == null)
+                    {
+                        OpenMessageWindow("Не выбран клиент");
+                        return;
+                    }
+                    await Task.Run(() => DeleteClientTagCommandMethod());
+                }
+                );
+            }
+        }
+        private void DeleteClientTagCommandMethod()
+        {
+            var tag = ClientDataWorker.DeleteClientTag(SelectedClient);
+            OpenMessageWindow("Тег успешно удален");
+            UpdateClientsPage();
+            return;
+
+        }
+        private void SetNullClientValueProperties()
+        {
+            ClientTag = null;
+            ClientTagColor = null;
+        }
+        private void UpdateClientsPage()
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                AllClients = ClientDataWorker.GetClients();
+                ClientsPage.ListClientsBox.ItemsSource = null;
+                ClientsPage.ListClientsBox.Items.Clear();
+                ClientsPage.ListClientsBox.ItemsSource = FilteredClients;
+            });
+        }
+        #endregion
+
+        #region Команды добавления, редактирования и удаления производителя
+        private AsyncRelayCommand _addmanufacturercommand;
+        public AsyncRelayCommand AddManufacturerCommand
+        {
+            get
+            {
+                return _addmanufacturercommand ?? new AsyncRelayCommand(async (obj) =>
+                {
+                    Window wnd = obj as Window;
+                    await Task.Run(() => AddManufacturerCommandMethod(wnd));
+
+                });
+            }
+        }
+        public void AddManufacturerCommandMethod(Window wnd)
+        {
+            if (!ManufacturerRegexp.IsNameValid(ManufacturerName))
+            {
+                OpenMessageWindow("Неправильное название производителя");
+                return;
+            }
+            if (!ManufacturerRegexp.IsStartDateValid(ManufacturerStartDate))
+            {
+                OpenMessageWindow("Неправильная дата открытия");
+                return;
+            }
+            var addmanufacturer = ManufacturerDataWorker.AddManufacturer(ManufacturerName, ManufacturerStartDate);
+            if (addmanufacturer)
+            {
+                OpenMessageWindow("Производитель успешно добавлен");
+                UpdateManufacturerWindow();
+                SetNullManufacturerValueProperties();
+                CloseWindow(wnd);
+            }
+            else
+            {
+                OpenMessageWindow("Производитель с таким именем уже существует");
+                return;
+            }
+        }
+
+        private AsyncRelayCommand _editmanufacturercommand;
+        public AsyncRelayCommand EditManufacturerCommand
+        {
+            get
+            {
+                return _editmanufacturercommand ?? new AsyncRelayCommand(async (obj) =>
+                {
+                    Window wnd = obj as Window;
+                    await Task.Run(() => EditManufacturerCommandMethod(wnd));
+
+                });
+            }
+        }
+        public void EditManufacturerCommandMethod(Window wnd)
+        {
+            if (!ManufacturerRegexp.IsNameValid(ManufacturerName))
+            {
+                OpenMessageWindow("Неправильное название производителя");
+                return;
+            }
+            if (!ManufacturerRegexp.IsStartDateValid(ManufacturerStartDate))
+            {
+                OpenMessageWindow("Неправильная дата открытия");
+                return;
+            }
+            var editmanufacturer = ManufacturerDataWorker.EditManufacturer(SelectedManufacturer,ManufacturerName, ManufacturerStartDate);
+            if (editmanufacturer)
+            {
+                OpenMessageWindow("Производитель успешно добавлен");
+                UpdateManufacturerWindow();
+                SetNullManufacturerValueProperties();
+                CloseWindow(wnd);
+            }
+            else
+            {
+                OpenMessageWindow("Производитель с таким именем уже существует");
+                return;
+            }
+        }
+
+        private AsyncRelayCommand _deletemanufacturercommand;
+        public AsyncRelayCommand DeleteManufacturerCommand
+        {
+            get
+            {
+                return _deletemanufacturercommand ?? new AsyncRelayCommand(async (obj) =>
+                {
+                    await Task.Run(() => DeleteManufacturerCommandMethod());
+
+                });
+            }
+        }
+        public void DeleteManufacturerCommandMethod()
+        {
+            ManufacturerDataWorker.DeleteManufacturer(SelectedManufacturer);
+            OpenMessageWindow("Производитель успешно удален");
+            UpdateManufacturerWindow();
+        }
+        private void SetNullManufacturerValueProperties()
+        {
+            ManufacturerName = null;
+            ManufacturerStartDate = null;
+        }
+        private void UpdateManufacturerWindow()
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                AllManufacturers = ManufacturerDataWorker.GetManufacturers();
+                ManufacturersWindow.ListManufacturersBox.ItemsSource = null;
+                ManufacturersWindow.ListManufacturersBox.Items.Clear();
+                ManufacturersWindow.ListManufacturersBox.ItemsSource = FilteredManufacturers;
             });
         }
         #endregion
@@ -1104,7 +1328,59 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
                 });
             }
         }
+        private AsyncRelayCommand _openaddclienttagwindowcommand;
+        public AsyncRelayCommand OpenAddClientTagWindowCommand
+        {
+            get
+            {
 
+                return _openaddclienttagwindowcommand ?? new AsyncRelayCommand(async (obj) =>
+                {
+                    if(SelectedClient == null)
+                    {
+                        OpenMessageWindow("Не выбран клиент");
+                        return;
+                    }
+                    await Task.Run(() => OpenAddClientTagWindow());
+                });
+            }
+        }
+        private AsyncRelayCommand _openmanufacturerswindowcommand;
+        public AsyncRelayCommand OpenManufacturersWindowCommand
+        {
+            get
+            {
+
+                return _openmanufacturerswindowcommand ?? new AsyncRelayCommand(async (obj) =>
+                {
+                    await Task.Run(() => OpenManufacturersWindow());
+                });
+            }
+        }
+        private AsyncRelayCommand _openaddmanufacturerwindowcommand;
+        public AsyncRelayCommand OpenAddManufacturerWindowCommand
+        {
+            get
+            {
+
+                return _openaddmanufacturerwindowcommand ?? new AsyncRelayCommand(async (obj) =>
+                {
+                    await Task.Run(() => OpenAddManufacturerWindow());
+                });
+            }
+        }
+        private AsyncRelayCommand _openeditmanufacturerwindowcommand;
+        public AsyncRelayCommand OpenEditManufacturerWindowCommand
+        {
+            get
+            {
+
+                return _openeditmanufacturerwindowcommand ?? new AsyncRelayCommand(async (obj) =>
+                {
+                    await Task.Run(() => OpenEditManufacturerWindow());
+                });
+            }
+        }
         #endregion
 
         #region Методы открытия окон и страниц
@@ -1200,6 +1476,38 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
                 frame.Navigate(new ClientsPage(this));
             });
         }
+        private void OpenAddClientTagWindow()
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                AddClientTagWindow wnd = new AddClientTagWindow(this);
+                wnd.ShowDialog();
+            });
+        }
+        private void OpenManufacturersWindow()
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                ManufacturersWindow wnd = new ManufacturersWindow(this);
+                wnd.Show();
+            });
+        }
+        private void OpenAddManufacturerWindow()
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                AddManufacturerWindow wnd = new AddManufacturerWindow(this);
+                wnd.ShowDialog();
+            });
+        }
+        private void OpenEditManufacturerWindow()
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                EditManufacturerWindow wnd = new EditManufacturerWindow(this);
+                wnd.ShowDialog();
+            });
+        }
         private void CloseWindow(Window window)
         {
             Application.Current.Dispatcher.Invoke(() =>
@@ -1209,7 +1517,7 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
 
         }
         
-        
+
         #endregion
 
         public event PropertyChangedEventHandler PropertyChanged;

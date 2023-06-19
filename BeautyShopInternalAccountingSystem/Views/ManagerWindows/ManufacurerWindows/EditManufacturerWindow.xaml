@@ -1,0 +1,25 @@
+﻿<Window x:Class="BeautyShopInternalAccountingSystem.Views.ManagerWindows.ManufacturerWindows.EditManufacturerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BeautyShopInternalAccountingSystem.Views.ManagerWindows.ManufacturerWindows"
+        mc:Ignorable="d"
+        Title="Добавить производителя" FontFamily="Tahoma" ResizeMode="NoResize" 
+        ui:WindowHelper.UseModernWindowStyle="True" Height="300" Width="500" 
+        WindowStartupLocation="CenterScreen" x:Name="editmanufacturerwnd">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBox Grid.Row="0" Height="50" Width="300" TextWrapping="Wrap" Text="{Binding ManufacturerName}"  
+                 Style="{StaticResource TextBoxStyle}" ui:ControlHelper.PlaceholderText="{Binding SelectedManufacturer.Name, StringFormat='Название производителя: {0}'}"></TextBox>
+        <TextBox Grid.Row="1" Height="50" Width="300" TextWrapping="Wrap" Text="{Binding ManufacturerStartDate}"  
+                 Style="{StaticResource TextBoxStyle}" ui:ControlHelper.PlaceholderText="{Binding SelectedManufacturer.StartDate, StringFormat='Дата открытия: {0}'}"></TextBox>
+        <Button Grid.Row="2"  Style="{StaticResource ButtonStyle}" Command="{Binding EditManufacturerCommand}" 
+                CommandParameter="{Binding ElementName=editmanufacturerwnd}" Height="40" Width="300" >Изменить производителя</Button>
+    </Grid>
+</Window>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Drawing;
 using System.Linq;
 using System.Net.Mail;
 using System.Text;
@@ -68,6 +69,18 @@ namespace BeautyShopInternalAccountingSystem.Models.RegularExpressions
         public static bool IsSexValid(string Sex)
         {
             if (string.IsNullOrEmpty(Sex) || !Regex.IsMatch(Sex.ToString(), @"(М|Ж)"))
+                return false;
+            return true;
+        }
+        public static bool IsClientTagValid(string ClientTag)
+        {
+            if(string.IsNullOrEmpty(ClientTag))
+                return false;
+            return true;
+        }
+        public static bool IsClientTagColorValid(string ClientTagColor)
+        {
+            if (string.IsNullOrEmpty(ClientTagColor))
                 return false;
             return true;
         }

@@ -39,14 +39,13 @@ namespace BeautyShopInternalAccountingSystem.Models.DataWorkers
                     return false;
             }
         }
-        public static bool AuthorizationAsManager(string Login, string Password, ref Manager manager)
+        public static bool AuthorizationAsManager(string Login, string Password)
         {
             using (ApplicationContext db = new ApplicationContext())
             {
                 Manager managerdb = db.Managers.Where(x => (x.Username == Login) && x.Password == Password).FirstOrDefault();
                 if (managerdb != null)
                 {
-                    manager = managerdb;
                     return true;
                 }
                 else

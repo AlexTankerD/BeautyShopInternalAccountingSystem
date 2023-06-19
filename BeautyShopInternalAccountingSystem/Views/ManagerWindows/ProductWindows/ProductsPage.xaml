@@ -22,6 +22,9 @@
         <Button Command="{Binding OpenAddProductWindowCommand}"  
                 Style="{StaticResource ButtonStyle}" HorizontalAlignment="Left"  
                 Margin="10,0,0,0" Height="40" Width="150" Grid.Row="0">Добавить продукт</Button>
+        <Button Command="{Binding OpenManufacturersWindowCommand}" 
+                HorizontalAlignment="Left" Style="{StaticResource ButtonStyle}" 
+                Margin="490,0,0,0" Height="40" Width="150" Grid.Row="0">Производители</Button>
         <Button Command="{Binding OpenEditProductWindowCommand}" 
                 HorizontalAlignment="Left" Style="{StaticResource ButtonStyle}" 
                 Margin="170,0,0,0" Height="40" Width="150" Grid.Row="0">Изменить продукт</Button>
@@ -32,47 +35,47 @@
                  ItemsSource="{Binding FilteredProducts}" SelectedItem="{Binding SelectedProduct}" >
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Border Padding="5" Background="{StaticResource AdditionalBackground}" CornerRadius="3" x:Name="border" Height="150" Width="1060"
+                    <Border Padding="5" Background="{StaticResource AdditionalBackground}" CornerRadius="3" x:Name="border" Width="1060"
                             BorderThickness="5" Margin="10" BorderBrush="Black">
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition />
-                                <RowDefinition />
-                                <RowDefinition />
+                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="50"/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
+                                <ColumnDefinition Width="212"/>
+                                <ColumnDefinition Width="212"/>
+                                <ColumnDefinition Width="212"/>
+                                <ColumnDefinition Width="212"/>
+                                <ColumnDefinition Width="212"/>
                             </Grid.ColumnDefinitions>
                             <Border Background="{StaticResource MainBackground}" Grid.RowSpan="3" Grid.Column="0"
-                                    Height="100" Width="100"
+                                    Height="130" Width="130"
                                     CornerRadius="3" BorderThickness="5" BorderBrush="Black">
                                 <Image HorizontalAlignment="Center" Width="{Binding RelativeSource={RelativeSource FindAncestor, 
                                 AncestorType={x:Type Border}},Path=ActualWidth}" Height="{Binding RelativeSource={RelativeSource FindAncestor, 
                                 AncestorType={x:Type Border}},Path=ActualHeight}" Source="{Binding Path=ProductImageDirectory, Converter={StaticResource PathConverter}}"></Image>
                             </Border>
-                            <TextBlock Margin="3" TextWrapping="Wrap" FontSize="10" Grid.Row="0" Grid.Column="1"  
+                            <TextBlock Margin="3" TextWrapping="Wrap" FontSize="12" Grid.Row="0" Grid.Column="1"  
                                        Text="{Binding Path=Name, StringFormat='Название: {0}'}"></TextBlock>
-                            <TextBlock Margin="3" TextWrapping="Wrap" FontSize="10" Grid.Row="1" Grid.Column="1"  
+                            <TextBlock Margin="3" TextWrapping="Wrap" FontSize="12" Grid.Row="1" Grid.Column="1"  
                                        Text="{Binding Path=ManufacturerName, StringFormat='Производитель: {0}'}"></TextBlock>
-                            <TextBlock Margin="3" TextWrapping="Wrap" FontSize="10" Grid.Row="2" Grid.Column="1"  
+                            <TextBlock Margin="3" TextWrapping="Wrap" FontSize="12" Grid.Row="2" Grid.Column="1"  
                                        Text="{Binding Path=Description, StringFormat='Описание: {0}'}"></TextBlock>
-                            <TextBlock Margin="3" TextWrapping="Wrap" FontSize="10" Grid.Row="0" Grid.Column="2"  
+                            <TextBlock Margin="3" TextWrapping="Wrap" FontSize="12" Grid.Row="0" Grid.Column="2"  
                                        Text="{Binding Path=Price, StringFormat='Цена: {0} рублей'}"></TextBlock>
-                            <TextBlock Margin="3" TextWrapping="Wrap" FontSize="10" Grid.Row="1" Grid.Column="2"  
+                            <TextBlock Margin="3" TextWrapping="Wrap" FontSize="12" Grid.Row="1" Grid.Column="2"  
                                        Text="{Binding Path=Specifications, StringFormat='Характеристики: {0}'}"></TextBlock>
-                            <TextBlock Margin="3" TextWrapping="Wrap" FontSize="10" Grid.Row="2" Grid.Column="2"  
+                            <TextBlock Margin="3" TextWrapping="Wrap" FontSize="12" Grid.Row="2" Grid.Column="2"  
                                        Text="{Binding Path=Weight, StringFormat='Вес: {0}'}"></TextBlock>
-                            <TextBlock Margin="3" TextWrapping="Wrap" FontSize="10" Grid.Row="0" Grid.Column="3"  
+                            <TextBlock Margin="3" TextWrapping="Wrap" FontSize="12" Grid.Row="0" Grid.Column="3"  
                                        Text="{Binding Path=Height, StringFormat='Высота: {0}'}"></TextBlock>
-                            <TextBlock Margin="3" TextWrapping="Wrap" FontSize="10" Grid.Row="1" Grid.Column="3"  
+                            <TextBlock Margin="3" TextWrapping="Wrap" FontSize="12" Grid.Row="1" Grid.Column="3"  
                                        Text="{Binding Path=Width, StringFormat='Ширина: {0}'}"></TextBlock>
-                            <TextBlock Margin="3" TextWrapping="Wrap" FontSize="10" Grid.Row="2" Grid.Column="3"  
+                            <TextBlock Margin="3" TextWrapping="Wrap" FontSize="12" Grid.Row="2" Grid.Column="3"  
                                        Text="{Binding Path=Length, StringFormat='Длина: {0}'}"></TextBlock>
-                            <TextBlock Margin="3" TextWrapping="Wrap" FontSize="10" Grid.Row="0" Grid.Column="4"  
+                            <TextBlock Margin="3" TextWrapping="Wrap" FontSize="12" Grid.Row="0" Grid.Column="4"  
                                        Text="{Binding Path=IsActive, StringFormat='Активен: {0}'}"></TextBlock>
                         </Grid>
                     </Border>

@@ -176,12 +176,11 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
             }
             if (ManagerBtnIsChecked)
             {
-                Manager manager = new Manager();
-                var auth = AuthorizationDataWorker.AuthorizationAsManager(Login, Password, ref manager);
+                var auth = AuthorizationDataWorker.AuthorizationAsManager(Login, Password);
                 if (auth)
                 {
                     OpenMessageWindow("Авторизация прошла успешно");
-                    OpenManagerWindow(manager);
+                    OpenManagerWindow();
                     CloseWindow(window);
                     return;
                 }
@@ -355,11 +354,11 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
             });
 
         }
-        private void OpenManagerWindow(object obj)
+        private void OpenManagerWindow()
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
-                ManagerWindow managerwindow = new ManagerWindow(new ManagerViewModel() { Manager = obj as Manager });
+                ManagerWindow managerwindow = new ManagerWindow(new ManagerViewModel());
                 managerwindow.Show();
             });
 

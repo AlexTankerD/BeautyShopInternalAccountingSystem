@@ -11,22 +11,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace BeautyShopInternalAccountingSystem.Views.ManagerWindows.ClientWindows
+namespace BeautyShopInternalAccountingSystem.Views.ManagerWindows.ManufacturerWindows
 {
     /// <summary>
-    /// Логика взаимодействия для ClientsPage.xaml
+    /// Логика взаимодействия для AddClientTagWindow.xaml
     /// </summary>
-    public partial class ClientsPage : ModernWpf.Controls.Page
+    public partial class AddManufacturerWindow : Window
     {
-        public static ListBox ListClientsBox;
-        public ClientsPage(ManagerViewModel vm)
+        public AddManufacturerWindow(ManagerViewModel vm)
         {
             InitializeComponent();
             DataContext = vm;
-            ListClientsBox = ClientsListBox;
         }
     }
 }

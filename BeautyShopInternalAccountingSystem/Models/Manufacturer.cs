@@ -12,7 +12,13 @@ namespace BeautyShopInternalAccountingSystem.Models
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }    
-        public DateTime StartDate { get; set; }
-        
+        public string StartDate { get; set; }
+        public Manufacturer()
+        { }
+        public Manufacturer(string Name, string StartDate)
+        {
+            this.Name = Name;
+            this.StartDate = StartDate;
+        }
     }
 }

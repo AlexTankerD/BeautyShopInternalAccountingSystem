@@ -71,6 +71,28 @@ namespace BeautyShopInternalAccountingSystem.Models.DataWorkers
             }
 
         }
+        public static bool AddClientTag(Client SelectedClient, string Tag, string TagColor)
+        {
+            using(ApplicationContext db = new ApplicationContext())
+            {
+                Client client = db.Clients.Where(x => x == SelectedClient).FirstOrDefault();
+                client.Tag = Tag;
+                client.TagColor = TagColor;
+                db.SaveChanges();
+                return true;
+            }
+        }
+        public static bool DeleteClientTag(Client SelectedClient)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                Client client = db.Clients.Where(x => x == SelectedClient).FirstOrDefault();
+                client.Tag = null;
+                client.TagColor = null;
+                db.SaveChanges();
+                return true;
+            }
+        }
         public static ObservableCollection<Client> GetClients()
         {
             using (ApplicationContext db = new ApplicationContext())
