@@ -23,6 +23,20 @@ namespace BeautyShopInternalAccountingSystem.Models.DataWorkers
                 return new ObservableCollection<Service>(db.Services.ToList());
             }
         }
+        public static ObservableCollection<Service> GetServicesForClient()
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                var services = db.Services.ToList();
+                List<Service> serviceswithdiscount = new List<Service>();
+                foreach (var service in services)
+                {
+                    service.PriceWithDiscount = service.Price - (service.Price / 100 * service.Discount);
+                    serviceswithdiscount.Add(service);
+                }
+                return new ObservableCollection<Service>(serviceswithdiscount);
+            }
+        }
         public static bool AddService(string Name, string Description, double? Price, double? Discount, 
             int? Duration, string ServiceImageDirectory)
         {

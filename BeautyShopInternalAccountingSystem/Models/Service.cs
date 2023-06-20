@@ -17,6 +17,8 @@ namespace BeautyShopInternalAccountingSystem.Models
         public string Description { get; set; }
         public double Price { get; set; }
         public double Discount { get; set; }
+        [NotMapped]
+        public double PriceWithDiscount { get; set; }
         public int Duration { get; set; }
         public string ServiceImageDirectory { get; set; }
         public List<Employee> Employees { get; set; }

@@ -29,7 +29,7 @@ namespace BeautyShopInternalAccountingSystem.Models.RegularExpressions
         }
         public static bool IsDiscountValid(double? discount)
         {
-            if (string.IsNullOrEmpty(discount.ToString()) || !double.TryParse(discount.ToString(), out _))
+            if (string.IsNullOrEmpty(discount.ToString()) || !double.TryParse(discount.ToString(), out _) || discount > 100 || discount < 0)
                 return false;
             return true;
         }

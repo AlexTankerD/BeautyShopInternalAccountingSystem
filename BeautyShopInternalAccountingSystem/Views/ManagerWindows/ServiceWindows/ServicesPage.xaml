@@ -60,7 +60,7 @@
                             <TextBlock Margin="3" TextWrapping="Wrap" FontSize="12" Grid.Row="2" Grid.Column="1"  
                                        Text="{Binding Path=Price, StringFormat='Цена: {0} рублей'}"></TextBlock>
                             <TextBlock Margin="3" TextWrapping="Wrap" FontSize="12" Grid.Row="0" Grid.Column="2"  
-                                       Text="{Binding Path=Discount, StringFormat='Скидка: {0}'}"></TextBlock>
+                                       Text="{Binding Path=Discount, StringFormat='Скидка: {0}%'}"></TextBlock>
                             <TextBlock Margin="3" TextWrapping="Wrap" FontSize="12" Grid.Row="1" Grid.Column="2"  
                                        Text="{Binding Path=Duration, StringFormat='Продолжительность услуги: {0}'}"></TextBlock>
                         </Grid>

@@ -41,7 +41,7 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
             set { _client = value; OnPropertyChanged(nameof(Client)); }
         }
         public Service SelectedService { get; set; }
-        public ObservableCollection<Service> AllServices = ServiceDataWorker.GetServices();
+        public ObservableCollection<Service> AllServices = ServiceDataWorker.GetServicesForClient();
         private string _searchtext;
         public string SearchText
         {
@@ -248,7 +248,7 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
             Application.Current.Dispatcher.Invoke(() =>
             {
                 ChangeClientDataWindow changeclientdatawindow = new ChangeClientDataWindow(this);
-                changeclientdatawindow.Show();
+                changeclientdatawindow.ShowDialog();
             });
         }
         private void OpenMessageWindow(string message)

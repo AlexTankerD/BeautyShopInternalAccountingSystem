@@ -22,7 +22,7 @@ namespace BeautyShopInternalAccountingSystem.Models.RegularExpressions
         }
         public static bool IsPriceValid(double? Price)
         {
-            if(string.IsNullOrEmpty(Price.ToString()) || !double.TryParse(Price.ToString(), out _))
+            if(string.IsNullOrEmpty(Price.ToString()) || !double.TryParse(Price.ToString(), out _) || Price < 0)
                 return false;
             return true;
         }

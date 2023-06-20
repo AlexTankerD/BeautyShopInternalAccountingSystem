@@ -52,7 +52,6 @@ namespace BeautyShopInternalAccountingSystem.Models.DataWorkers
                     return false;
             }
         }
-
         public static bool Registration(string Username, string Password, string Name, string Surname, string Patronymic, string Birthday,
             string Sex, string Email, string PhoneNumber, string? ClientImageDirectory)
         {

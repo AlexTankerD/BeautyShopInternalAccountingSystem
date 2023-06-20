@@ -100,5 +100,6 @@ namespace BeautyShopInternalAccountingSystem.Models.DataWorkers
                 return new ObservableCollection<Client>(db.Clients.ToList());
             }
         }
+        
     }
 }
