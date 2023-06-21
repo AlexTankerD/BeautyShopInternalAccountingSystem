@@ -1,11 +1,11 @@
-﻿<ui:Page x:Class="BeautyShopInternalAccountingSystem.Views.ClientWindows.ServicesPage"
+﻿<ui:Page x:Class="BeautyShopInternalAccountingSystem.Views.ClientWindows.ClientServiceOrdersPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-         xmlns:ui="http://schemas.modernwpf.com/2019"
+      xmlns:ui="http://schemas.modernwpf.com/2019"
       xmlns:local="clr-namespace:BeautyShopInternalAccountingSystem.Views.ClientWindows"
-         xmlns:local1="clr-namespace:BeautyShopInternalAccountingSystem.Models"
+      xmlns:local1="clr-namespace:BeautyShopInternalAccountingSystem.Models"
       mc:Ignorable="d" 
       d:DesignHeight="570" d:DesignWidth="1100"
       Title="ServicesPage" FontFamily="Tahoma" Background="{StaticResource MainBackground}">
@@ -19,12 +19,12 @@
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Button Command="{Binding OpenServiceOrderWindowCommand}"
+        <Button Command="{Binding DeleteClientServiceOrderCommand}"
                 HorizontalAlignment="Left" Style="{StaticResource ButtonStyle}" 
-                Margin="10,0,0,0" FontSize="10" Height="40" Width="150" Grid.Row="0">Оформить заказ на услугу</Button>
-        <TextBox Grid.Row="1" Margin="3" Text="{Binding SearchText,UpdateSourceTrigger=PropertyChanged}" ui:ControlHelper.PlaceholderText="Поиск: "  Style="{StaticResource TextBoxStyle}"/>
-        <ListBox Grid.Row="2" x:Name="ServicesListBox" ItemContainerStyle="{StaticResource ListBoxItemStyle}"
-                 ItemsSource="{Binding FilteredServices}" SelectedItem="{Binding SelectedService}" >
+                Margin="10,0,0,0" FontSize="10" Height="40" Width="150" Grid.Row="0">Отменить заказ на услугу</Button>
+        <TextBox Grid.Row="1" Margin="3" Text="{Binding SearchServiceOrderText,UpdateSourceTrigger=PropertyChanged}" ui:ControlHelper.PlaceholderText="Поиск: "  Style="{StaticResource TextBoxStyle}"/>
+        <ListBox Grid.Row="2" x:Name="ServiceOrdersListBox" ItemContainerStyle="{StaticResource ListBoxItemStyle}"
+                 ItemsSource="{Binding FilteredServiceOrders}" SelectedItem="{Binding SelectedServiceOrder}" >
 
             <ListBox.ItemTemplate>
                 <DataTemplate>
@@ -46,19 +46,23 @@
                                     CornerRadius="3" BorderThickness="5" BorderBrush="Black">
                                 <Image HorizontalAlignment="Center" Width="{Binding RelativeSource={RelativeSource FindAncestor, 
                                 AncestorType={x:Type Border}},Path=ActualWidth}" Height="{Binding RelativeSource={RelativeSource FindAncestor, 
-                                AncestorType={x:Type Border}},Path=ActualHeight}" Source="{Binding Path=ServiceImageDirectory, Converter={StaticResource PathConverter}}"></Image>
+                                AncestorType={x:Type Border}},Path=ActualHeight}" Source="{Binding Path=Service.ServiceImageDirectory, Converter={StaticResource PathConverter}}"></Image>
                             </Border>
                             <TextBlock Margin="3" TextWrapping="Wrap" FontSize="12" Grid.Row="0" Grid.Column="1"  
-                                       Text="{Binding Path=Name, StringFormat='Название: {0}'}"></TextBlock>
+                                       Text="{Binding Path=Service.Name, StringFormat='Название услуги: {0}'}"></TextBlock>
                             <TextBlock Margin="3" TextWrapping="Wrap" FontSize="12" Grid.Row="1" Grid.Column="1"  
-                                       Text="{Binding Path=Description, StringFormat='Описание: {0}'}"></TextBlock>
+                                       Text="{Binding Path=Service.Description, StringFormat='Описание услуги: {0}'}"></TextBlock>
                             <TextBlock Margin="3" TextWrapping="Wrap" FontSize="12" Grid.Row="2" Grid.Column="1">
                                 <Run Text="Цена: "/>
-                                <Run Text="{Binding Path=Price, StringFormat='{}{0} рублей'}" TextDecorations="Strikethrough"/>
-                                <Run Text="{Binding Path=PriceWithDiscount, StringFormat='{}{0} рублей'}"/>
+                                <Run Text="{Binding Path=Service.Price, StringFormat='{}{0} рублей'}" TextDecorations="Strikethrough"/>
+                                <Run Text="{Binding Path=Service.PriceWithDiscount, StringFormat='{}{0} рублей'}"/>
                             </TextBlock>
                             <TextBlock Margin="3" TextWrapping="Wrap" FontSize="12" Grid.Row="0" Grid.Column="2"  
-                                       Text="{Binding Path=Duration, StringFormat='Продолжительность услуги: {0}'}"></TextBlock>
+                                       Text="{Binding Path=Service.Duration, StringFormat='Продолжительность услуги: {0}'}"></TextBlock>
+                            <TextBlock Margin="3" TextWrapping="Wrap" FontSize="12" Grid.Row="1" Grid.Column="2"  
+                                       Text="{Binding Path=StartDate, StringFormat='Выбрананая дата проведения услуги: {0}'}"></TextBlock>
+                            <TextBlock Margin="3" TextWrapping="Wrap" FontSize="12" Grid.Row="2" Grid.Column="2"  
+                                       Text="{Binding Path=Comment, StringFormat='Комментарий к заказу: {0}'}"></TextBlock>
                         </Grid>
                     </Border>
 

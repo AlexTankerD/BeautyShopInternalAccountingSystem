@@ -18,31 +18,31 @@ namespace BeautyShopInternalAccountingSystem.Models.RegularExpressions
         }
         public static bool IsUsernameValid(string Username)
         {
-            if (string.IsNullOrEmpty(Username) || Username.Length > 15)
+            if (string.IsNullOrEmpty(Username) || Username.Length > 50)
                 return false;
             return true;
         }
         public static bool IsNameValid(string Name)
         {
-            if (string.IsNullOrEmpty(Name) || Regex.IsMatch(Name, @"\d"))
+            if (string.IsNullOrEmpty(Name) || !Regex.IsMatch(Name, @"^[A-Za-zА-Яа-я]+$") || Name.Length > 50)
                 return false;
             return true;
         }
         public static bool IsSurnameValid(string Surname)
         {
-            if (string.IsNullOrEmpty(Surname) || Regex.IsMatch(Surname, @"\d"))
+            if (string.IsNullOrEmpty(Surname) || !Regex.IsMatch(Surname, @"^[A-Za-zА-Яа-я]+$") || Surname.Length > 50)
                 return false;
             return true;
         }
         public static bool IsPatronymicValid(string Patronymic)
         {
-            if (string.IsNullOrEmpty(Patronymic) || Regex.IsMatch(Patronymic, @"\d"))
+            if (string.IsNullOrEmpty(Patronymic) || !Regex.IsMatch(Patronymic, @"^[A-Za-zА-Яа-я]+$") || Patronymic.Length > 50)
                 return false;
             return true;
         }
         public static bool IsEmailValid(string Email)
         {
-            if (!MailAddress.TryCreate(Email, out _))
+            if (!MailAddress.TryCreate(Email, out _) || Email.Length > 50)
                 return false;
             return true;
         }
@@ -66,19 +66,25 @@ namespace BeautyShopInternalAccountingSystem.Models.RegularExpressions
         }
         public static bool IsSellaryRatioValid(double? sellaryratio)
         {
-            if(string.IsNullOrEmpty(sellaryratio.ToString()) || !double.TryParse(sellaryratio.ToString(), out _))
+            if(string.IsNullOrEmpty(sellaryratio.ToString()) || !double.TryParse(sellaryratio.ToString(), out _) || sellaryratio > 1000000000.00)
                 return false;
             return true;
         }
         public static bool IsPositionValid(string Position)
         {
-            if(string.IsNullOrEmpty(Position))
+            if(string.IsNullOrEmpty(Position) || Position.Length > 50)
                 return false;
             return true;
         }
-        public static bool IsPassportDataValid(string PassportData)
+        public static bool IsPassportNumberValid(string PassportNumber)
         {
-            if(string.IsNullOrEmpty(PassportData) || !Regex.IsMatch(PassportData,@"\d{10}"))
+            if(string.IsNullOrEmpty(PassportNumber) || !Regex.IsMatch(PassportNumber,@"\d{6}"))
+                return false;
+            return true;
+        }
+        public static bool IsPassportSeriesValid(string PassportSeries)
+        {
+            if (string.IsNullOrEmpty(PassportSeries) || !Regex.IsMatch(PassportSeries, @"\d{4}"))
                 return false;
             return true;
         }

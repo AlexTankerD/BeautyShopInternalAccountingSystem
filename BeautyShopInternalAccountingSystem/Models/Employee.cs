@@ -24,11 +24,12 @@ namespace BeautyShopInternalAccountingSystem.Models
         public string Position { get; set; }
         public double SellaryRatio { get; set; }
         public string? EmployeeImageDirectory { get; set; }
-        public string PassportData { get; set; }
+        public string PassportNumber { get; set; }
+        public string PassportSeries { get; set; }
         public List<Service> Services { get; set; }
         public Employee() { }
         public Employee(string Username, string Password, string Name, string Surname, string Patronymic, string Birthday,
-            string Sex, string Email, string PhoneNumber, string Position, double SellaryRatio, string PassportData, List<Service> Services, string? EmployeeImageDirectory)
+            string Sex, string Email, string PhoneNumber, string Position, double SellaryRatio, string PassportNumber, string PassportSeries, List<Service> Services, string? EmployeeImageDirectory)
         {
             this.Username = Username;
             this.Password = Password;
@@ -41,7 +42,8 @@ namespace BeautyShopInternalAccountingSystem.Models
             this.PhoneNumber = PhoneNumber;
             this.Position = Position;
             this.SellaryRatio = SellaryRatio;
-            this.PassportData = PassportData;
+            this.PassportNumber = PassportNumber;
+            this.PassportSeries = PassportSeries;
             this.Services = Services;
             this.EmployeeImageDirectory = EmployeeImageDirectory;
         }

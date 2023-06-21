@@ -17,10 +17,19 @@
         </Grid.RowDefinitions>
         <Button Command="{Binding OpenClientDataPageCommand}" CommandParameter="{Binding ElementName=MainFrame}" 
                 FontSize="11" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Left"  
-                Margin="180,0,0,0" Height="40" Width="150" Grid.Row="1">Пользовательские данные</Button>
+                Margin="650,0,0,0" Height="40" Width="150" Grid.Row="1">Пользовательские данные</Button>
+        <Button Command="{Binding OpenClientServiceOrdersPageCommand}" CommandParameter="{Binding ElementName=MainFrame}" 
+                HorizontalAlignment="Left" Style="{StaticResource ButtonStyle}" 
+                Margin="170,0,0,0" Height="40" Width="150" Grid.Row="1">Заказы услуг</Button>
+        <Button Command="{Binding OpenProductCartPageCommand}" CommandParameter="{Binding ElementName=MainFrame}" 
+                HorizontalAlignment="Left" Style="{StaticResource ButtonStyle}" 
+                Margin="490,0,0,0" Height="40" Width="150" Grid.Row="1">Корзина</Button>
         <Button Command="{Binding OpenServicesPageCommand}" CommandParameter="{Binding ElementName=MainFrame}" 
                 HorizontalAlignment="Left" Style="{StaticResource ButtonStyle}" 
-                Margin="10,0,0,0" Height="40" Width="150" Grid.Row="1">Услуги</Button>
+                Margin="10,0,0,0" Height="40" Width="150" Grid.Row="1">Список услуг</Button>
+        <Button Command="{Binding OpenProductsPageCommand}" CommandParameter="{Binding ElementName=MainFrame}" 
+                HorizontalAlignment="Left" Style="{StaticResource ButtonStyle}" 
+                Margin="330,0,0,0" Height="40" Width="150" Grid.Row="1">Список товаров</Button>
         <Frame NavigationUIVisibility="Hidden" Grid.Row="0" x:Name="MainFrame"></Frame>
     </Grid>
     

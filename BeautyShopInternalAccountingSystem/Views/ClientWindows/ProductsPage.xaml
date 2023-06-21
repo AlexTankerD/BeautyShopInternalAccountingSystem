@@ -16,10 +16,14 @@
     <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBox Margin="3" Text="{Binding SearchText,UpdateSourceTrigger=PropertyChanged}" ui:ControlHelper.PlaceholderText="Поиск: "  Style="{StaticResource TextBoxStyle}"/>
-        <ListBox Grid.Row="1" x:Name="ProductsListBox" ItemContainerStyle="{StaticResource ProductListBoxItemStyle}"
+        <Button Command="{Binding AddProductToCartCommand}"
+                HorizontalAlignment="Left" Style="{StaticResource ButtonStyle}"
+                Margin="10,0,0,0" FontSize="10" Height="40" Width="150">Добавить продукт в корзину</Button>
+        <TextBox Grid.Row="1" Margin="3" Text="{Binding SearchProductText,UpdateSourceTrigger=PropertyChanged}" ui:ControlHelper.PlaceholderText="Поиск: "  Style="{StaticResource TextBoxStyle}"/>
+        <ListBox Grid.Row="2" x:Name="ProductsListBox" ItemContainerStyle="{StaticResource ProductListBoxItemStyle}"
                  ItemsSource="{Binding FilteredProducts}" SelectedItem="{Binding SelectedProduct}" >
            
             <ListBox.ItemTemplate>

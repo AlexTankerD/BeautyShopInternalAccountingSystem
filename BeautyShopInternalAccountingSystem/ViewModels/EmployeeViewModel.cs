@@ -21,47 +21,8 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
     {
         public Employee Employee { get; set; } 
         public Product SelectedProduct { get; set; }
-        public ObservableCollection<Product> AllProducts = ProductDataWorker.GetProducts();
-        private string _searchtext;
-        public string SearchText
-        {
-            get
-            {
-                return _searchtext;
-            }
-            set
-            {
-                _searchtext = value;
-                OnPropertyChanged("FilteredProducts");
-            }
-        }
-        public IEnumerable<Product> FilteredProducts
-        {
-            get
-            {
-                if (SearchText != null)
-                {
-                    var SearchName = AllProducts.Where(x => x.Name.ToUpper().StartsWith(SearchText.ToUpper()));
-                    return SearchName;
-                }
-                else { return AllProducts; }
-
-            }
-        }
-
-        private AsyncRelayCommand _openproductspagecommand;
-        public AsyncRelayCommand OpenProductsPageCommand
-        {
-            get
-            {
-
-                return _openproductspagecommand ?? new AsyncRelayCommand(async(obj) =>
-                {
-                    Frame frame = obj as Frame;
-                    await Task.Run(()=>OpenProductsPage(frame));
-                });
-            }
-        }
+        
+        
         private AsyncRelayCommand _openemployeedatapagecommand;
         public AsyncRelayCommand OpenEmployeeDataPageCommand
         {
@@ -74,13 +35,6 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
                     await Task.Run(() => OpenEmployeeDataPage(frame));
                 });
             }
-        }
-        private void OpenProductsPage(Frame frame)
-        {
-            Application.Current.Dispatcher.Invoke(() =>
-            {
-                frame.Navigate(new ProductsPage(this));
-            });
         }
         private void OpenEmployeeDataPage(Frame frame)
         {

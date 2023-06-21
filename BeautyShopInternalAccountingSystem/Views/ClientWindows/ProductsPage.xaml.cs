@@ -21,7 +21,7 @@ namespace BeautyShopInternalAccountingSystem.Views.ClientWindows
     /// </summary>
     public partial class ProductsPage : ModernWpf.Controls.Page
     {
-        public ProductsPage(EmployeeViewModel vm)
+        public ProductsPage(ClientViewModel vm)
         {
             InitializeComponent();
             DataContext = vm;

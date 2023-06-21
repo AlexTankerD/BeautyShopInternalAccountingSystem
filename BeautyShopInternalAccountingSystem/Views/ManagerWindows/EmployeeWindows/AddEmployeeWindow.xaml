@@ -28,6 +28,7 @@
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
+                    <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Border CornerRadius="3" BorderThickness="2" BorderBrush="{StaticResource BlackColor}" Margin="10"  
                     Width="200" HorizontalAlignment="Left" Grid.Row="0" Grid.RowSpan="3" Height="200">
@@ -74,15 +75,18 @@
                      Text="{Binding EmployeeSellaryRatio}" ui:ControlHelper.PlaceholderText="Коэффициент оплаты"  
                      Width="350" Style="{StaticResource TextBoxStyle}"></TextBox>
                 <TextBox HorizontalAlignment="Right" Grid.Row="11" Margin="10" Height="50" 
-                     Text="{Binding EmployeePassportData}" ui:ControlHelper.PlaceholderText="Номер паспорта"  
+                     Text="{Binding EmployeePassportSeries}" ui:ControlHelper.PlaceholderText="Серия паспорта"  
                      Width="350" Style="{StaticResource TextBoxStyle}"></TextBox>
-                <TextBox Grid.Row="12" HorizontalAlignment="Left" Margin="10" Width="200" 
+                <TextBox HorizontalAlignment="Right" Grid.Row="12" Margin="10" Height="50" 
+                     Text="{Binding EmployeePassportNumber}" ui:ControlHelper.PlaceholderText="Номер паспорта"  
+                     Width="350" Style="{StaticResource TextBoxStyle}"></TextBox>
+                <TextBox Grid.Row="13" HorizontalAlignment="Left" Margin="10" Width="200" 
                          TextWrapping="Wrap" Text="{Binding EmployeeServices.Count, StringFormat='Количество услуг: {0}', Mode=OneWay}" 
                          Style="{StaticResource TextBoxStyle}" IsReadOnly="True"/>
-                <Button Grid.Row="12" Height="50" Width="200" Margin="0,10,85,10" HorizontalAlignment="Right"
+                <Button Grid.Row="13" Height="50" Width="200" Margin="0,10,85,10" HorizontalAlignment="Right"
                     Style="{StaticResource ButtonStyle}"
                     Command="{Binding OpenAddEmployeeServiceWindowCommand}">Добавить услуги</Button>
-                <Button Grid.Row="13" Height="50" Width="200" Margin="10" HorizontalAlignment="Center"  
+                <Button Grid.Row="14" Height="50" Width="200" Margin="10" HorizontalAlignment="Center"  
                     Style="{StaticResource ButtonStyle}"
                     Command="{Binding AddEmployeeCommand}" CommandParameter="{Binding ElementName=addemployeewnd}">Добавить работника</Button>
             </Grid>

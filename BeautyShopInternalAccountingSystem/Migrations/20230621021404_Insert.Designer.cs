@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BeautyShopInternalAccountingSystem.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20230619224725_Insert")]
+    [Migration("20230621021404_Insert")]
     partial class Insert
     {
         /// <inheritdoc />
@@ -108,7 +108,11 @@ namespace BeautyShopInternalAccountingSystem.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PassportData")
+                    b.Property<string>("PassportNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PassportSeries")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -243,6 +247,30 @@ namespace BeautyShopInternalAccountingSystem.Migrations
                     b.ToTable("Products");
                 });
 
+            modelBuilder.Entity("BeautyShopInternalAccountingSystem.Models.ProductSale", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DateOfSale")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductsSale");
+                });
+
             modelBuilder.Entity("BeautyShopInternalAccountingSystem.Models.Service", b =>
                 {
                     b.Property<int>("Id")
@@ -277,6 +305,39 @@ namespace BeautyShopInternalAccountingSystem.Migrations
                     b.ToTable("Services");
                 });
 
+            modelBuilder.Entity("BeautyShopInternalAccountingSystem.Models.ServiceOrder", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ClientId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Comment")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ServiceId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ServiceOrderImage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClientId");
+
+                    b.HasIndex("ServiceId");
+
+                    b.ToTable("ServiceOrders");
+                });
+
             modelBuilder.Entity("EmployeeService", b =>
                 {
                     b.Property<int>("EmployeesId")
@@ -301,6 +362,36 @@ namespace BeautyShopInternalAccountingSystem.Migrations
                         .IsRequired();
 
                     b.Navigation("Manufacturer");
+                });
+
+            modelBuilder.Entity("BeautyShopInternalAccountingSystem.Models.ProductSale", b =>
+                {
+                    b.HasOne("BeautyShopInternalAccountingSystem.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("BeautyShopInternalAccountingSystem.Models.ServiceOrder", b =>
+                {
+                    b.HasOne("BeautyShopInternalAccountingSystem.Models.Client", "Client")
+                        .WithMany()
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BeautyShopInternalAccountingSystem.Models.Service", "Service")
+                        .WithMany()
+                        .HasForeignKey("ServiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Client");
+
+                    b.Navigation("Service");
                 });
 
             modelBuilder.Entity("EmployeeService", b =>

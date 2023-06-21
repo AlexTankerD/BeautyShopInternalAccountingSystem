@@ -18,6 +18,8 @@ namespace BeautyShopInternalAccountingSystem.Models.Data
         public DbSet<Manager> Managers { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Service> Services { get; set; }
+        public DbSet<ServiceOrder> ServiceOrders { get; set; }
+        public DbSet<ProductSale> ProductsSale { get; set; }
         public ApplicationContext() => Database.EnsureCreated();
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

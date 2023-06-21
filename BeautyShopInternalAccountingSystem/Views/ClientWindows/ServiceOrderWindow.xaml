@@ -1,0 +1,28 @@
+﻿<Window x:Class="BeautyShopInternalAccountingSystem.Views.ClientWindows.ServiceOrderWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BeautyShopInternalAccountingSystem.Views.ClientWindows"
+        mc:Ignorable="d"
+        Title="Заказ услуги" FontFamily="Tahoma" ResizeMode="NoResize" 
+        ui:WindowHelper.UseModernWindowStyle="True" Height="400" Width="500" 
+        WindowStartupLocation="CenterScreen" x:Name="serviceorderwnd">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBox Grid.Row="0" Height="50" Width="350" TextWrapping="Wrap" IsReadOnly="True" Text="{Binding SelectedService.Name, StringFormat='Выбранная услуга: {0}'}"  
+                 Style="{StaticResource TextBoxStyle}"></TextBox>
+        <TextBox Grid.Row="1" Height="50" Width="350" TextWrapping="Wrap" Text="{Binding StartDate}"  
+                 Style="{StaticResource TextBoxStyle}" ui:ControlHelper.PlaceholderText="Дата проведения услуги"></TextBox>
+        <TextBox Grid.Row="2" Height="50" Width="350" TextWrapping="Wrap" Text="{Binding Comment}"  
+                 Style="{StaticResource TextBoxStyle}" ui:ControlHelper.PlaceholderText="Комментарий"></TextBox>
+        <Button Grid.Row="3" Height="40" Width="250" Command="{Binding OrderServiceCommand}" 
+                CommandParameter="{Binding ElementName=serviceorderwnd}" Style="{StaticResource ButtonStyle }">Оформить заказ</Button>
+    </Grid>
+</Window>

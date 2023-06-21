@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -52,7 +53,8 @@ namespace BeautyShopInternalAccountingSystem.Migrations
                     Position = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SellaryRatio = table.Column<double>(type: "float", nullable: false),
                     EmployeeImageDirectory = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PassportData = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    PassportNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PassportSeries = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -159,6 +161,56 @@ namespace BeautyShopInternalAccountingSystem.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "ServiceOrders",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ClientId = table.Column<int>(type: "int", nullable: false),
+                    ServiceId = table.Column<int>(type: "int", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Comment = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ServiceOrderImage = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ServiceOrders", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ServiceOrders_Clients_ClientId",
+                        column: x => x.ClientId,
+                        principalTable: "Clients",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ServiceOrders_Services_ServiceId",
+                        column: x => x.ServiceId,
+                        principalTable: "Services",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProductsSale",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    Count = table.Column<int>(type: "int", nullable: false),
+                    DateOfSale = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductsSale", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProductsSale_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_EmployeeService_ServicesId",
                 table: "EmployeeService",
@@ -168,14 +220,26 @@ namespace BeautyShopInternalAccountingSystem.Migrations
                 name: "IX_Products_ManufacturerId",
                 table: "Products",
                 column: "ManufacturerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductsSale_ProductId",
+                table: "ProductsSale",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ServiceOrders_ClientId",
+                table: "ServiceOrders",
+                column: "ClientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ServiceOrders_ServiceId",
+                table: "ServiceOrders",
+                column: "ServiceId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Clients");
-
             migrationBuilder.DropTable(
                 name: "EmployeeService");
 
@@ -183,10 +247,19 @@ namespace BeautyShopInternalAccountingSystem.Migrations
                 name: "Managers");
 
             migrationBuilder.DropTable(
-                name: "Products");
+                name: "ProductsSale");
+
+            migrationBuilder.DropTable(
+                name: "ServiceOrders");
 
             migrationBuilder.DropTable(
                 name: "Employees");
+
+            migrationBuilder.DropTable(
+                name: "Products");
+
+            migrationBuilder.DropTable(
+                name: "Clients");
 
             migrationBuilder.DropTable(
                 name: "Services");

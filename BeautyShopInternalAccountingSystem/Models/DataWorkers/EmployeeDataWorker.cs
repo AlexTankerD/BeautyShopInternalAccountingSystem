@@ -44,18 +44,18 @@ namespace BeautyShopInternalAccountingSystem.Models.DataWorkers
             image.Source = new BitmapImage(uri);
         }
         public static bool AddEmployee(string Username, string Password, string Name, string Surname, string Patronymic, string Birthday,
-           string Sex, string Email, string PhoneNumber, string Position, double? SellaryRatio, string PassportData, List<Service> Services, string? EmployeeImageDirectory)
+           string Sex, string Email, string PhoneNumber, string Position, double? SellaryRatio, string PassportNumber, string PassportSeries, List<Service> Services, string? EmployeeImageDirectory)
         {
             using (ApplicationContext db = new ApplicationContext())
             {
                 Employee employeedb = db.Employees.Where(x => x.Username == Username || x.PhoneNumber == PhoneNumber ||
-                x.Email == Email || x.PassportData == PassportData).FirstOrDefault();
+                x.Email == Email || (x.PassportNumber == PassportNumber) && (x.PassportSeries == PassportSeries)).FirstOrDefault();
                 if (employeedb != null)
                     return false;
                 else
                 {
                     Employee employee = new Employee(Username, Password, Name, Surname, Patronymic, Birthday, Sex,
-                        Email, PhoneNumber, Position, Convert.ToDouble(SellaryRatio), PassportData,Services, EmployeeImageDirectory);
+                        Email, PhoneNumber, Position, Convert.ToDouble(SellaryRatio), PassportNumber, PassportSeries, Services, EmployeeImageDirectory);
                     foreach(Service service in Services)
                     {
                         db.Services.Entry(service).State = Microsoft.EntityFrameworkCore.EntityState.Unchanged;
@@ -69,14 +69,16 @@ namespace BeautyShopInternalAccountingSystem.Models.DataWorkers
 
         }
         public static bool EditEmployee(Employee SelectedEmployee, string Username, string Password, string Name, string Surname, string Patronymic, string Birthday,
-           string Sex, string Email, string PhoneNumber, string Position, double? SellaryRatio, string PassportData, List<Service> Services, string? EmployeeImageDirectory)
+           string Sex, string Email, string PhoneNumber, string Position, double? SellaryRatio, string PassportNumber, string PassportSeries, List<Service> Services, 
+           string? EmployeeImageDirectory)
         {
             using (ApplicationContext db = new ApplicationContext())
             {
                 Employee employeedb = db.Employees.Where(x => (x.Username == Username && Username != SelectedEmployee.Username) || 
                 (x.PhoneNumber == PhoneNumber && PhoneNumber != SelectedEmployee.PhoneNumber) ||
                 (x.Email == Email && Email != SelectedEmployee.Email) || 
-                (x.PassportData == PassportData && PassportData != SelectedEmployee.PassportData)).FirstOrDefault();
+                ((x.PassportNumber == PassportNumber && PassportNumber != SelectedEmployee.PassportNumber) || 
+                (x.PassportSeries == PassportSeries && PassportSeries != SelectedEmployee.PassportSeries))).FirstOrDefault();
                 if (employeedb != null)
                     return false;
                 else
@@ -98,7 +100,8 @@ namespace BeautyShopInternalAccountingSystem.Models.DataWorkers
                     newemployee.PhoneNumber = PhoneNumber;
                     newemployee.Position = Position;
                     newemployee.SellaryRatio = Convert.ToDouble(SellaryRatio);
-                    newemployee.PassportData = PassportData;
+                    newemployee.PassportNumber = PassportNumber;
+                    newemployee.PassportSeries = PassportSeries;
                     newemployee.Services = Services;
                     newemployee.EmployeeImageDirectory = EmployeeImageDirectory;
                     db.Entry(newemployee).State = EntityState.Modified;

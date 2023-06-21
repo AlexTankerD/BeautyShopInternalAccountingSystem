@@ -63,7 +63,8 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
         public string EmployeePosition { get; set; }
         public double? EmployeeSellaryRatio { get; set; }
         public string? EmployeeImageDirectory { get; set; }
-        public string EmployeePassportData { get; set; }
+        public string EmployeePassportNumber { get; set; }
+        public string EmployeePassportSeries { get; set; }
         private ObservableCollection<Service> _employeeservices;
         public ObservableCollection<Service> EmployeeServices
         {
@@ -472,10 +473,13 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
         }
         private void UpdateProductPage()
         {
-            AllProducts = ProductDataWorker.GetProducts();
-            ProductsPage.ListProductsBox.ItemsSource = null;
-            ProductsPage.ListProductsBox.Items.Clear();
-            ProductsPage.ListProductsBox.ItemsSource = FilteredProducts;
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                AllProducts = ProductDataWorker.GetProducts();
+                ProductsPage.ListProductsBox.ItemsSource = null;
+                ProductsPage.ListProductsBox.Items.Clear();
+                ProductsPage.ListProductsBox.ItemsSource = FilteredProducts;
+            });
         }
         #endregion
 
@@ -526,7 +530,7 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
                 ServicePrice, ServiceDiscount, ServiceDuration, ServiceImageDirectory);
             if (addservice)
             {
-                OpenMessageWindow("Услуга успешно добавлен");
+                OpenMessageWindow("Услуга успешно добавлена");
                 UpdateServicePage();
                 SetNullServiceValueProperties();
                 CloseWindow(wnd);
@@ -702,7 +706,12 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
                 OpenMessageWindow("Неправильный коэффициент оплаты");
                 return;
             }
-            if (!EmployeeRegexp.IsPassportDataValid(EmployeePassportData))
+            if (!EmployeeRegexp.IsPassportSeriesValid(EmployeePassportSeries))
+            {
+                OpenMessageWindow("Неправильная серия паспорта");
+                return;
+            }
+            if (!EmployeeRegexp.IsPassportNumberValid(EmployeePassportNumber))
             {
                 OpenMessageWindow("Неправильный номер паспорта");
                 return;
@@ -716,7 +725,7 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
                 EmployeeImageDirectory = @"Images\ClientImages\user.png";
             var addemployee = EmployeeDataWorker.AddEmployee(EmployeeUsername,EmployeePassword, 
                 EmployeeName, EmployeeSurname, EmployeePatronymic, EmployeeBirthday, EmployeeSex, 
-                EmployeeEmail, EmployeePhoneNumber, EmployeePosition, EmployeeSellaryRatio, EmployeePassportData, EmployeeServices.ToList(), EmployeeImageDirectory);
+                EmployeeEmail, EmployeePhoneNumber, EmployeePosition, EmployeeSellaryRatio, EmployeePassportNumber, EmployeePassportSeries, EmployeeServices.ToList(), EmployeeImageDirectory);
             if(addemployee)
             {
                 OpenMessageWindow("Работник успешно добавлен");
@@ -802,7 +811,12 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
                 OpenMessageWindow("Неправильный коэффициент оплаты");
                 return;
             }
-            if (!EmployeeRegexp.IsPassportDataValid(EmployeePassportData))
+            if (!EmployeeRegexp.IsPassportSeriesValid(EmployeePassportSeries))
+            {
+                OpenMessageWindow("Неправильная серия паспорта");
+                return;
+            }
+            if (!EmployeeRegexp.IsPassportNumberValid(EmployeePassportNumber))
             {
                 OpenMessageWindow("Неправильный номер паспорта");
                 return;
@@ -816,7 +830,8 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
                 EmployeeImageDirectory = @"Images\ClientImages\user.png";
             var editemployee = EmployeeDataWorker.EditEmployee(SelectedEmployee, EmployeeUsername, EmployeePassword,
                 EmployeeName, EmployeeSurname, EmployeePatronymic, EmployeeBirthday, EmployeeSex,
-                EmployeeEmail, EmployeePhoneNumber, EmployeePosition, EmployeeSellaryRatio, EmployeePassportData, EmployeeServices.ToList(), EmployeeImageDirectory);
+                EmployeeEmail, EmployeePhoneNumber, EmployeePosition, EmployeeSellaryRatio, EmployeePassportNumber, EmployeePassportSeries,
+                EmployeeServices.ToList(), EmployeeImageDirectory);
             if (editemployee)
             {
                 OpenMessageWindow("Работник успешно изменен");
@@ -920,7 +935,8 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
             EmployeePhoneNumber = null;
             EmployeePosition = null;
             EmployeeSellaryRatio = null;
-            EmployeePassportData = null;
+            EmployeePassportNumber = null;
+            EmployeePassportSeries = null;
             EmployeeImageDirectory = null;
             EmployeeServices = null;
         }

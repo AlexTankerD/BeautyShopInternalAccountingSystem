@@ -26,6 +26,7 @@
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
+                    <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Border CornerRadius="3" BorderThickness="2" BorderBrush="{StaticResource BlackColor}" Margin="10"  
                     Width="300" HorizontalAlignment="Right" Grid.Row="0" Grid.RowSpan="4" Height="300">
@@ -68,7 +69,13 @@
                          Text="{Binding Path=Employee.SellaryRatio, StringFormat='Коэффциент зарплаты: {0}'}"></TextBox>
                 <TextBox Margin="10" Height="60" IsReadOnly="True" HorizontalAlignment="Left" 
                          Width="700" Style="{StaticResource TextBoxStyle}" Grid.Row="11" 
-                         Text="{Binding Path=Employee.PassportData, StringFormat='Серия и номер паспорта: {0}'}"></TextBox>
+                         Text="{Binding Path=Employee.PassportNumber, StringFormat='Номер паспорта: {0}'}"></TextBox>
+                <TextBox Margin="10" Height="60" IsReadOnly="True" HorizontalAlignment="Left" 
+                         Width="700" Style="{StaticResource TextBoxStyle}" Grid.Row="12" 
+                         Text="{Binding Path=Employee.PassportSeries, StringFormat='Серия паспорта: {0}'}"></TextBox>
+                <TextBox Margin="10" Height="60" IsReadOnly="True" HorizontalAlignment="Left" 
+                         Width="700" Style="{StaticResource TextBoxStyle}" Grid.Row="13" 
+                         Text="{Binding Path=Employee.Services, StringFormat='Услуги: {0}'}"></TextBox>
             </Grid>
         </ScrollViewer>
     </Grid>

@@ -1,5 +1,4 @@
 ﻿using BeautyShopInternalAccountingSystem.ViewModels;
-using BeautyShopInternalAccountingSystem.Views.ClientWindows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,15 +13,19 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace BeautyShopInternalAccountingSystem.Views.EmployeeWindows
+namespace BeautyShopInternalAccountingSystem.Views.ClientWindows
 {
-    public partial class EmployeeWindow : Window
+    /// <summary>
+    /// Логика взаимодействия для ClientServiceOrdersPage.xaml
+    /// </summary>
+    public partial class ClientServiceOrdersPage : ModernWpf.Controls.Page
     {
-        public EmployeeWindow(EmployeeViewModel vm)
+        public static ListBox ListServiceOrdersBox;
+        public ClientServiceOrdersPage(ClientViewModel vm)
         {
             InitializeComponent();
             DataContext = vm;
+            ListServiceOrdersBox = ServiceOrdersListBox; 
         }
     }
-    
 }
