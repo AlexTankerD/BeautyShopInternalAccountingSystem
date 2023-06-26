@@ -15,7 +15,7 @@ namespace BeautyShopInternalAccountingSystem.Models.DataWorkers
         {
             using(ApplicationContext db = new ApplicationContext())
             {
-                return new ObservableCollection<ProductSale>(db.ProductsSale.Include(x => x.Product).ToList());
+                return new ObservableCollection<ProductSale>(db.ProductsSale.Include(x => x.Product).Include(x => x.Client).ToList());
             }
         }
         public static bool AddProductSale(ObservableCollection<Product> Products, Client Client)

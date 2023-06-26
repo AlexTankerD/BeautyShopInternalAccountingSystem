@@ -11,6 +11,7 @@ using BeautyShopInternalAccountingSystem.Views.ManagerWindows.ManufacturerWindow
 using BeautyShopInternalAccountingSystem.Views.ManagerWindows.ManufacurerWindows;
 using BeautyShopInternalAccountingSystem.Views.ManagerWindows.ProductWindows;
 using BeautyShopInternalAccountingSystem.Views.ManagerWindows.ServiceWindows;
+using BeautyShopInternalAccountingSystem.Views.ManagerWindows.StatisticsWindows;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -118,6 +119,26 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
             { 
                 _allmanufacturers = value;
                 OnPropertyChanged("AllManufacturers");
+            }
+        }
+        private ObservableCollection<ProductSale> allproductssales = ProductSaleDataWorker.GetProductSales();
+        public ObservableCollection<ProductSale> AllProductsSales
+        {
+            get { return allproductssales; }
+            set
+            {
+                allproductssales = value;
+                OnPropertyChanged("AllProductsSales");
+            }
+        }
+        private ObservableCollection<ServiceOrder> allserviceorders = ServiceOrderDataWorker.GetServiceOrders();
+        public ObservableCollection<ServiceOrder> AllServiceOrders
+        {
+            get { return allserviceorders; }
+            set
+            {
+                allserviceorders = value;
+                OnPropertyChanged("AllServiceOrdersSales");
             }
         }
         #endregion
@@ -1397,6 +1418,45 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
                 });
             }
         }
+        private AsyncRelayCommand _openstatisticspagecommand;
+        public AsyncRelayCommand OpenStatisticsPageCommand
+        {
+            get
+            {
+
+                return _openstatisticspagecommand ?? new AsyncRelayCommand(async (obj) =>
+                {
+                    Frame frame = obj as Frame;
+                    await Task.Run(() => OpenStatisticsPage(frame));
+                });
+            }
+        }
+        private AsyncRelayCommand _openproductsstatisticspagecommand;
+        public AsyncRelayCommand OpenProductsStatisticsPageCommand
+        {
+            get
+            {
+
+                return _openproductsstatisticspagecommand ?? new AsyncRelayCommand(async (obj) =>
+                {
+                    Frame frame = obj as Frame;
+                    await Task.Run(() => OpenProductsStatisticsPage(frame));
+                });
+            }
+        }
+        private AsyncRelayCommand _openservicesstatisticspagecommand;
+        public AsyncRelayCommand OpenServicesStatisticsPageCommand
+        {
+            get
+            {
+
+                return _openservicesstatisticspagecommand ?? new AsyncRelayCommand(async (obj) =>
+                {
+                    Frame frame = obj as Frame;
+                    await Task.Run(() => OpenServicesStatisticsPage(frame));
+                });
+            }
+        }
         #endregion
 
         #region Методы открытия окон и страниц
@@ -1522,6 +1582,27 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
             {
                 EditManufacturerWindow wnd = new EditManufacturerWindow(this);
                 wnd.ShowDialog();
+            });
+        }
+        private void OpenStatisticsPage(Frame frame)
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                frame.Navigate(new StatisticsPage(this));
+            });
+        }
+        private void OpenProductsStatisticsPage(Frame frame)
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                frame.Navigate(new ProductsStatisticsPage(this));
+            });
+        }
+        private void OpenServicesStatisticsPage(Frame frame)
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                frame.Navigate(new ServicesStatisticsPage(this));
             });
         }
         private void CloseWindow(Window window)

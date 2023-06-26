@@ -14,7 +14,6 @@ namespace BeautyShopInternalAccountingSystem.Models
         public int Id { get; set; }
         public Client Client { get; set; }
         public int ProductId { get; set; }
-        [ForeignKey("ProductId")]
         public Product Product { get; set; }
         public int Count { get; set; }
         public string DateOfSale { get; set; }

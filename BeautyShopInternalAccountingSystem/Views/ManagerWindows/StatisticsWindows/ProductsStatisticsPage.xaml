@@ -1,0 +1,53 @@
+﻿<ui:Page x:Class="BeautyShopInternalAccountingSystem.Views.ManagerWindows.StatisticsWindows.ProductsStatisticsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:ui="http://schemas.modernwpf.com/2019"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BeautyShopInternalAccountingSystem.Views.ManagerWindows.StatisticsWindows"
+      mc:Ignorable="d" 
+      d:DesignHeight="520" d:DesignWidth="1100"
+      Title="ProductsStatisticsPage" FontFamily="Tahoma" Background="{StaticResource MainBackground}">
+    <ListView ItemsSource="{Binding AllProductsSales}">
+        <ListView.View>
+            <GridView>
+                <GridView.Columns>
+                    <GridViewColumn Header="Клиент" Width="275">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <Run Text="{Binding Path= Client.Name}"/>
+                                    <Run Text="{Binding Path = Client.Surname}"/>
+                                    <Run Text="{Binding Path = Client.Patronymic}"/>
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Товар" Width="275">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path = Product.Name}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Количество" Width="275">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Path = Count}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Дата продажи" Width="275">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path = DateOfSale}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView.Columns>
+            </GridView>
+        </ListView.View>
+    </ListView>
+</ui:Page>

@@ -1,0 +1,28 @@
+﻿<ui:Page x:Class="BeautyShopInternalAccountingSystem.Views.ManagerWindows.StatisticsWindows.StatisticsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:ui="http://schemas.modernwpf.com/2019"
+      xmlns:local="clr-namespace:BeautyShopInternalAccountingSystem.Views.ManagerWindows.StatisticsWindows"
+      xmlns:local1="clr-namespace:BeautyShopInternalAccountingSystem.Models"
+      mc:Ignorable="d" 
+      d:DesignHeight="570" d:DesignWidth="1100"
+      Title="StatisticsPage" FontFamily="Tahoma" Background="{StaticResource MainBackground}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Button Command="{Binding OpenServicesStatisticsPageCommand}" 
+                CommandParameter="{Binding ElementName=StatisticsPageFrame}"
+                Style="{StaticResource ButtonStyle}" HorizontalAlignment="Left"  
+                Margin="10,0,0,0" Height="40" FontSize="10" Width="150" Grid.Row="0">Статистика заказов услуг</Button>
+        <Button Command="{Binding OpenProductsStatisticsPageCommand}"  
+                CommandParameter="{Binding ElementName=StatisticsPageFrame}"
+                Style="{StaticResource ButtonStyle}" HorizontalAlignment="Left"  
+                Margin="170,0,0,0" Height="40" Width="150" FontSize="10" Grid.Row="0">Статистика продаж товаров</Button>
+        <Frame NavigationUIVisibility="Hidden" Grid.Row="1" x:Name="StatisticsPageFrame"></Frame>
+    </Grid>
+</ui:Page>

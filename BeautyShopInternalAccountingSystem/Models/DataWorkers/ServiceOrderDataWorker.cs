@@ -18,6 +18,13 @@ namespace BeautyShopInternalAccountingSystem.Models.DataWorkers
                 return new ObservableCollection<ServiceOrder>(db.ServiceOrders.Include(x => x.Service).Include(x => x.Client).Where(x=> x.Client == Client && x.Status == null).ToList());
             }
         }
+        public static ObservableCollection<ServiceOrder> GetServiceOrders()
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                return new ObservableCollection<ServiceOrder>(db.ServiceOrders.Include(x => x.Service).Include(x => x.Client).Include(x => x.Employee).ToList());
+            }
+        }
         public static ObservableCollection<ServiceOrder> GetServiceOrdersForEmployee(Employee employee)
         {
             using (ApplicationContext db = new ApplicationContext())

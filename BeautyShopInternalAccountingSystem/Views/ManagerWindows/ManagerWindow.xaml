@@ -26,6 +26,9 @@
         <Button Command="{Binding OpenClientsPageCommand}" CommandParameter="{Binding ElementName=MainFrame}" 
                 HorizontalAlignment="Left" Style="{StaticResource ButtonStyle}" 
                 Margin="490,0,0,0" Height="40" Width="150" Grid.Row="1">Клиенты</Button>
+        <Button Command="{Binding OpenStatisticsPageCommand}" CommandParameter="{Binding ElementName=MainFrame}" 
+                HorizontalAlignment="Left" Style="{StaticResource ButtonStyle}" 
+                Margin="650,0,0,0" Height="40" Width="150" Grid.Row="1">Статистика</Button>
         <Frame NavigationUIVisibility="Hidden" Grid.Row="0" x:Name="MainFrame"></Frame>
     </Grid>
 </Window>
