@@ -15,7 +15,7 @@
                     <GridViewColumn Header="Клиент" Width="275">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock>
+                                <TextBlock TextWrapping="Wrap">
                                     <Run Text="{Binding Path= Client.Name}"/>
                                     <Run Text="{Binding Path = Client.Surname}"/>
                                     <Run Text="{Binding Path = Client.Patronymic}"/>
@@ -26,7 +26,7 @@
                     <GridViewColumn Header="Товар" Width="275">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Path = Product.Name}"/>
+                                <TextBlock TextWrapping="Wrap" Text="{Binding Path = Product.Name}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -34,7 +34,7 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel>
-                                    <TextBlock Text="{Binding Path = Count}"/>
+                                    <TextBlock TextWrapping="Wrap" Text="{Binding Path = Count}"/>
                                 </StackPanel>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
@@ -42,7 +42,7 @@
                     <GridViewColumn Header="Дата продажи" Width="275">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Path = DateOfSale}"/>
+                                <TextBlock TextWrapping="Wrap" Text="{Binding Path = DateOfSale}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

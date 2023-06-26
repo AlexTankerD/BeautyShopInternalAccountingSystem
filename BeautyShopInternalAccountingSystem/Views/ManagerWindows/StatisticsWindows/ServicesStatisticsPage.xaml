@@ -19,7 +19,7 @@
                     <GridViewColumn Header="Клиент">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock>
+                                <TextBlock TextWrapping="Wrap">
                                     <Run Text="{Binding Path= Client.Name}"/>
                                     <Run Text="{Binding Path=Client.Surname}"/>
                                     <Run Text="{Binding Path=Client.Patronymic}"/>
@@ -30,14 +30,14 @@
                     <GridViewColumn Header="Услуга">
                     <GridViewColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Path=Service.Name}"/>
+                                <TextBlock TextWrapping="Wrap" Text="{Binding Path=Service.Name}"/>
                         </DataTemplate>
                     </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                     <GridViewColumn Header="Работник">
                         <GridViewColumn.CellTemplate>
                         <DataTemplate>
-                                <TextBlock>
+                                <TextBlock TextWrapping="Wrap">
                                     <Run Text="{Binding Path = Employee.Name}"/>
                                     <Run Text="{Binding Path = Employee.Surname}"/>
                                     <Run Text="{Binding Path = Employee.Patronymic}"/>
@@ -48,21 +48,21 @@
                     <GridViewColumn Header="Дата проведения услуги">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Path=StartDate}"/>
+                                <TextBlock TextWrapping="Wrap" Text="{Binding Path=StartDate}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                     <GridViewColumn Header="Комментарий">
                     <GridViewColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Path = Comment}"/>
+                                <TextBlock TextWrapping="Wrap" Text="{Binding Path = Comment}"/>
                         </DataTemplate>
                     </GridViewColumn.CellTemplate>
                 </GridViewColumn>
                     <GridViewColumn Header="Статус">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Path = Status}"/>
+                                <TextBlock TextWrapping="Wrap" Text="{Binding Path = Status}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
