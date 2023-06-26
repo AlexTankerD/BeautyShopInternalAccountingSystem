@@ -11,19 +11,19 @@ namespace BeautyShopInternalAccountingSystem.Models.RegularExpressions
     {
         public static bool IsNameValid(string name)
         {
-            if (string.IsNullOrEmpty(name))
+            if (string.IsNullOrEmpty(name) || name.Length > 50)
                 return false;
             return true;
         }
         public static bool IsDescriptionValid(string description)
         {
-            if (string.IsNullOrEmpty(description))
+            if (string.IsNullOrEmpty(description) || description.Length > 50)
                 return false;
             return true;
         }
         public static bool IsPriceValid(double? Price)
         {
-            if (string.IsNullOrEmpty(Price.ToString()) || !double.TryParse(Price.ToString(), out _))
+            if (string.IsNullOrEmpty(Price.ToString()) || !double.TryParse(Price.ToString(), out _) || Price > 10000000000)
                 return false;
             return true;
         }
@@ -35,7 +35,7 @@ namespace BeautyShopInternalAccountingSystem.Models.RegularExpressions
         }
         public static bool IsDurationValid(int? duration)
         {
-            if(string.IsNullOrEmpty(duration.ToString()) || !int.TryParse(duration.ToString(), out _))
+            if(string.IsNullOrEmpty(duration.ToString()) || !int.TryParse(duration.ToString(), out _) || duration > 10000000000)
                 return false;
             return true;
         }

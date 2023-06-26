@@ -10,6 +10,7 @@
       Title="EmployeeDataPage">
     <ui:Page.Resources>
         <local1:PathConverter x:Key="PathConverter"/>
+        <local1:ListToStringConverter x:Key="ListToStringConverter"/>
     </ui:Page.Resources>
     <Grid>
         <ScrollViewer VerticalScrollBarVisibility="Hidden">
@@ -75,7 +76,7 @@
                          Text="{Binding Path=Employee.PassportSeries, StringFormat='Серия паспорта: {0}'}"></TextBox>
                 <TextBox Margin="10" Height="60" IsReadOnly="True" HorizontalAlignment="Left" 
                          Width="700" Style="{StaticResource TextBoxStyle}" Grid.Row="13" 
-                         Text="{Binding Path=Employee.Services, StringFormat='Услуги: {0}'}"></TextBox>
+                         Text="{Binding Path=Employee.Services, Converter={StaticResource ListToStringConverter}, StringFormat='Услуги: {0}'}"></TextBox>
             </Grid>
         </ScrollViewer>
     </Grid>

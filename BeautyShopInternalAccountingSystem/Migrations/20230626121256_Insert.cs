@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -169,9 +168,11 @@ namespace BeautyShopInternalAccountingSystem.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ClientId = table.Column<int>(type: "int", nullable: false),
                     ServiceId = table.Column<int>(type: "int", nullable: false),
-                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Comment = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ServiceOrderImage = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    EmployeeId = table.Column<int>(type: "int", nullable: true),
+                    StartDate = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Comment = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ServiceOrderImage = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -182,6 +183,11 @@ namespace BeautyShopInternalAccountingSystem.Migrations
                         principalTable: "Clients",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ServiceOrders_Employees_EmployeeId",
+                        column: x => x.EmployeeId,
+                        principalTable: "Employees",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_ServiceOrders_Services_ServiceId",
                         column: x => x.ServiceId,
@@ -196,13 +202,20 @@ namespace BeautyShopInternalAccountingSystem.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    ClientId = table.Column<int>(type: "int", nullable: false),
                     ProductId = table.Column<int>(type: "int", nullable: false),
                     Count = table.Column<int>(type: "int", nullable: false),
-                    DateOfSale = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    DateOfSale = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ProductsSale", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProductsSale_Clients_ClientId",
+                        column: x => x.ClientId,
+                        principalTable: "Clients",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_ProductsSale_Products_ProductId",
                         column: x => x.ProductId,
@@ -222,6 +235,11 @@ namespace BeautyShopInternalAccountingSystem.Migrations
                 column: "ManufacturerId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ProductsSale_ClientId",
+                table: "ProductsSale",
+                column: "ClientId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ProductsSale_ProductId",
                 table: "ProductsSale",
                 column: "ProductId");
@@ -230,6 +248,11 @@ namespace BeautyShopInternalAccountingSystem.Migrations
                 name: "IX_ServiceOrders_ClientId",
                 table: "ServiceOrders",
                 column: "ClientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ServiceOrders_EmployeeId",
+                table: "ServiceOrders",
+                column: "EmployeeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ServiceOrders_ServiceId",
@@ -253,13 +276,13 @@ namespace BeautyShopInternalAccountingSystem.Migrations
                 name: "ServiceOrders");
 
             migrationBuilder.DropTable(
-                name: "Employees");
-
-            migrationBuilder.DropTable(
                 name: "Products");
 
             migrationBuilder.DropTable(
                 name: "Clients");
+
+            migrationBuilder.DropTable(
+                name: "Employees");
 
             migrationBuilder.DropTable(
                 name: "Services");

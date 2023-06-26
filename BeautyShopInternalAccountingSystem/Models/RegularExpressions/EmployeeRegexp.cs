@@ -12,7 +12,7 @@ namespace BeautyShopInternalAccountingSystem.Models.RegularExpressions
     {
         public static bool IsPasswordValid(string Password)
         {
-            if (string.IsNullOrEmpty(Password) || Password.Length < 10)
+            if (string.IsNullOrEmpty(Password) || Password.Length < 10 || Password.Length > 50)
                 return false;
             return true;
         }
@@ -54,7 +54,7 @@ namespace BeautyShopInternalAccountingSystem.Models.RegularExpressions
         }
         public static bool IsBirthdayValid(string Birthday)
         {
-            if (!DateOnly.TryParse(Birthday, out _))
+            if (!DateOnly.TryParse(Birthday, out _) || DateTime.Parse(Birthday) > DateTime.Now)
                 return false;
             return true;
         }
@@ -66,7 +66,7 @@ namespace BeautyShopInternalAccountingSystem.Models.RegularExpressions
         }
         public static bool IsSellaryRatioValid(double? sellaryratio)
         {
-            if(string.IsNullOrEmpty(sellaryratio.ToString()) || !double.TryParse(sellaryratio.ToString(), out _) || sellaryratio > 1000000000.00)
+            if(string.IsNullOrEmpty(sellaryratio.ToString()) || !double.TryParse(sellaryratio.ToString(), out _) || sellaryratio > 100)
                 return false;
             return true;
         }
@@ -78,13 +78,13 @@ namespace BeautyShopInternalAccountingSystem.Models.RegularExpressions
         }
         public static bool IsPassportNumberValid(string PassportNumber)
         {
-            if(string.IsNullOrEmpty(PassportNumber) || !Regex.IsMatch(PassportNumber,@"\d{6}"))
+            if(string.IsNullOrEmpty(PassportNumber) || !Regex.IsMatch(PassportNumber,@"^\d{6}$"))
                 return false;
             return true;
         }
         public static bool IsPassportSeriesValid(string PassportSeries)
         {
-            if (string.IsNullOrEmpty(PassportSeries) || !Regex.IsMatch(PassportSeries, @"\d{4}"))
+            if (string.IsNullOrEmpty(PassportSeries) || !Regex.IsMatch(PassportSeries, @"^\d{4}$"))
                 return false;
             return true;
         }

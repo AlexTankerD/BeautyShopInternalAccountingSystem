@@ -60,7 +60,6 @@ namespace BeautyShopInternalAccountingSystem.Models.DataWorkers
                     {
                         db.Services.Entry(service).State = Microsoft.EntityFrameworkCore.EntityState.Unchanged;
                     }
-                    employee.Services= Services;
                     db.Employees.Add(employee);
                     db.SaveChanges();
                     return true;
@@ -128,6 +127,15 @@ namespace BeautyShopInternalAccountingSystem.Models.DataWorkers
                 
                 return employees;
                 
+            }
+        }
+        public static Employee GetEmployeeServices(Employee Employee)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                var employees = new ObservableCollection<Employee>(db.Employees.Include(x => x.Services).ToList());
+                var employee = employees.Where(x => x.Id == Employee.Id).FirstOrDefault();
+                return employee;
             }
         }
     }

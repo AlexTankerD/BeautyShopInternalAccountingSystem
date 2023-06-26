@@ -340,7 +340,7 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
-                ClientWindow clientwindow = new ClientWindow(new ClientViewModel() { Client = obj as Client });
+                ClientWindow clientwindow = new ClientWindow(new ClientViewModel(obj as Client));
                 clientwindow.Show();
             });
 
@@ -349,7 +349,7 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
-                EmployeeWindow employeewindow = new EmployeeWindow(new EmployeeViewModel() { Employee = obj as Employee });
+                EmployeeWindow employeewindow = new EmployeeWindow(new EmployeeViewModel(obj as Employee));
                 employeewindow.Show();
             });
 

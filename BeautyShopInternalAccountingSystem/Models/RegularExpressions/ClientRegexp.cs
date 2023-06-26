@@ -14,7 +14,7 @@ namespace BeautyShopInternalAccountingSystem.Models.RegularExpressions
     {
         public static bool IsPasswordValid(string Password)
         {
-            if (string.IsNullOrEmpty(Password) || Password.Length < 10)
+            if (string.IsNullOrEmpty(Password) || Password.Length < 10 || Password.Length > 50)
                 return false;
             return true;
         }
@@ -62,7 +62,7 @@ namespace BeautyShopInternalAccountingSystem.Models.RegularExpressions
         }
         public static bool IsBirthdayValid(string Birthday)
         {
-            if (!DateOnly.TryParse(Birthday, out _))
+            if (!DateOnly.TryParse(Birthday, out _) || DateTime.Parse(Birthday) > DateTime.Now)
                 return false;
             return true;
         }

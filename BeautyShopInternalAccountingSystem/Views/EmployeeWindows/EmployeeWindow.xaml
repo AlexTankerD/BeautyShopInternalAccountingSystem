@@ -17,9 +17,9 @@
         <Button Command="{Binding OpenEmployeeDataPageCommand}" CommandParameter="{Binding ElementName=MainFrame}" 
                 FontSize="11" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Left"  
                 Margin="180,0,0,0" Height="40" Width="150" Grid.Row="1">Пользовательские данные</Button>
-        <Button Command="{Binding OpenProductsPageCommand}" CommandParameter="{Binding ElementName=MainFrame}" 
+        <Button Command="{Binding OpenServiceOrdersPageCommand}" CommandParameter="{Binding ElementName=MainFrame}" 
                 HorizontalAlignment="Left" Style="{StaticResource ButtonStyle}" 
-                Margin="10,0,0,0" Height="40" Width="150" Grid.Row="1">Продукты</Button>
+                Margin="10,0,0,0" Height="40" Width="150" Grid.Row="1">Заказы на услугу</Button>
         <Frame NavigationUIVisibility="Hidden" Grid.Row="0" x:Name="MainFrame"></Frame>
     </Grid>
 

@@ -11,13 +11,22 @@ namespace BeautyShopInternalAccountingSystem.Models.DataWorkers
 {
     public static class ServiceOrderDataWorker
     {
-        public static ObservableCollection<ServiceOrder> GetServiceOrders()
+        public static ObservableCollection<ServiceOrder> GetServiceOrdersForClient(Client Client)
         {
-            using(ApplicationContext db = new ApplicationContext())
+            using (ApplicationContext db = new ApplicationContext())
             {
-                return new ObservableCollection<ServiceOrder>(db.ServiceOrders.Include(x => x.Service).Include(x => x.Client).ToList());
+                return new ObservableCollection<ServiceOrder>(db.ServiceOrders.Include(x => x.Service).Include(x => x.Client).Where(x=> x.Client == Client && x.Status == null).ToList());
             }
-            
+        }
+        public static ObservableCollection<ServiceOrder> GetServiceOrdersForEmployee(Employee employee)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                var list = new ObservableCollection<ServiceOrder>(db.ServiceOrders.Include(x => x.Service).Include(x => x.Client)
+                    .Include(x => x.Service.Employees).Where(x => x.Employee != employee && x.Service.Employees.Any(x => x == employee) && x.Status != "Confirmed").ToList());
+                return list;
+            }
+
         }
         public static bool OrderService(Client Client, Service SelectedService, string StartDate, string Comment)
         {
@@ -35,6 +44,30 @@ namespace BeautyShopInternalAccountingSystem.Models.DataWorkers
                     db.SaveChanges();
                     return true;
                 }
+            }
+        }
+        public static bool ConfirmOrder(ServiceOrder ServiceOrder, Employee Employee)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                db.Employees.Entry(Employee).State = EntityState.Unchanged;
+                ServiceOrder serviceorder = db.ServiceOrders.Where(x => x == ServiceOrder).FirstOrDefault();
+                serviceorder.Employee = Employee;
+                serviceorder.Status = "Confirmed";
+                db.SaveChanges();
+                return true;
+            }
+        }
+        public static bool RejectOrder(ServiceOrder ServiceOrder, Employee Employee)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                db.Employees.Entry(Employee).State = EntityState.Unchanged;
+                ServiceOrder serviceorder = db.ServiceOrders.Where(x => x == ServiceOrder).FirstOrDefault();
+                serviceorder.Employee = Employee;
+                serviceorder.Status = "Rejected";
+                db.SaveChanges();
+                return true;
             }
         }
         public static bool DeleteServiceOrder(ServiceOrder SelectedServiceOrder)

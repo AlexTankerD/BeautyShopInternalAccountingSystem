@@ -10,55 +10,55 @@ namespace BeautyShopInternalAccountingSystem.Models.RegularExpressions
     {
         public static bool IsNameValid(string Name)
         {
-            if(string.IsNullOrEmpty(Name)) 
+            if(string.IsNullOrEmpty(Name) || Name.Length > 50) 
                 return false;
             return true;
         }
         public static bool IsCategoryValid(string Category)
         {
-            if(string.IsNullOrEmpty (Category))
+            if(string.IsNullOrEmpty (Category) || Category.Length > 50)
                 return false;
             return true;
         }
         public static bool IsPriceValid(double? Price)
         {
-            if(string.IsNullOrEmpty(Price.ToString()) || !double.TryParse(Price.ToString(), out _) || Price < 0)
+            if(string.IsNullOrEmpty(Price.ToString()) || !double.TryParse(Price.ToString(), out _) || Price < 0 || Price > 10000000000)
                 return false;
             return true;
         }
         public static bool IsSpecificationsValid(string Specifications)
         {
-            if (string.IsNullOrEmpty(Specifications))
+            if (string.IsNullOrEmpty(Specifications) || Specifications.Length > 50)
                 return false;
             return true;
         }
         public static bool IsDescriptionValid(string Description)
         {
-            if(string.IsNullOrEmpty(Description))
+            if(string.IsNullOrEmpty(Description) || Description.Length > 50)
                 return false;
             return true;
         }
         public static bool IsWeightValid(double? Weight)
         {
-            if(string.IsNullOrEmpty(Weight.ToString()) || !double.TryParse(Weight.ToString(), out _)) 
+            if(string.IsNullOrEmpty(Weight.ToString()) || !double.TryParse(Weight.ToString(), out _) || Weight > 10000000000) 
                 return false;
             return true;
         }
         public static bool IsHeightValid(double? Height)
         {
-            if (string.IsNullOrEmpty(Height.ToString()) || !double.TryParse(Height.ToString(), out _))
+            if (string.IsNullOrEmpty(Height.ToString()) || !double.TryParse(Height.ToString(), out _) || Height > 10000000000)
                 return false;
             return true;
         }
         public static bool IsWidthValid(double? Width)
         {
-            if (string.IsNullOrEmpty(Width.ToString()) || !double.TryParse(Width.ToString(), out _))
+            if (string.IsNullOrEmpty(Width.ToString()) || !double.TryParse(Width.ToString(), out _) || Width > 10000000000)
                 return false;
             return true;
         }
         public static bool IsLengthValid(double? Length)
         {
-            if (string.IsNullOrEmpty(Length.ToString()) || !double.TryParse(Length.ToString(), out _))
+            if (string.IsNullOrEmpty(Length.ToString()) || !double.TryParse(Length.ToString(), out _) || Length > 10000000000)
                 return false;
             return true;
         }

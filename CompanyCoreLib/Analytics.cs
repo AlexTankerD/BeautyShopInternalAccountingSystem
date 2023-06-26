@@ -4,11 +4,11 @@ namespace CompanyCoreLib
 {
     public class Analytics
     {
-        public List<DateTime> PopularMonths(List<DateTime> purchaseDates)
+        public List<DateTime> PopularMonths(List<DateTime> Dates)
         {
             Dictionary<DateTime, int> monthCounts = new Dictionary<DateTime, int>();
 
-            foreach (DateTime date in purchaseDates)
+            foreach (DateTime date in Dates)
             {
                 DateTime month = new DateTime(date.Year, date.Month, 1);
                 if (monthCounts.ContainsKey(month))

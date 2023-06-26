@@ -24,6 +24,11 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
 {
     public class ClientViewModel : INotifyPropertyChanged
     {
+        public ClientViewModel(Client Client) 
+        {
+            this.Client = Client;
+            AllServiceOrders = ServiceOrderDataWorker.GetServiceOrdersForClient(Client);
+        }
         #region Поля клиента
         public string Username { get; set; }
         public string Name { get; set; }
@@ -57,7 +62,8 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
         #region Все услуги и продукты
         public ObservableCollection<Service> AllServices = ServiceDataWorker.GetServicesForClient();
         public ObservableCollection<Product> AllProducts = ProductDataWorker.GetProducts();
-        public ObservableCollection<ServiceOrder> AllServiceOrders = ServiceOrderDataWorker.GetServiceOrders();
+        public ObservableCollection<ServiceOrder> AllServiceOrders;
+        public ObservableCollection<Product> AllProductsInCart;
         #endregion
 
         #region Поиск услуг, товаров, заказов 
@@ -70,7 +76,7 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
             }
             set
             { 
-                _searchproducttext = value;
+                _searchservicetext = value;
                 OnPropertyChanged("FilteredServices");
             }
         }
@@ -110,6 +116,32 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
                     return SearchName;
                 }
                 else { return AllProducts; }
+
+            }
+        }
+        private string _searchproductcarttext;
+        public string SearchProductCartText
+        {
+            get
+            {
+                return _searchproductcarttext;
+            }
+            set
+            {
+                _searchproductcarttext = value;
+                OnPropertyChanged("FilteredProductCart");
+            }
+        }
+        public IEnumerable<Product> FilteredProductCart
+        {
+            get
+            {
+                if (SearchProductCartText != null)
+                {
+                    var SearchName = AllProductsInCart.Where(x => x.Name.ToUpper().StartsWith(SearchProductText.ToUpper()));
+                    return SearchName;
+                }
+                else { return AllProductsInCart; }
 
             }
         }
@@ -281,7 +313,7 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
             }
             else
             {
-                OpenMessageWindow("Пользователь с таким именем пользователя, Email или номером телефона уже существует");
+                OpenMessageWindow("На данную услугу уже назначено это время");
                 return;
             }
         }
@@ -320,15 +352,75 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
         }
         public void UpdateClientServiceOrdersPage()
         {
+            AllServiceOrders = ServiceOrderDataWorker.GetServiceOrdersForClient(Client);
             Application.Current.Dispatcher.Invoke(() =>
             {
-                AllServiceOrders = ServiceOrderDataWorker.GetServiceOrders();
                 if (ClientServiceOrdersPage.ListServiceOrdersBox == null)
                     return;
                 ClientServiceOrdersPage.ListServiceOrdersBox.ItemsSource = null;
                 ClientServiceOrdersPage.ListServiceOrdersBox.Items.Clear();
                 ClientServiceOrdersPage.ListServiceOrdersBox.ItemsSource = FilteredServiceOrders;
             });
+        }
+        #endregion
+
+        #region Команды добавления продуктов в корзину, оформление заказа
+        private AsyncRelayCommand _addproducttocartcommand;
+        public AsyncRelayCommand AddProductToCartCommand
+        {
+            get
+            {
+                return _addproducttocartcommand ?? new AsyncRelayCommand(async (obj) =>
+                {
+                    if(SelectedProduct == null)
+                    {
+                        OpenMessageWindow("Не выбран продукт");
+                        return;
+                    }
+                    await Task.Run(() => AddProductToCartCommandMethod());
+                }
+                );
+            }
+        }
+        private void AddProductToCartCommandMethod()
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                if (AllProductsInCart == null)
+                    AllProductsInCart = new ObservableCollection<Product>();
+                AllProductsInCart.Add(SelectedProduct);
+                OpenMessageWindow("Продукт успешно добавлен в корзину");
+                return;
+            });
+        }
+
+        private AsyncRelayCommand _orderproductscommand;
+        public AsyncRelayCommand OrderProductsCommand
+        {
+            get
+            {
+                return _orderproductscommand ?? new AsyncRelayCommand(async (obj) =>
+                {
+                    if (AllProductsInCart == null)
+                    {
+                        OpenMessageWindow("В коризне нету товаров");
+                        return;
+                    }
+                    await Task.Run(() => OrderProductsCommandMethod());
+                }
+                );
+            }
+        }
+        private void OrderProductsCommandMethod()
+        {
+            ProductSaleDataWorker.AddProductSale(AllProductsInCart, Client);
+            OpenMessageWindow("Заказ успешно оформлен");
+            
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                AllProductsInCart.Clear();
+            });
+            
         }
         #endregion
 
@@ -363,6 +455,19 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
                 {
                     Frame frame = obj as Frame;
                     await Task.Run(() => OpenProductsPage(frame));
+                });
+            }
+        }
+        private AsyncRelayCommand _openproductcartpagecommand;
+        public AsyncRelayCommand OpenProductCartPageCommand
+        {
+            get
+            {
+
+                return _openproductcartpagecommand ?? new AsyncRelayCommand(async (obj) =>
+                {
+                    Frame frame = obj as Frame;
+                    await Task.Run(() => OpenProductCartPage(frame));
                 });
             }
         }
@@ -442,6 +547,13 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
             Application.Current.Dispatcher.Invoke(() =>
             {
                 frame.Navigate(new ProductsPage(this));
+            });
+        }
+        private void OpenProductCartPage(Frame frame)
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                frame.Navigate(new ProductCartPage(this));
             });
         }
         private void OpenServicesPage(Frame frame)

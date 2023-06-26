@@ -77,7 +77,7 @@
                             <TextBlock Margin="5" TextWrapping="Wrap" FontSize="12" Grid.Row="0" Grid.Column="4"  
                                        Text="{Binding Path=Position, StringFormat='Позиция: {0}'}"></TextBlock>
                             <TextBlock Margin="5" TextWrapping="Wrap" FontSize="12" Grid.Row="1" Grid.Column="4"  
-                                       Text="{Binding Path=SellaryRatio, StringFormat='Коэффициент оплаты: {0}'}"></TextBlock>
+                                       Text="{Binding Path=SellaryRatio, StringFormat='Коэффициент оплаты: {0}%'}"></TextBlock>
                             <TextBlock Margin="5" TextWrapping="Wrap" FontSize="12" Grid.Row="2" Grid.Column="4"  
                                        Text="{Binding Path=PassportSeries, StringFormat='Номер паспорта: {0}'}"></TextBlock>
                             <TextBlock Margin="5" TextWrapping="Wrap" FontSize="12" Grid.Row="0" Grid.Column="5"  
