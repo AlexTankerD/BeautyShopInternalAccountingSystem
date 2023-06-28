@@ -8,7 +8,7 @@
       xmlns:local1="clr-namespace:BeautyShopInternalAccountingSystem.Models"
       mc:Ignorable="d" 
       d:DesignHeight="570" d:DesignWidth="1100"
-      Title="StatisticsPage" FontFamily="Tahoma" Background="{StaticResource MainBackground}">
+      Title="StatisticsPage" FontFamily="Tahoma">
 
     <Grid>
         <Grid.RowDefinitions>

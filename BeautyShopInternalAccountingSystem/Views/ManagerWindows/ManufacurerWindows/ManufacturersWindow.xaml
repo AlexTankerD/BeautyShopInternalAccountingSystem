@@ -12,11 +12,8 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBox Grid.Row="1" Margin="3" Text="{Binding SearchManufacturersText,UpdateSourceTrigger=PropertyChanged}" 
-                 ui:ControlHelper.PlaceholderText="Поиск: "  Style="{StaticResource TextBoxStyle}"/>
         <Button Command="{Binding OpenAddManufacturerWindowCommand}" 
                 HorizontalAlignment="Left" Style="{StaticResource ButtonStyle}" 
                 Margin="10,0,0,0" Height="40" Width="150" Grid.Row="0" FontSize="11">Добавить производителя</Button>
@@ -26,12 +23,12 @@
         <Button Command="{Binding DeleteManufacturerCommand}" 
                 HorizontalAlignment="Left" Style="{StaticResource ButtonStyle}" 
                 Margin="330,0,0,0" Height="40" Width="150" Grid.Row="0" FontSize="11">Удалить производителя</Button>
-        <ListBox Grid.Row="2" x:Name="ManufacturersListBox" ItemContainerStyle="{StaticResource ListBoxItemStyle}"
+        <ListBox Grid.Row="1" x:Name="ManufacturersListBox" ItemContainerStyle="{StaticResource ListBoxItemStyle}"
                  ItemsSource="{Binding FilteredManufacturers}" SelectedItem="{Binding SelectedManufacturer}" >
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Border Padding="5" Background="{StaticResource AdditionalBackground}" CornerRadius="3" x:Name="border" Width="400"
-                            BorderThickness="3" Margin="10" BorderBrush="Black">
+                    <Border Padding="5" Background="{StaticResource AdditionalBackground}" CornerRadius="10" x:Name="border" Width="400"
+                            Margin="10">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition />

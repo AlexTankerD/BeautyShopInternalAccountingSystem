@@ -7,7 +7,7 @@
       xmlns:local="clr-namespace:BeautyShopInternalAccountingSystem.Views.ManagerWindows" xmlns:local1="clr-namespace:BeautyShopInternalAccountingSystem.Models"
          mc:Ignorable="d" 
       d:DesignHeight="570" d:DesignWidth="1100"
-      Title="ClientsPage" FontFamily="Tahoma" Background="{StaticResource MainBackground}">
+      Title="ClientsPage" FontFamily="Tahoma" >
     <ui:Page.Resources>
         <local1:PathConverter x:Key="PathConverter"/>
         <local1:StringToColorConverter x:Key="StringToColorConverter"/>
@@ -26,12 +26,12 @@
                 Margin="170,0,0,0" Height="40" Width="150" Grid.Row="0">Удалить тег</Button>
         <TextBox Grid.Row="1" Margin="3" Text="{Binding SearchClientsText,UpdateSourceTrigger=PropertyChanged}" 
                  ui:ControlHelper.PlaceholderText="Поиск: "  Style="{StaticResource TextBoxStyle}"/>
-        <ListBox x:Name="ClientsListBox"  Grid.Row="2" ItemContainerStyle="{StaticResource ListBoxItemStyle}"
+        <ListBox Background="Transparent"  x:Name="ClientsListBox"  Grid.Row="2" ItemContainerStyle="{StaticResource ListBoxItemStyle}"
                  ItemsSource="{Binding FilteredClients}" SelectedItem="{Binding SelectedClient}" >
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Border Padding="5" Background="{StaticResource AdditionalBackground}" CornerRadius="3" x:Name="border"  Width="1060"
-                            BorderThickness="5" Margin="10" BorderBrush="Black">
+                    <Border Padding="5" Background="{StaticResource AdditionalBackground}" CornerRadius="10" x:Name="border"  Width="1160"
+                            Margin="10" >
                         <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="50"/>
@@ -45,10 +45,12 @@
                             <ColumnDefinition Width="212"/>
                             <ColumnDefinition Width="212"/>
                         </Grid.ColumnDefinitions>
-                        <Border Background="{StaticResource MainBackground}" Grid.RowSpan="3" Grid.Column="0"
+                            <Border Background="{StaticResource MainBackground}" Grid.RowSpan="3" Grid.Column="0"
                                     Height="130" Width="130"
-                                    CornerRadius="3" BorderThickness="5" BorderBrush="{Binding Path=TagColor,Converter={StaticResource StringToColorConverter}}">
-                            <Image HorizontalAlignment="Center" Width="{Binding RelativeSource={RelativeSource FindAncestor, 
+                                    CornerRadius="10" 
+                                    BorderBrush="{Binding Path=TagColor,Converter={StaticResource StringToColorConverter}}"
+                                    BorderThickness="4">
+                                <Image HorizontalAlignment="Center" Width="{Binding RelativeSource={RelativeSource FindAncestor, 
                                 AncestorType={x:Type Border}},Path=ActualWidth}" Height="{Binding RelativeSource={RelativeSource FindAncestor, 
                                 AncestorType={x:Type Border}},Path=ActualHeight}" Source="{Binding Path=ClientImageDirectory, Converter={StaticResource PathConverter}}"></Image>
                         </Border>

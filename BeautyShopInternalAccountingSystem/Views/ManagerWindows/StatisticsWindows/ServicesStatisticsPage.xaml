@@ -8,7 +8,7 @@
       xmlns:local1="clr-namespace:BeautyShopInternalAccountingSystem.Models"
       mc:Ignorable="d" 
       d:DesignHeight="520" d:DesignWidth="1100"
-      Title="ServiceStatisticsPage" FontFamily="Tahoma" Background="{StaticResource MainBackground}">
+      Title="ServiceStatisticsPage" FontFamily="Tahoma">
     <ui:Page.Resources>
         <local1:PathConverter x:Key="PathConverter"/>
     </ui:Page.Resources>

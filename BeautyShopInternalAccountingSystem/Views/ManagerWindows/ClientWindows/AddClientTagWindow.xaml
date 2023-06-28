@@ -7,29 +7,40 @@
         xmlns:local="clr-namespace:BeautyShopInternalAccountingSystem.Views.ManagerWindows.ClientWindows"
         mc:Ignorable="d"
         Title="Добавить тег" FontFamily="Tahoma" ResizeMode="NoResize" 
-        ui:WindowHelper.UseModernWindowStyle="True" Height="250" Width="400" 
+        Height="350" Width="500" WindowStyle="None" AllowsTransparency="True" Background="Transparent"
         WindowStartupLocation="CenterScreen" x:Name="addclienttagwnd">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <TextBox Grid.Row="0" Height="30" Width="250" TextWrapping="Wrap" Text="{Binding ClientTag}"  
+    <Border BorderThickness="2" BorderBrush="Black" CornerRadius="20" Background="{StaticResource MainBackground}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Border Margin="10" Height="40" HorizontalAlignment="Left" Width="40" CornerRadius="21">
+                <Image Source="/Resources/Logo/beauty_logo.png"/>
+            </Border>
+            <Button Grid.Row="0" Height="40" Width="40" x:Name="Exitbtn" Margin="10" HorizontalAlignment="Right" Background="Transparent" Click="Exitbtn_Click">
+                <Button.Content>
+                    <Image Source="/Resources/ThemeImages/close.png"/>
+                </Button.Content>
+            </Button>
+            <TextBox Grid.Row="1" Height="40" Width="350" TextWrapping="Wrap" Text="{Binding ClientTag}"  
                  Style="{StaticResource TextBoxStyle}" ui:ControlHelper.PlaceholderText="Тег"></TextBox>
-        <ComboBox Grid.Row="1" x:Name="tagcolors" Height="30" Width="250" SelectedItem="{Binding ClientTagColor}" 
+            <ComboBox Grid.Row="2" x:Name="tagcolors" Height="40" Width="350" SelectedItem="{Binding ClientTagColor}" 
                   SelectedValuePath="{Binding Name}" HorizontalAlignment="Center" ui:ControlHelper.PlaceholderText="Цвет тега">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Ellipse HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="20" Fill="{Binding Name}">
-                        </Ellipse>
-                        <TextBlock VerticalAlignment="Center" Margin="40,0,0,0" Text="{Binding Name}"/>
-                    </Grid>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
-        <Button Grid.Row="2"  Style="{StaticResource ButtonStyle}" Command="{Binding AddClientTagCommand}" 
-                CommandParameter="{Binding ElementName=addclienttagwnd}" Height="30" Width="250" >Добавить тег</Button>
-    </Grid>
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Ellipse HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="20" Fill="{Binding Name}">
+                            </Ellipse>
+                            <TextBlock VerticalAlignment="Center" Margin="40,0,0,0" Text="{Binding Name}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <Button Grid.Row="3"  Style="{StaticResource ButtonStyle}" Command="{Binding AddClientTagCommand}" 
+                CommandParameter="{Binding ElementName=addclienttagwnd}" Height="40" Width="350" >Добавить тег</Button>
+        </Grid>
+        </Border>
 </Window>

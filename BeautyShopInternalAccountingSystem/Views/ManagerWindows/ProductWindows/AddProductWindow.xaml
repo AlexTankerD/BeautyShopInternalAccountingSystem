@@ -8,65 +8,79 @@
         xmlns:local="clr-namespace:BeautyShopInternalAccountingSystem.Views.ManagerWindows" xmlns:vm="clr-namespace:BeautyShopInternalAccountingSystem.ViewModels"
         mc:Ignorable="d"
         Title="Добавить продукт" FontFamily="Tahoma" ResizeMode="NoResize" 
-        ui:WindowHelper.UseModernWindowStyle="True" Height="600" Width="600" 
-        WindowStartupLocation="CenterScreen" x:Name="addproductwnd">
-    <Grid>
-        <ScrollViewer VerticalScrollBarVisibility="Hidden">
+        Height="700" Width="700" 
+        WindowStartupLocation="CenterScreen" WindowStyle="None" Background="Transparent"  AllowsTransparency="True" x:Name="addproductwnd">
+    <Border BorderThickness="2" BorderBrush="Black" CornerRadius="20" Background="{StaticResource MainBackground}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Border Margin="10" Height="40" HorizontalAlignment="Left" Width="40" CornerRadius="21">
+                <Image Source="/Resources/Logo/beauty_logo.png"/>
+            </Border>
+            <Button Grid.Row="0" Height="40" Width="40" x:Name="Exitbtn" Margin="10" HorizontalAlignment="Right" Background="Transparent" Click="Exitbtn_Click">
+                <Button.Content>
+                    <Image Source="/Resources/ThemeImages/close.png"/>
+                </Button.Content>
+            </Button>
+            <ScrollViewer Grid.Row="1"  VerticalScrollBarVisibility="Hidden">
             <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <Border CornerRadius="3" BorderThickness="2" BorderBrush="{StaticResource BlackColor}" Margin="10"  
-                    Width="200" HorizontalAlignment="Left" Grid.Row="0" Grid.RowSpan="3" Height="200">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Border CornerRadius="10" BorderThickness="2" BorderBrush="{StaticResource BlackColor}" Margin="10"  
+                    Width="250" HorizontalAlignment="Left" Grid.Row="0" Grid.RowSpan="3" Height="250">
                     <Image Width="{Binding RelativeSource={RelativeSource FindAncestor, 
                        AncestorType={x:Type Border}},Path=ActualWidth}" Height="{Binding RelativeSource={RelativeSource FindAncestor, 
                        AncestorType={x:Type Border}},Path=ActualHeight}" x:Name="ProductImage"></Image>
                 </Border>
                 <Button Command="{Binding AddProductImageCommand}" CommandParameter="{Binding ElementName=addproductwnd}" 
-                     Grid.Row="3" Height="50" Width="200" Margin="10" HorizontalAlignment="Left"  
+                     Grid.Row="3" Height="50" Width="250" Margin="10" HorizontalAlignment="Left"  
                      Style="{StaticResource ButtonStyle}">Добавить изображение</Button>
                 <TextBox HorizontalAlignment="Right" Grid.Row="0" Margin="10" Height="50" 
                      Text="{Binding ProductName}"  ui:ControlHelper.PlaceholderText="Название продукта" 
-                     Width="350" Style="{StaticResource TextBoxStyle}"></TextBox>
+                     Width="400" Style="{StaticResource TextBoxStyle}"></TextBox>
                 <TextBox HorizontalAlignment="Right" Grid.Row="1" Margin="10" Height="50" 
                      Text="{Binding ProductCategory}"  ui:ControlHelper.PlaceholderText="Категория" 
-                     Width="350" Style="{StaticResource TextBoxStyle}"></TextBox>
+                     Width="400" Style="{StaticResource TextBoxStyle}"></TextBox>
                 <TextBox HorizontalAlignment="Right" Grid.Row="2" Margin="10" Height="50" 
                      Text="{Binding ProductPrice}" ui:ControlHelper.PlaceholderText="Цена" 
-                     Width="350" Style="{StaticResource TextBoxStyle}"></TextBox>
+                     Width="400" Style="{StaticResource TextBoxStyle}"></TextBox>
                 <TextBox HorizontalAlignment="Right" Grid.Row="3" Margin="10" Height="50" 
                      Text="{Binding ProductSpecifications}" ui:ControlHelper.PlaceholderText="Характеристики"  
-                     Width="350" Style="{StaticResource TextBoxStyle}"></TextBox>
+                     Width="400" Style="{StaticResource TextBoxStyle}"></TextBox>
                 <TextBox HorizontalAlignment="Right" Grid.Row="4" Margin="10" Height="50" 
                      Text="{Binding ProductDescription}" ui:ControlHelper.PlaceholderText="Описание"  
-                     Width="350" Style="{StaticResource TextBoxStyle}"></TextBox>
+                     Width="400" Style="{StaticResource TextBoxStyle}"></TextBox>
                 <TextBox HorizontalAlignment="Right" Grid.Row="5" Margin="10" Height="50" 
                      Text="{Binding ProductWeight}"  ui:ControlHelper.PlaceholderText="Вес"  
-                     Width="350" Style="{StaticResource TextBoxStyle}"></TextBox>
+                     Width="400" Style="{StaticResource TextBoxStyle}"></TextBox>
                 <TextBox HorizontalAlignment="Right" Grid.Row="6" Margin="10" Height="50" 
                      Text="{Binding ProductHeight}" ui:ControlHelper.PlaceholderText="Высота"  
-                     Width="350" Style="{StaticResource TextBoxStyle}"></TextBox>
+                     Width="400" Style="{StaticResource TextBoxStyle}"></TextBox>
                 <TextBox HorizontalAlignment="Right" Grid.Row="7" Margin="10" Height="50" 
                      Text="{Binding ProductWidth}" ui:ControlHelper.PlaceholderText="Ширина"  
-                     Width="350" Style="{StaticResource TextBoxStyle}"></TextBox>
+                     Width="400" Style="{StaticResource TextBoxStyle}"></TextBox>
                 <TextBox HorizontalAlignment="Right" Grid.Row="8" Margin="10" Height="50" 
                      Text="{Binding ProductLength}" ui:ControlHelper.PlaceholderText="Длина"  
-                     Width="350" Style="{StaticResource TextBoxStyle}"></TextBox>
-                <ComboBox HorizontalAlignment="Right" ItemsSource="{Binding AllManufacturers}" Grid.Row="9" Margin="10" Height="50" 
+                     Width="400" Style="{StaticResource TextBoxStyle}"></TextBox>
+                <ComboBox HorizontalAlignment="Right" ItemsSource="{Binding AllManufacturers}" 
+                          Grid.Row="9" Margin="10" Height="50" 
                      ui:ControlHelper.PlaceholderText="Производитель"
                      SelectedItem="{Binding ProductManufacturer}"
-                     Width="350">
+                     Width="400">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel>
@@ -77,14 +91,15 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
                 <ComboBox FontFamily="Tahoma"  Margin="0,10,210,0" HorizontalAlignment="Right" Height="50" 
-                      Width="150" SelectedValue="{Binding ProductIsActive}" ui:ControlHelper.PlaceholderText="Активен" Grid.Row="10">
+                      Width="200" SelectedValue="{Binding ProductIsActive}" ui:ControlHelper.PlaceholderText="Активен" Grid.Row="10">
                     <sys:Boolean>True</sys:Boolean>
                     <sys:Boolean>False</sys:Boolean>
                 </ComboBox>
-                <Button Grid.Row="11" Height="50" Width="200" Margin="10" HorizontalAlignment="Center"  
+                <Button Grid.Row="11" Height="50" Width="250" Margin="12" HorizontalAlignment="Center"  
                     Style="{StaticResource ButtonStyle}"
                     Command="{Binding AddProductCommand}" CommandParameter="{Binding ElementName=addproductwnd}">Добавить продукт</Button>
             </Grid>
         </ScrollViewer>
     </Grid>
+    </Border>
 </Window>

@@ -7,12 +7,17 @@
     </SolidColorBrush>
     <SolidColorBrush x:Key="AdditionalBackground">
         <SolidColorBrush.Color>
-            <Color A="255" G="228" R="225" B="255"/>
+            <Color A="255" G="218" R="215" B="245"/>
         </SolidColorBrush.Color>
     </SolidColorBrush>
     <SolidColorBrush x:Key="AccentuatedAttention">
         <SolidColorBrush.Color>
             <Color A="255" G="74" R="255" B="109"/>
+        </SolidColorBrush.Color>
+    </SolidColorBrush>
+    <SolidColorBrush x:Key="AnotherAccentuatedAttention">
+        <SolidColorBrush.Color>
+            <Color A="255" G="118" R="246" B="142"/>
         </SolidColorBrush.Color>
     </SolidColorBrush>
     <SolidColorBrush x:Key="AccentuatedTransparentColor1">

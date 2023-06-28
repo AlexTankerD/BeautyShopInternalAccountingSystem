@@ -25,5 +25,10 @@ namespace BeautyShopInternalAccountingSystem.Views.ManagerWindows.ProductWindows
             InitializeComponent();
             DataContext = vm;
         }
+
+        private void Exitbtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

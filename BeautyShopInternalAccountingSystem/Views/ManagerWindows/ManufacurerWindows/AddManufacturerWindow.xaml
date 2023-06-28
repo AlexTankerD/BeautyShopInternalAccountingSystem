@@ -7,19 +7,31 @@
         xmlns:local="clr-namespace:BeautyShopInternalAccountingSystem.Views.ManagerWindows.ManufacturerWindows"
         mc:Ignorable="d"
         Title="Добавить производителя" FontFamily="Tahoma" ResizeMode="NoResize" 
-        ui:WindowHelper.UseModernWindowStyle="True" Height="300" Width="500" 
+        Height="400" Width="600" WindowStyle="None" AllowsTransparency="True" Background="Transparent"
         WindowStartupLocation="CenterScreen" x:Name="addmanufacturerwnd">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <TextBox Grid.Row="0" Height="50" Width="300" TextWrapping="Wrap" Text="{Binding ManufacturerName}"  
+    <Border BorderThickness="2" BorderBrush="Black"  CornerRadius="20" Background="{StaticResource MainBackground}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Border Margin="10" Height="40" HorizontalAlignment="Left" Width="40" CornerRadius="21">
+                <Image Source="/Resources/Logo/beauty_logo.png"/>
+            </Border>
+            <Button Grid.Row="0" Height="40" Width="40" x:Name="Exitbtn" Margin="10" HorizontalAlignment="Right" Background="Transparent" Click="Exitbtn_Click">
+                <Button.Content>
+                    <Image Source="/Resources/ThemeImages/close.png"/>
+                </Button.Content>
+            </Button>
+
+            <TextBox Grid.Row="1" Height="50" Width="350" TextWrapping="Wrap" Text="{Binding ManufacturerName}"  
                  Style="{StaticResource TextBoxStyle}" ui:ControlHelper.PlaceholderText="Название производителя"></TextBox>
-        <TextBox Grid.Row="1" Height="50" Width="300" TextWrapping="Wrap" Text="{Binding ManufacturerStartDate}"  
+            <TextBox Grid.Row="2" Height="50" Width="350" TextWrapping="Wrap" Text="{Binding ManufacturerStartDate}"  
                  Style="{StaticResource TextBoxStyle}" ui:ControlHelper.PlaceholderText="Дата открытия"></TextBox>
-        <Button Grid.Row="2"  Style="{StaticResource ButtonStyle}" Command="{Binding AddManufacturerCommand}" 
-                CommandParameter="{Binding ElementName=addmanufacturerwnd}" Height="40" Width="300" >Добавить производителя</Button>
-    </Grid>
+            <Button Grid.Row="3"  Style="{StaticResource ButtonStyle}" Command="{Binding AddManufacturerCommand}" 
+                CommandParameter="{Binding ElementName=addmanufacturerwnd}" Height="40" Width="350" >Добавить производителя</Button>
+        </Grid>
+    </Border>
 </Window>

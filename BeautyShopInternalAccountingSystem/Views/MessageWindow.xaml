@@ -6,14 +6,26 @@
         xmlns:local="clr-namespace:BeautyShopInternalAccountingSystem.Views"
         xmlns:ui="http://schemas.modernwpf.com/2019"
         mc:Ignorable="d"
-        Title="Сообщение" Height="200" FontFamily="Tahoma" Width="300" ui:WindowHelper.UseModernWindowStyle="True" 
+        Title="Сообщение" Height="300" FontFamily="Tahoma" Width="400" 
+        AllowsTransparency="True" WindowStyle="None" Background="Transparent"
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <TextBlock Padding="10" Grid.Row="0" HorizontalAlignment ="Center" VerticalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" Name="MessageText"/>
-        <Button Style="{StaticResource ButtonStyle}" Height="40" Grid.Row="1" HorizontalAlignment="Center" x:Name="okbtn" Click="okbtn_Click" Width="149">ОК</Button>
-    </Grid>
+    <Border BorderThickness="2" BorderBrush="Black" CornerRadius="20" Background="{StaticResource MainBackground}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Border Margin="10" Height="40" HorizontalAlignment="Left" Width="40" CornerRadius="21">
+                <Image Source="/Resources/Logo/beauty_logo.png"/>
+            </Border>
+            <Button Grid.Row="0" Height="40" Width="40" x:Name="Exitbtn" Margin="10" HorizontalAlignment="Right" Background="Transparent" Click="Exitbtn_Click">
+                <Button.Content>
+                    <Image Source="/Resources/ThemeImages/close.png"/>
+                </Button.Content>
+            </Button>
+            <TextBlock FontSize="20"  Padding="10" Grid.Row="1" HorizontalAlignment ="Center" VerticalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" Name="MessageText"/>
+            <Button Style="{StaticResource ButtonStyle}" Height="40" Grid.Row="2" HorizontalAlignment="Center" x:Name="okbtn" Click="okbtn_Click" Width="250">ОК</Button>
+        </Grid>
+    </Border>
 </Window>

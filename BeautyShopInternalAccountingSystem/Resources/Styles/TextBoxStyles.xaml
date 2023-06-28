@@ -7,11 +7,10 @@
             <Setter.Value>
                 <ControlTemplate x:Name="control" TargetType="{x:Type TextBox}">
                     <Border Name="border"
-                            BorderThickness="2"
-                            BorderBrush="{StaticResource BlackColor}"
-                            CornerRadius="3"
+                            CornerRadius="7"
                             Background="{StaticResource AdditionalBackground}">
-                        <TextBox FontFamily="Tahoma"  x:Name="box" Text="{Binding Path=Text,
+                        <TextBox FontFamily="Tahoma" ui:ControlHelper.CornerRadius="7" BorderBrush="{x:Null}"
+                                 x:Name="box" Text="{Binding Path=Text,
                                                 RelativeSource={RelativeSource TemplatedParent}, 
                                                 Mode=TwoWay,
                                                 UpdateSourceTrigger=PropertyChanged}" Background="Transparent" ui:ControlHelper.PlaceholderText="{TemplateBinding ui:ControlHelper.PlaceholderText}"/>
@@ -27,5 +26,48 @@
             </Setter.Value>
         </Setter>
     </Style>
+    <Style BasedOn="{StaticResource {x:Type TextBox}}" x:Key="SearchTextBoxStyle" TargetType="TextBox">
 
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate x:Name="control" TargetType="{x:Type TextBox}">
+                    <Border Name="border"
+                            BorderBrush="{x:Null}"
+                            CornerRadius="7"
+                            Background="{StaticResource AdditionalBackground}">
+                        <TextBox ui:ControlHelper.CornerRadius="7" BorderBrush="{x:Null}" FontFamily="Tahoma" x:Name="box" Text="{Binding Path=Text,
+                                                RelativeSource={RelativeSource TemplatedParent}, 
+                                                Mode=TwoWay,
+                                                UpdateSourceTrigger=PropertyChanged}" Background="Transparent" Foreground="Black" ui:ControlHelper.PlaceholderText="{TemplateBinding ui:ControlHelper.PlaceholderText}">
+                        </TextBox>
+
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <EventTrigger RoutedEvent="TextChanged">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0:0:0.2" Storyboard.TargetProperty="Width" To="930"></DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="MouseLeave">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0:0:0.2" Storyboard.TargetProperty="Width" To="300"></DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="{StaticResource AccentuatedAttention}"/>
+                            <Setter TargetName="box" Property="TextBox.Foreground" Value="{StaticResource MainBackground}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

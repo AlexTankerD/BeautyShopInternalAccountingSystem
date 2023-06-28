@@ -12,6 +12,10 @@
     <None Remove="DatabaseSettings.json" />
     <None Remove="Images\ClientImages\user.png" />
     <None Remove="Images\ServiceImages\servicedefaultimage.png" />
+    <None Remove="Resources\Logo\beauty_logo.png" />
+    <None Remove="Resources\ThemeImages\close.png" />
+    <None Remove="Resources\ThemeImages\list.png" />
+    <None Remove="Resources\ThemeImages\sign-out.png" />
     <None Remove="Товары салона красоты\1781670-1.jpg" />
     <None Remove="Resources\Logo\beauty_logo.ico" />
     <None Remove="Товары салона красоты\productdefaultimage.png" />
@@ -29,6 +33,18 @@
     </Content>
     <Content Include="Images\ServiceImages\servicedefaultimage.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Logo\beauty_logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\ThemeImages\close.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\ThemeImages\list.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\ThemeImages\sign-out.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Товары салона красоты\1781670-1.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

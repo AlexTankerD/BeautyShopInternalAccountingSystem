@@ -6,8 +6,7 @@
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border Name="btn"
                             BorderThickness="2"
-                            BorderBrush="{StaticResource BlackColor}"
-                            CornerRadius="3"
+                            CornerRadius="7"
                             Background="{StaticResource AdditionalBackground}">
                         <ContentPresenter x:Name="content"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>

@@ -26,5 +26,9 @@ namespace BeautyShopInternalAccountingSystem.Views.ManagerWindows.ClientWindows
             DataContext = vm;
             tagcolors.ItemsSource = typeof(Colors).GetProperties();
         }
+        private void Exitbtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

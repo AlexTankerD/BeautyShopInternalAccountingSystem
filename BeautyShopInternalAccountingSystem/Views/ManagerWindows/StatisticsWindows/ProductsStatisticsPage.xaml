@@ -7,7 +7,7 @@
       xmlns:local="clr-namespace:BeautyShopInternalAccountingSystem.Views.ManagerWindows.StatisticsWindows"
       mc:Ignorable="d" 
       d:DesignHeight="520" d:DesignWidth="1100"
-      Title="ProductsStatisticsPage" FontFamily="Tahoma" Background="{StaticResource MainBackground}">
+      Title="ProductsStatisticsPage" FontFamily="Tahoma">
     <ListView ItemsSource="{Binding AllProductsSales}">
         <ListView.View>
             <GridView>

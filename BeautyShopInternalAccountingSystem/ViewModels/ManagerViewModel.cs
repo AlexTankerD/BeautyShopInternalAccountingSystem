@@ -153,131 +153,87 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
         #endregion
 
         #region Поиск товаров, услуг, работников, клиентов
-        private string _searchproductstext;
-        public string SearchProductsText
+        private string _searchtext;
+        public string SearchText
         {
             get
             {
-                return _searchproductstext;
+                return _searchtext;
             }
             set
             {
-                _searchproductstext = value;
+                _searchtext = value;
                 OnPropertyChanged("FilteredProducts");
+                OnPropertyChanged("FilteredServices");
+                OnPropertyChanged("FilteredEmployees");
+                OnPropertyChanged("FilteredClients");
+                OnPropertyChanged("FilteredManufacturers");
             }
         }
         public IEnumerable<Product> FilteredProducts
         {
             get
             {
-                if (SearchProductsText != null)
+                if (SearchText != null)
                 {
-                    var SearchName = AllProducts.Where(x => x.Name.ToUpper().StartsWith(SearchProductsText.ToUpper()) ||
-                    x.Description.ToUpper().StartsWith(SearchProductsText.ToUpper()));
+                    var SearchName = AllProducts.Where(x => x.Name.ToUpper().StartsWith(SearchText.ToUpper()) ||
+                    x.Description.ToUpper().StartsWith(SearchText.ToUpper()));
                     return SearchName;
                 }
                 else { return AllProducts; }
 
             }
         }
-        private string _searchservicestext;
-        public string SearchServicesText
-        {
-            get
-            {
-                return _searchservicestext;
-            }
-            set
-            {
-                _searchservicestext = value;
-                OnPropertyChanged("FilteredServices");
-            }
-        }
         public IEnumerable<Service> FilteredServices
         {
             get
             {
-                if (SearchServicesText != null)
+                if (SearchText != null)
                 {
-                    var SearchName = AllServices.Where(x => x.Name.ToUpper().StartsWith(SearchServicesText.ToUpper()));
+                    var SearchName = AllServices.Where(x => x.Name.ToUpper().StartsWith(SearchText.ToUpper()) || x.Description.ToUpper().StartsWith(SearchText.ToUpper()));
                     return SearchName;
                 }
                 else { return AllServices; }
 
             }
         }
-        private string _searchemployeestext;
-        public string SearchEmployeesText
-        {
-            get
-            {
-                return _searchemployeestext;
-            }
-            set
-            {
-                _searchemployeestext = value;
-                OnPropertyChanged("FilteredEmployees");
-            }
-        }
         public IEnumerable<Employee> FilteredEmployees
         {
             get
             {
-                if (SearchEmployeesText != null)
+                if (SearchText != null)
                 {
-                    var SearchName = AllEmployees.Where(x => x.Name.ToUpper().StartsWith(SearchEmployeesText.ToUpper()));
+                    var SearchName = AllEmployees.Where(x => x.Name.ToUpper().StartsWith(SearchText.ToUpper()) || 
+                    x.Surname.ToUpper().StartsWith(SearchText.ToUpper()) ||
+                    x.Patronymic.ToUpper().StartsWith(SearchText.ToUpper()));
                     return SearchName;
                 }
                 else { return AllEmployees; }
 
             }
         }
-        private string _searchclientstext;
-        public string SearchClientsText
-        {
-            get
-            {
-                return _searchclientstext;
-            }
-            set
-            {
-                _searchclientstext = value;
-                OnPropertyChanged("FilteredClients");
-            }
-        }
         public IEnumerable<Client> FilteredClients
         {
             get
             {
-                if (SearchClientsText != null)
+                if (SearchText != null)
                 {
-                    var SearchName = AllClients.Where(x => x.Name.ToUpper().StartsWith(SearchClientsText.ToUpper()));
+                    var SearchName = AllClients.Where(x => x.Name.ToUpper().StartsWith(SearchText.ToUpper()) ||
+                    x.Surname.ToUpper().StartsWith(SearchText.ToUpper()) ||
+                    x.Patronymic.ToUpper().StartsWith(SearchText.ToUpper()));
                     return SearchName;
                 }
                 else { return AllClients; }
 
             }
         }
-        private string _searchmanufacturerstext;
-        public string SearchManufacturersText
-        {
-            get
-            {
-                return _searchmanufacturerstext;
-            }
-            set
-            {
-                _searchmanufacturerstext = value;
-                OnPropertyChanged("FilteredManufacturers");
-            }
-        }
         public IEnumerable<Manufacturer> FilteredManufacturers
         {
             get
             {
-                if (SearchManufacturersText != null)
+                if (SearchText != null)
                 {
-                    var SearchName = AllManufacturers.Where(x => x.Name.ToUpper().StartsWith(SearchManufacturersText.ToUpper()));
+                    var SearchName = AllManufacturers.Where(x => x.Name.ToUpper().StartsWith(SearchText.ToUpper()));
                     return SearchName;
                 }
                 else { return AllManufacturers; }
@@ -1139,6 +1095,11 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
         }
         public void DeleteManufacturerCommandMethod()
         {
+            if (SelectedManufacturer == null)
+            {
+                OpenMessageWindow("Производитель не выбран");
+                return;
+            }
             ManufacturerDataWorker.DeleteManufacturer(SelectedManufacturer);
             OpenMessageWindow("Производитель успешно удален");
             UpdateManufacturerWindow();
@@ -1414,6 +1375,11 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
 
                 return _openeditmanufacturerwindowcommand ?? new AsyncRelayCommand(async (obj) =>
                 {
+                    if (SelectedManufacturer == null)
+                    {
+                        OpenMessageWindow("Производитель не выбран");
+                        return;
+                    }
                     await Task.Run(() => OpenEditManufacturerWindow());
                 });
             }

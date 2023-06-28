@@ -8,111 +8,122 @@
         xmlns:local1="clr-namespace:BeautyShopInternalAccountingSystem.Models"
         mc:Ignorable="d"
         Title="Добавить услуги работнику" FontFamily="Tahoma" ResizeMode="NoResize" 
-        ui:WindowHelper.UseModernWindowStyle="True" Height="700" Width="900" 
+        WindowStyle="None" AllowsTransparency="True" Background="Transparent"  Height="800" Width="1000" 
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <local1:PathConverter x:Key="PathConverter"/>
     </Window.Resources>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="50"/>
+    <Border BorderThickness="2" BorderBrush="Black" CornerRadius="20" Background="{StaticResource MainBackground}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
-            <TextBox Grid.Row="0" Margin="3" Text="{Binding SearchServicesText,UpdateSourceTrigger=PropertyChanged}" 
+            <Border Margin="10" Height="40" HorizontalAlignment="Left" Width="40" CornerRadius="21">
+                <Image Source="/Resources/Logo/beauty_logo.png"/>
+            </Border>
+            <Button Grid.Row="0" Height="40" Width="40" x:Name="Exitbtn" Margin="10" HorizontalAlignment="Right" Background="Transparent" Click="Exitbtn_Click">
+                <Button.Content>
+                    <Image Source="/Resources/ThemeImages/close.png"/>
+                </Button.Content>
+            </Button>
+            <TextBox Grid.Row="1" Margin="3" Text="{Binding SearchServicesText,UpdateSourceTrigger=PropertyChanged}" 
                  ui:ControlHelper.PlaceholderText="Поиск: "  Style="{StaticResource TextBoxStyle}"/>
-        <Button Command="{Binding AddEmployeeServiceCommand}"  
+            <Button Command="{Binding AddEmployeeServiceCommand}"  
                 Style="{StaticResource ButtonStyle}" HorizontalAlignment="Left"  
-                Margin="10,0,0,0" Height="40" Width="150" Grid.Row="3">Добавить услугу</Button>
-        <TextBlock Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                Margin="10,0,0,0" Height="40" Width="200" Grid.Row="4">Добавить услугу</Button>
+            <TextBlock Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Center" 
                    Text="{Binding EmployeeServices.Count,StringFormat='Количество добавленных услуг: {0}'}"></TextBlock>
-        <Button Command="{Binding DeleteEmployeeServiceCommand}" 
+            <Button Command="{Binding DeleteEmployeeServiceCommand}" 
                 HorizontalAlignment="Right" Style="{StaticResource ButtonStyle}" 
-                Margin="0,0,10,0"  Height="40" Width="150" Grid.Row="3">Удалить услугу</Button>
-        
-        <ListBox Grid.Row="1" ItemContainerStyle="{StaticResource ListBoxItemStyle}"
+                Margin="0,0,10,0"  Height="40" Width="200" Grid.Row="4">Удалить услугу</Button>
+
+            <ListBox Grid.Row="2" ItemContainerStyle="{StaticResource ListBoxItemStyle}"
                  ItemsSource="{Binding FilteredServices}" SelectedItem="{Binding SelectedService}" >
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Border Padding="5" Background="{StaticResource AdditionalBackground}" CornerRadius="3" x:Name="border" Height="100" Width="860"
-                            BorderThickness="3" Margin="10" BorderBrush="Black">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition />
-                                <RowDefinition />
-                                <RowDefinition />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <Border Background="{StaticResource MainBackground}" Grid.RowSpan="3" Grid.Column="0"
-                                    Height="66" Width="66"
-                                    CornerRadius="3" BorderThickness="3" BorderBrush="Black">
-                                <Image Width="{Binding RelativeSource={RelativeSource FindAncestor, 
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border Padding="5" Background="{StaticResource AdditionalBackground}" CornerRadius="10" x:Name="border" Height="150" Width="960"
+                            Margin="10">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Border Background="{StaticResource MainBackground}" Grid.RowSpan="3" Grid.Column="0"
+                                    Height="116" Width="116"
+                                    CornerRadius="10" BorderThickness="3" BorderBrush="Black">
+                                    <Image Width="{Binding RelativeSource={RelativeSource FindAncestor, 
                                 AncestorType={x:Type Border}},Path=ActualWidth}" Height="{Binding RelativeSource={RelativeSource FindAncestor, 
                                 AncestorType={x:Type Border}},Path=ActualHeight}" Source="{Binding Path=ServiceImageDirectory, Converter={StaticResource PathConverter}}"></Image>
-                            </Border>
-                            <TextBlock Margin="3" TextWrapping="Wrap" FontSize="9" Grid.Row="0" Grid.Column="1"  
+                                </Border>
+                                <TextBlock Margin="3" TextWrapping="Wrap" FontSize="9" Grid.Row="0" Grid.Column="1"  
                                        Text="{Binding Path=Name, StringFormat='Название: {0}'}"></TextBlock>
-                            <TextBlock Margin="3" TextWrapping="Wrap" FontSize="9" Grid.Row="1" Grid.Column="1"  
+                                <TextBlock Margin="3" TextWrapping="Wrap" FontSize="9" Grid.Row="1" Grid.Column="1"  
                                        Text="{Binding Path=Description, StringFormat='Производитель: {0}'}"></TextBlock>
-                            <TextBlock Margin="3" TextWrapping="Wrap" FontSize="9" Grid.Row="2" Grid.Column="1"  
+                                <TextBlock Margin="3" TextWrapping="Wrap" FontSize="9" Grid.Row="2" Grid.Column="1"  
                                        Text="{Binding Path=Price, StringFormat='Цена: {0} рублей'}"></TextBlock>
-                            <TextBlock Margin="3" TextWrapping="Wrap" FontSize="9" Grid.Row="0" Grid.Column="2"  
+                                <TextBlock Margin="3" TextWrapping="Wrap" FontSize="9" Grid.Row="0" Grid.Column="2"  
                                        Text="{Binding Path=Discount, StringFormat='Скидка: {0}'}"></TextBlock>
-                            <TextBlock Margin="3" TextWrapping="Wrap" FontSize="9" Grid.Row="1" Grid.Column="2"  
+                                <TextBlock Margin="3" TextWrapping="Wrap" FontSize="9" Grid.Row="1" Grid.Column="2"  
                                        Text="{Binding Path=Duration, StringFormat='Продолжительность услуги: {0}'}"></TextBlock>
-                        </Grid>
-                    </Border>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-        <ListBox Grid.Row="2" x:Name="EmployeeServicesListBox"  ItemContainerStyle="{StaticResource ListBoxItemStyle}"
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <ListBox Grid.Row="3" x:Name="EmployeeServicesListBox"  ItemContainerStyle="{StaticResource ListBoxItemStyle}"
                  ItemsSource="{Binding EmployeeServices}" SelectedItem="{Binding SelectedEmployeeService}" >
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Border Padding="5" Background="{StaticResource AdditionalBackground}" CornerRadius="3" x:Name="border" Height="100" Width="860"
-                            BorderThickness="5" Margin="10" BorderBrush="Black">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition />
-                                <RowDefinition />
-                                <RowDefinition />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <Border Background="{StaticResource MainBackground}" Grid.RowSpan="3" Grid.Column="0"
-                                    Height="66" Width="66"
-                                    CornerRadius="3" BorderThickness="5" BorderBrush="Black">
-                                <Image Width="{Binding RelativeSource={RelativeSource FindAncestor, 
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border Padding="5" Background="{StaticResource AdditionalBackground}" CornerRadius="10" x:Name="border" Height="150" Width="960"
+                            Margin="10">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Border Background="{StaticResource MainBackground}" Grid.RowSpan="3" Grid.Column="0"
+                                    Height="116" Width="116"
+                                    CornerRadius="10" BorderThickness="5" BorderBrush="Black">
+                                    <Image Width="{Binding RelativeSource={RelativeSource FindAncestor, 
                                 AncestorType={x:Type Border}},Path=ActualWidth}" Height="{Binding RelativeSource={RelativeSource FindAncestor, 
                                 AncestorType={x:Type Border}},Path=ActualHeight}" Source="{Binding Path=ServiceImageDirectory, Converter={StaticResource PathConverter}}"></Image>
-                            </Border>
-                            <TextBlock Margin="3" TextWrapping="Wrap" FontSize="9" Grid.Row="0" Grid.Column="1"  
+                                </Border>
+                                <TextBlock Margin="3" TextWrapping="Wrap" FontSize="9" Grid.Row="0" Grid.Column="1"  
                                        Text="{Binding Path=Name, StringFormat='Название: {0}'}"></TextBlock>
-                            <TextBlock Margin="3" TextWrapping="Wrap" FontSize="9" Grid.Row="1" Grid.Column="1"  
+                                <TextBlock Margin="3" TextWrapping="Wrap" FontSize="9" Grid.Row="1" Grid.Column="1"  
                                        Text="{Binding Path=Description, StringFormat='Производитель: {0}'}"></TextBlock>
-                            <TextBlock Margin="3" TextWrapping="Wrap" FontSize="9" Grid.Row="2" Grid.Column="1"  
+                                <TextBlock Margin="3" TextWrapping="Wrap" FontSize="9" Grid.Row="2" Grid.Column="1"  
                                        Text="{Binding Path=Price, StringFormat='Цена: {0} рублей'}"></TextBlock>
-                            <TextBlock Margin="3" TextWrapping="Wrap" FontSize="9" Grid.Row="0" Grid.Column="2"  
+                                <TextBlock Margin="3" TextWrapping="Wrap" FontSize="9" Grid.Row="0" Grid.Column="2"  
                                        Text="{Binding Path=Discount, StringFormat='Скидка: {0}'}"></TextBlock>
-                            <TextBlock Margin="3" TextWrapping="Wrap" FontSize="9" Grid.Row="1" Grid.Column="2"  
+                                <TextBlock Margin="3" TextWrapping="Wrap" FontSize="9" Grid.Row="1" Grid.Column="2"  
                                        Text="{Binding Path=Duration, StringFormat='Продолжительность услуги: {0}'}"></TextBlock>
-                        </Grid>
-                    </Border>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-        <Line Y1="0" Y2="0" X1="0" X2="900" StrokeThickness="4" Grid.Row="2"  Stroke="Black"/>
-     </Grid>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Line Y1="0" Y2="0" X1="0" X2="900" StrokeThickness="4" Grid.Row="3"  Stroke="Black"/>
+        </Grid>
+    </Border>
 </Window>
