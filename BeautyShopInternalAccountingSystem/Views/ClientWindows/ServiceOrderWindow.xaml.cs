@@ -29,5 +29,32 @@ namespace BeautyShopInternalAccountingSystem.Views.ClientWindows
         {
             this.Close();
         }
+        private void Border_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                this.DragMove();
+            }
+        }
+        private bool IsMaximized = false;
+        private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ClickCount == 2)
+            {
+                if (IsMaximized)
+                {
+                    this.WindowState = WindowState.Normal;
+                    this.Width = 500;
+                    this.Height = 400;
+                    IsMaximized = false;
+                }
+                else
+                {
+                    this.WindowState = WindowState.Maximized;
+                    IsMaximized = true;
+
+                }
+            }
+        }
     }
 }

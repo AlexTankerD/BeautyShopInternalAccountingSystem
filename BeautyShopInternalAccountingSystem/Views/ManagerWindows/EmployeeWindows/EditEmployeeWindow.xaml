@@ -10,7 +10,7 @@
         Title="Изменить работника" FontFamily="Tahoma" ResizeMode="NoResize" 
         Height="700" Width="700" WindowStyle="None" AllowsTransparency="True" Background="Transparent"
         WindowStartupLocation="CenterScreen" x:Name="editemployeewnd" >
-    <Border BorderThickness="2" BorderBrush="Black" CornerRadius="20" Background="{StaticResource MainBackground}">
+    <Border BorderThickness="2" BorderBrush="Black" CornerRadius="20" Background="{StaticResource MainBackground}" MouseDown="Border_MouseDown" MouseLeftButtonDown="Border_MouseLeftButtonDown">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="60"/>

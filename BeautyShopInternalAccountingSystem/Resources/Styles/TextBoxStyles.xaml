@@ -7,9 +7,9 @@
             <Setter.Value>
                 <ControlTemplate x:Name="control" TargetType="{x:Type TextBox}">
                     <Border Name="border"
-                            CornerRadius="7"
+                            CornerRadius="15"
                             Background="{StaticResource AdditionalBackground}">
-                        <TextBox FontFamily="Tahoma" ui:ControlHelper.CornerRadius="7" BorderBrush="{x:Null}"
+                        <TextBox FontFamily="Tahoma" ui:ControlHelper.CornerRadius="15" BorderBrush="{x:Null}"
                                  x:Name="box" Text="{Binding Path=Text,
                                                 RelativeSource={RelativeSource TemplatedParent}, 
                                                 Mode=TwoWay,
@@ -33,9 +33,9 @@
                 <ControlTemplate x:Name="control" TargetType="{x:Type TextBox}">
                     <Border Name="border"
                             BorderBrush="{x:Null}"
-                            CornerRadius="7"
+                            CornerRadius="15"
                             Background="{StaticResource AdditionalBackground}">
-                        <TextBox ui:ControlHelper.CornerRadius="7" BorderBrush="{x:Null}" FontFamily="Tahoma" x:Name="box" Text="{Binding Path=Text,
+                        <TextBox ui:ControlHelper.CornerRadius="15" BorderBrush="{x:Null}" FontFamily="Tahoma" x:Name="box" Text="{Binding Path=Text,
                                                 RelativeSource={RelativeSource TemplatedParent}, 
                                                 Mode=TwoWay,
                                                 UpdateSourceTrigger=PropertyChanged}" Background="Transparent" Foreground="Black" ui:ControlHelper.PlaceholderText="{TemplateBinding ui:ControlHelper.PlaceholderText}">

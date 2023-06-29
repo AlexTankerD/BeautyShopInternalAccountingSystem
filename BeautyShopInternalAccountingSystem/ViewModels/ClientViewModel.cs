@@ -370,7 +370,7 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
             {
                 return _orderproductscommand ?? new AsyncRelayCommand(async (obj) =>
                 {
-                    if (AllProductsInCart == null)
+                    if (AllProductsInCart.Count == 0)
                     {
                         OpenMessageWindow("В коризне нету товаров");
                         return;

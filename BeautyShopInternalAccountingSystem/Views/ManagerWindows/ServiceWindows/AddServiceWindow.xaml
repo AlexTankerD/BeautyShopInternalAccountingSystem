@@ -9,7 +9,7 @@
         Title="Добавить услугу" FontFamily="Tahoma" ResizeMode="NoResize" 
         Height="550" Width="700" 
         WindowStartupLocation="CenterScreen" x:Name="addservicewnd" WindowStyle="None" AllowsTransparency="True" Background="Transparent">
-    <Border BorderThickness="2" BorderBrush="Black"  CornerRadius="20" Background="{StaticResource MainBackground}">
+    <Border BorderThickness="2" BorderBrush="Black"  CornerRadius="20" Background="{StaticResource MainBackground}" MouseDown="Border_MouseDown" PreviewMouseLeftButtonDown="Border_MouseLeftButtonDown">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="60"/>

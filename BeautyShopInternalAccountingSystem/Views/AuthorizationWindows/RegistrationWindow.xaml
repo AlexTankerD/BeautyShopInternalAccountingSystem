@@ -10,11 +10,11 @@
         mc:Ignorable="d"
         Title="Регистрация" WindowStyle="None" AllowsTransparency="True" Background="Transparent"  
         FontFamily="Tahoma" ResizeMode="NoResize" 
-        Height="700" Width="700" WindowStartupLocation="CenterScreen" x:Name="regwnd">
+        Height="700" Width="700" WindowStartupLocation="CenterScreen" x:Name="regwnd" >
     <Window.DataContext>
         <viewmodel:AuthorizationViewModel/>
     </Window.DataContext>
-    <Border BorderThickness="2" BorderBrush="Black" CornerRadius="20" Background="{StaticResource MainBackground}">
+    <Border BorderThickness="2" BorderBrush="Black" CornerRadius="20" Background="{StaticResource MainBackground}" MouseDown="Border_MouseDown" MouseLeftButtonDown="Border_MouseLeftButtonDown">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="60"/>

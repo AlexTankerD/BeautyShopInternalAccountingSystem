@@ -10,7 +10,7 @@
         Title="Приложение для клиента" FontFamily="Tahoma" Height="720" Width="1200" 
         WindowStartupLocation="CenterScreen"  
         ResizeMode="NoResize" WindowStyle="None" AllowsTransparency="True"  Background="Transparent" >
-    <Border BorderThickness="2" BorderBrush="Black" CornerRadius="20" Background="{StaticResource MainBackground}">
+    <Border BorderThickness="2" BorderBrush="Black" CornerRadius="20" Background="{StaticResource MainBackground}" MouseDown="Border_MouseDown" MouseLeftButtonDown="Border_MouseLeftButtonDown">
         <Grid x:Name="MainArea">
             <Grid.RowDefinitions>
                 <RowDefinition Height="90"></RowDefinition>
