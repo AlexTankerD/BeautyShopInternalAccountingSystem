@@ -49,7 +49,7 @@
                                     Height="130" Width="130"
                                     CornerRadius="10" 
                                     BorderBrush="{Binding Path=TagColor,Converter={StaticResource StringToColorConverter}}"
-                                    BorderThickness="4">
+                                    BorderThickness="3">
                                 <Image HorizontalAlignment="Center" Width="{Binding RelativeSource={RelativeSource FindAncestor, 
                                 AncestorType={x:Type Border}},Path=ActualWidth}" Height="{Binding RelativeSource={RelativeSource FindAncestor, 
                                 AncestorType={x:Type Border}},Path=ActualHeight}" Source="{Binding Path=ClientImageDirectory, Converter={StaticResource PathConverter}}"></Image>

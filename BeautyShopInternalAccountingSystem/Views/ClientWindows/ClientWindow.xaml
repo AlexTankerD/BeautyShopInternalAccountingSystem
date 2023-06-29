@@ -7,30 +7,76 @@
         xmlns:viewmodel="clr-namespace:BeautyShopInternalAccountingSystem.ViewModels"
         xmlns:local="clr-namespace:BeautyShopInternalAccountingSystem.Views.ClientWindows"
         mc:Ignorable="d"
-        Title="Приложение для клиента" FontFamily="Tahoma" Height="620" Width="1100" 
-        WindowStartupLocation="CenterScreen" ui:WindowHelper.UseModernWindowStyle="True" 
-        ResizeMode="NoResize" Background="{StaticResource MainBackground}" >
-    <Grid>
-        <Grid.RowDefinitions>
+        Title="Приложение для клиента" FontFamily="Tahoma" Height="720" Width="1200" 
+        WindowStartupLocation="CenterScreen"  
+        ResizeMode="NoResize" WindowStyle="None" AllowsTransparency="True"  Background="Transparent" >
+    <Border BorderThickness="2" BorderBrush="Black" CornerRadius="20" Background="{StaticResource MainBackground}">
+        <Grid x:Name="MainArea">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="90"></RowDefinition>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="50"/>
-        </Grid.RowDefinitions>
-        <Button Command="{Binding OpenClientDataPageCommand}" CommandParameter="{Binding ElementName=MainFrame}" 
-                FontSize="11" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Left"  
-                Margin="650,0,0,0" Height="40" Width="150" Grid.Row="1">Пользовательские данные</Button>
-        <Button Command="{Binding OpenClientServiceOrdersPageCommand}" CommandParameter="{Binding ElementName=MainFrame}" 
-                HorizontalAlignment="Left" Style="{StaticResource ButtonStyle}" 
-                Margin="170,0,0,0" Height="40" Width="150" Grid.Row="1">Заказы услуг</Button>
-        <Button Command="{Binding OpenProductCartPageCommand}" CommandParameter="{Binding ElementName=MainFrame}" 
-                HorizontalAlignment="Left" Style="{StaticResource ButtonStyle}" 
-                Margin="490,0,0,0" Height="40" Width="150" Grid.Row="1">Корзина</Button>
-        <Button Command="{Binding OpenServicesPageCommand}" CommandParameter="{Binding ElementName=MainFrame}" 
-                HorizontalAlignment="Left" Style="{StaticResource ButtonStyle}" 
-                Margin="10,0,0,0" Height="40" Width="150" Grid.Row="1">Список услуг</Button>
-        <Button Command="{Binding OpenProductsPageCommand}" CommandParameter="{Binding ElementName=MainFrame}" 
-                HorizontalAlignment="Left" Style="{StaticResource ButtonStyle}" 
-                Margin="330,0,0,0" Height="40" Width="150" Grid.Row="1">Список товаров</Button>
-        <Frame NavigationUIVisibility="Hidden" Grid.Row="0" x:Name="MainFrame"></Frame>
-    </Grid>
-    
+            </Grid.RowDefinitions>
+            <Button x:Name="Menubtn"  Margin="10" Background="Transparent" Click="Menubtn_Click">
+                <Button.Content>
+                    <Image Height="50" Width="50" Source="/Resources/ThemeImages/list.png"/>
+                </Button.Content>
+            </Button>
+            <TextBox x:Name="SearchTextBox" Grid.Row="0" Height="50" Margin="100,10,0,10" HorizontalAlignment="Left" Width="300" Text="{Binding SearchText,UpdateSourceTrigger=PropertyChanged}" 
+                 ui:ControlHelper.PlaceholderText="Поиск: "  Style="{StaticResource SearchTextBoxStyle}"></TextBox>
+            <Button Grid.Row="0" x:Name="Exitbtn" Margin="0,10,80,10" HorizontalAlignment="Right" Background="Transparent" Click="Exitbtn_Click">
+                <Button.Content>
+                    <Image Height="50" Source="/Resources/ThemeImages/sign-out.png"/>
+                </Button.Content>
+            </Button>
+            <Button Grid.Row="0" x:Name="Closebtn" Margin="10" HorizontalAlignment="Right" Background="Transparent" Click="Closebtn_Click">
+                <Button.Content>
+                    <Image Height="50" Source="/Resources/ThemeImages/close.png"/>
+                </Button.Content>
+            </Button>
+            <Frame NavigationUIVisibility="Hidden" Grid.Row="1" x:Name="MainFrame"></Frame>
+            <Border MouseLeave="Menu_MouseLeave"  x:Name="Menu" CornerRadius="20" Grid.RowSpan="2" Margin="-100,0,0,0" Width="0"
+                    HorizontalAlignment="Left"  Background="{StaticResource AnotherAccentuatedAttention}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="100"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Border Margin="10" Height="80" HorizontalAlignment="Left" Width="80" CornerRadius="21" 
+                            BorderThickness="4" BorderBrush="White">
+                        <Image Source="/Resources/Logo/beauty_logo.png"/>
+                    </Border>
+                    <TextBlock FontFamily="Tahoma" Margin="80,10,0,10" TextAlignment="Center" 
+                               Grid.Row="0" VerticalAlignment="Center" 
+                               HorizontalAlignment="Center" FontSize="24" Foreground="White">
+                        <Run Text="Салон красоты"/>
+                        <LineBreak/>
+                        <Run Text="&quot;Бровушка&quot;"/>
+                    </TextBlock>
+                    <RadioButton Command="{Binding OpenClientDataPageCommand}" CommandParameter="{Binding ElementName=MainFrame}" 
+                Style="{StaticResource MenuButtonStyle}" HorizontalAlignment="Left"  
+                Height="86" Width="300" FontSize="23" Grid.Row="6">Пользовательские данные</RadioButton>
+                    <RadioButton Command="{Binding OpenClientServiceOrdersPageCommand}" CommandParameter="{Binding ElementName=MainFrame}" 
+                HorizontalAlignment="Left" Style="{StaticResource MenuButtonStyle}" 
+                Height="86" Width="300" FontSize="25" Grid.Row="3">Заказы услуг</RadioButton>
+                    <RadioButton Command="{Binding OpenProductCartPageCommand}" CommandParameter="{Binding ElementName=MainFrame}" 
+                HorizontalAlignment="Left" Style="{StaticResource MenuButtonStyle}" 
+                Height="86" Width="300" FontSize="25" Grid.Row="5">Корзина</RadioButton>
+                    <RadioButton Command="{Binding OpenServicesPageCommand}" CommandParameter="{Binding ElementName=MainFrame}" 
+                HorizontalAlignment="Left" Style="{StaticResource MenuButtonStyle}" 
+                Height="86" Width="300" IsChecked="True"  FontSize="25" Grid.Row="2">Список услуг</RadioButton>
+                    <RadioButton Command="{Binding OpenProductsPageCommand}" CommandParameter="{Binding ElementName=MainFrame}" 
+                HorizontalAlignment="Left" Style="{StaticResource MenuButtonStyle}" 
+                Height="86" Width="300" FontSize="25" Grid.Row="4">Список товаров</RadioButton>
+                </Grid>
+            </Border>
+
+        </Grid>
+    </Border>
+
 </Window>

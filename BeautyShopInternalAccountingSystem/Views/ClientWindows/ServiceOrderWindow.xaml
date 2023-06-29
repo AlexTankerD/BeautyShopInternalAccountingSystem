@@ -7,22 +7,33 @@
         xmlns:local="clr-namespace:BeautyShopInternalAccountingSystem.Views.ClientWindows"
         mc:Ignorable="d"
         Title="Заказ услуги" FontFamily="Tahoma" ResizeMode="NoResize" 
-        ui:WindowHelper.UseModernWindowStyle="True" Height="400" Width="500" 
-        WindowStartupLocation="CenterScreen" x:Name="serviceorderwnd">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <TextBox Grid.Row="0" Height="50" Width="350" TextWrapping="Wrap" IsReadOnly="True" Text="{Binding SelectedService.Name, StringFormat='Выбранная услуга: {0}'}"  
+        Height="400" Width="500" WindowStyle="None" AllowsTransparency="True" 
+        WindowStartupLocation="CenterScreen" x:Name="serviceorderwnd" Background="Transparent">
+    <Border BorderThickness="2" BorderBrush="Black" CornerRadius="20" Background="White">
+        <Grid x:Name="MainArea">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"></RowDefinition>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Border Margin="10" Height="40" HorizontalAlignment="Left" Width="40" CornerRadius="21">
+                <Image Source="/Resources/Logo/beauty_logo.png"/>
+            </Border>
+            <Button Grid.Row="0" Height="40" Width="40" x:Name="Exitbtn" Margin="10" HorizontalAlignment="Right" Background="Transparent" Click="Exitbtn_Click">
+                <Button.Content>
+                    <Image Source="/Resources/ThemeImages/close.png"/>
+                </Button.Content>
+            </Button>
+            <TextBox Grid.Row="1" Height="50" Width="350" TextWrapping="Wrap" IsReadOnly="True" Text="{Binding SelectedService.Name, StringFormat='Выбранная услуга: {0}'}"  
                  Style="{StaticResource TextBoxStyle}"></TextBox>
-        <TextBox Grid.Row="1" Height="50" Width="350" TextWrapping="Wrap" Text="{Binding StartDate}"  
+            <TextBox Grid.Row="2" Height="50" Width="350" TextWrapping="Wrap" Text="{Binding StartDate}"  
                  Style="{StaticResource TextBoxStyle}" ui:ControlHelper.PlaceholderText="Дата проведения услуги"></TextBox>
-        <TextBox Grid.Row="2" Height="50" Width="350" TextWrapping="Wrap" Text="{Binding Comment}"  
+            <TextBox Grid.Row="3" Height="50" Width="350" TextWrapping="Wrap" Text="{Binding Comment}"  
                  Style="{StaticResource TextBoxStyle}" ui:ControlHelper.PlaceholderText="Комментарий"></TextBox>
-        <Button Grid.Row="3" Height="40" Width="250" Command="{Binding OrderServiceCommand}" 
+            <Button Grid.Row="4" Height="40" Width="250" Command="{Binding OrderServiceCommand}" 
                 CommandParameter="{Binding ElementName=serviceorderwnd}" Style="{StaticResource ButtonStyle }">Оформить заказ</Button>
-    </Grid>
+        </Grid>
+    </Border>
 </Window>

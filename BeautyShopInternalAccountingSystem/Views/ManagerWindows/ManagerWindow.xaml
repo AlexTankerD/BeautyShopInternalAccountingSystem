@@ -9,7 +9,7 @@
         Title="Приложение для менеджера" WindowStyle="None" Background="Transparent" FontFamily="Tahoma" Height="720" Width="1200" 
         WindowStartupLocation="CenterScreen" AllowsTransparency="True"  
         ResizeMode="NoResize" >
-    <Border CornerRadius="20" Background="{StaticResource MainBackground}">
+    <Border BorderThickness="2" BorderBrush="Black"  CornerRadius="20" Background="{StaticResource MainBackground}">
         <Grid x:Name="MainArea">
         <Grid.RowDefinitions>
                 <RowDefinition Height="90"></RowDefinition>

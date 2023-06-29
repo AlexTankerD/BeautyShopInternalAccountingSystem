@@ -7,44 +7,56 @@
         xmlns:ui="http://schemas.modernwpf.com/2019" 
         xmlns:viewmodel="clr-namespace:BeautyShopInternalAccountingSystem.ViewModels"
         mc:Ignorable="d"
-        Title="Авторизация" FontFamily="Tahoma" Height="450" Width="400" WindowStartupLocation="CenterScreen" ui:WindowHelper.UseModernWindowStyle="True" ResizeMode="NoResize" x:Name="authwnd">
+        Title="Авторизация" WindowStyle="None" AllowsTransparency="True" Background="Transparent"
+        FontFamily="Tahoma" Height="550" Width="500" WindowStartupLocation="CenterScreen"  ResizeMode="NoResize" x:Name="authwnd">
     <Window.DataContext>
         <viewmodel:AuthorizationViewModel/>
     </Window.DataContext>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition/>
-            <RowDefinition />
-            <RowDefinition Height="50"/>
-        </Grid.RowDefinitions>
-        <TextBox Text="{Binding Login}" x:Name="LoginBox" Grid.Row="0" Margin="15,15,15,15" 
+    <Border BorderThickness="2" BorderBrush="Black" CornerRadius="20" Background="{StaticResource MainBackground}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Border Margin="10" Height="40" HorizontalAlignment="Left" Width="40" CornerRadius="21">
+                <Image Source="/Resources/Logo/beauty_logo.png"/>
+            </Border>
+            <Button Grid.Row="0" Height="40" Width="40" x:Name="Exitbtn" Margin="10" HorizontalAlignment="Right" Background="Transparent" Click="Exitbtn_Click">
+                <Button.Content>
+                    <Image Source="/Resources/ThemeImages/close.png"/>
+                </Button.Content>
+            </Button>
+            <TextBox Text="{Binding Login}" x:Name="LoginBox" Grid.Row="1" Margin="15,15,15,15" 
                  Height="60" 
                  ui:ControlHelper.PlaceholderText="Логин"
                  Style="{StaticResource TextBoxStyle}" 
                  ></TextBox>
-        <TextBox Text="{Binding Password}" x:Name="PasswordBox" Grid.Row="1" Height="60" 
+            <TextBox Text="{Binding Password}" x:Name="PasswordBox" Grid.Row="2" Height="60" 
                  Margin="15,15,15,15" 
                  ui:ControlHelper.PlaceholderText="Пароль"
                  Style="{StaticResource TextBoxStyle}"></TextBox>
-        <StackPanel Margin="15,0,15,0" Grid.Row="2">
-            <RadioButton IsChecked="{Binding ClientBtnIsChecked}"  Margin="15,10,15,0" Style="{StaticResource RadioButtonStyle}">Войти как пользователь</RadioButton>
-            <RadioButton IsChecked="{Binding EmployeeBtnIsChecked}" Margin="15,10,15,0" Style="{StaticResource RadioButtonStyle}">Войти как сотрудник</RadioButton>
-            <RadioButton IsChecked="{Binding ManagerBtnIsChecked}" Margin="15,10,15,0" Style="{StaticResource RadioButtonStyle}">Войти как менеджер</RadioButton>
-        </StackPanel>
-        <Button VerticalAlignment="Bottom" Margin="15" Height="50" 
-                Grid.Row="3" Width="150" 
+            <StackPanel Margin="15,0,15,0" Grid.Row="3">
+                <RadioButton FontSize="15" IsChecked="{Binding ClientBtnIsChecked}"  Margin="15,10,15,0" Style="{StaticResource RadioButtonStyle}">Войти как пользователь</RadioButton>
+                <RadioButton FontSize="15" IsChecked="{Binding EmployeeBtnIsChecked}" Margin="15,10,15,0" Style="{StaticResource RadioButtonStyle}">Войти как сотрудник</RadioButton>
+                <RadioButton FontSize="15" IsChecked="{Binding ManagerBtnIsChecked}" Margin="15,10,15,0" Style="{StaticResource RadioButtonStyle}">Войти как менеджер</RadioButton>
+            </StackPanel>
+            <Button VerticalAlignment="Bottom" Margin="15" Height="50" 
+                Grid.Row="4" Width="200" 
                 Style="{StaticResource ButtonStyle}" 
                 HorizontalAlignment="Center"
                 Command="{Binding AuthorizationCommand}" 
                 CommandParameter="{Binding ElementName = authwnd}">Войти</Button>
-        <Button Grid.Row="4" Margin="15,0,0,0" 
+            <Button FontSize="15" Grid.Row="5" Margin="15,0,0,0" 
                 HorizontalAlignment="Left" 
                 Style="{StaticResource ButtonStringStyle}"
                 Command="{Binding OpenRegistrationWindowCommand}" CommandParameter="{Binding ElementName=authwnd}">Зарегистрироваться</Button>
-        <Button Grid.Row="4" Margin="0,0,15,0"
+            <Button FontSize="15" Grid.Row="5" Margin="0,0,15,0"
                 HorizontalAlignment="Right" 
                 Command="{Binding OpenForgotPasswordWindowCommand}" CommandParameter="{Binding ElementName=authwnd}" Style="{StaticResource ButtonStringStyle}">Забыли пароль</Button>
-    </Grid>
+        </Grid>
+    </Border>
 </Window>

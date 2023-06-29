@@ -170,6 +170,19 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
                 OnPropertyChanged("FilteredManufacturers");
             }
         }
+        private string _searchmanufacturertext;
+        public string SearchManufacturerText
+        {
+            get
+            {
+                return _searchmanufacturertext;
+            }
+            set
+            {
+                _searchmanufacturertext = value;
+                OnPropertyChanged("FilteredManufacturers");
+            }
+        }
         public IEnumerable<Product> FilteredProducts
         {
             get
@@ -231,9 +244,9 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
         {
             get
             {
-                if (SearchText != null)
+                if (SearchManufacturerText != null)
                 {
-                    var SearchName = AllManufacturers.Where(x => x.Name.ToUpper().StartsWith(SearchText.ToUpper()));
+                    var SearchName = AllManufacturers.Where(x => x.Name.ToUpper().StartsWith(SearchManufacturerText.ToUpper()));
                     return SearchName;
                 }
                 else { return AllManufacturers; }

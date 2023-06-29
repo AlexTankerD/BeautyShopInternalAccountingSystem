@@ -103,7 +103,7 @@
                                 </Grid.ColumnDefinitions>
                                 <Border Background="{StaticResource MainBackground}" Grid.RowSpan="3" Grid.Column="0"
                                     Height="116" Width="116"
-                                    CornerRadius="10" BorderThickness="5" BorderBrush="Black">
+                                    CornerRadius="10" BorderThickness="3" BorderBrush="Black">
                                     <Image Width="{Binding RelativeSource={RelativeSource FindAncestor, 
                                 AncestorType={x:Type Border}},Path=ActualWidth}" Height="{Binding RelativeSource={RelativeSource FindAncestor, 
                                 AncestorType={x:Type Border}},Path=ActualHeight}" Source="{Binding Path=ServiceImageDirectory, Converter={StaticResource PathConverter}}"></Image>
@@ -123,7 +123,7 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <Line Y1="0" Y2="0" X1="0" X2="900" StrokeThickness="4" Grid.Row="3"  Stroke="Black"/>
+            <Line Y1="0" Y2="0" X1="40" X2="960" StrokeThickness="4" Grid.Row="3"  Stroke="Black"/>
         </Grid>
     </Border>
 </Window>

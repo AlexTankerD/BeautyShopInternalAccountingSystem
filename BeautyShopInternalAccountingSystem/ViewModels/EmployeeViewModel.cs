@@ -32,16 +32,16 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
 
         private ObservableCollection<ServiceOrder> AllServiceOrders;
 
-        private string _searchserviceordertext;
-        public string SearchServiceOrderText
+        private string _searchtext;
+        public string SearchText
         {
             get
             {
-                return _searchserviceordertext;
+                return _searchtext;
             }
             set
             {
-                _searchserviceordertext = value;
+                _searchtext = value;
                 OnPropertyChanged("FilteredServiceOrders");
             }
         }
@@ -49,12 +49,12 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
         {
             get
             {
-                if (SearchServiceOrderText != null)
+                if (SearchText != null)
                 {
-                    var SearchName = AllServiceOrders.Where(x => x.Client.Name.ToUpper().StartsWith(SearchServiceOrderText.ToUpper()) ||
-                    x.Client.Surname.ToUpper().StartsWith(SearchServiceOrderText.ToUpper()) ||
-                    x.Client.Patronymic.ToUpper().StartsWith(SearchServiceOrderText.ToUpper()) ||
-                    x.Service.Name.ToUpper().StartsWith(SearchServiceOrderText.ToUpper()));
+                    var SearchName = AllServiceOrders.Where(x => x.Client.Name.ToUpper().StartsWith(SearchText.ToUpper()) ||
+                    x.Client.Surname.ToUpper().StartsWith(SearchText.ToUpper()) ||
+                    x.Client.Patronymic.ToUpper().StartsWith(SearchText.ToUpper()) ||
+                    x.Service.Name.ToUpper().StartsWith(SearchText.ToUpper()));
                     return SearchName;
                 }
                 else { return AllServiceOrders; }

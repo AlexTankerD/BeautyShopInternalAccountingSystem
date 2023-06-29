@@ -8,64 +8,80 @@
         xmlns:local="clr-namespace:BeautyShopInternalAccountingSystem.Views.ClientWindows"
         mc:Ignorable="d"
         Title="Изменить данные о клиенте" FontFamily="Tahoma" ResizeMode="NoResize" 
-        ui:WindowHelper.UseModernWindowStyle="True" Height="600" Width="600" 
+        WindowStyle="None" AllowsTransparency="True" Background="Transparent"  Height="700" Width="700" 
         WindowStartupLocation="CenterScreen" x:Name="changeclientdatawnd">
-    <ScrollViewer VerticalScrollBarVisibility="Hidden">
-        <Grid>
+    <Border BorderThickness="2" BorderBrush="Black" CornerRadius="20" Background="White">
+        <Grid x:Name="MainArea">
             <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
+                <RowDefinition Height="60"></RowDefinition>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Border CornerRadius="3" BorderThickness="2" BorderBrush="{StaticResource BlackColor}" Margin="10"  
-                    Width="200" HorizontalAlignment="Left" Grid.Row="0" Grid.RowSpan="3" Height="200">
-                <Image Width="{Binding RelativeSource={RelativeSource FindAncestor, 
+            <Border Margin="10" Height="40" HorizontalAlignment="Left" Width="40" CornerRadius="21">
+                <Image Source="/Resources/Logo/beauty_logo.png"/>
+            </Border>
+            <Button Grid.Row="0" Height="40" Width="40" x:Name="Exitbtn" Margin="10" HorizontalAlignment="Right" Background="Transparent" Click="Exitbtn_Click">
+                <Button.Content>
+                    <Image Source="/Resources/ThemeImages/close.png"/>
+                </Button.Content>
+            </Button>
+            <ScrollViewer Grid.Row="1"  VerticalScrollBarVisibility="Hidden">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Border CornerRadius="10" BorderThickness="3" BorderBrush="{StaticResource BlackColor}" Margin="10"  
+                    Width="250" HorizontalAlignment="Left" Grid.Row="0" Grid.RowSpan="3" Height="250">
+                        <Image Width="{Binding RelativeSource={RelativeSource FindAncestor, 
                        AncestorType={x:Type Border}},Path=ActualWidth}" Height="{Binding RelativeSource={RelativeSource FindAncestor, 
                        AncestorType={x:Type Border}},Path=ActualHeight}" x:Name="ClientImage"></Image>
-            </Border>
-            <Button  Command="{Binding AddImageCommand}" CommandParameter="{Binding ElementName=changeclientdatawnd}" 
-                     Grid.Row="3" Height="50" Width="200" Margin="10" HorizontalAlignment="Left"  
+                    </Border>
+                    <Button  Command="{Binding AddImageCommand}" CommandParameter="{Binding ElementName=changeclientdatawnd}" 
+                     Grid.Row="3" Height="50" Width="250" Margin="10" HorizontalAlignment="Left"  
                      Style="{StaticResource ButtonStyle}">Изменить изображение</Button>
-            <TextBox HorizontalAlignment="Right" Grid.Row="0" Margin="10" Height="50" 
+                    <TextBox HorizontalAlignment="Right" Grid.Row="0" Margin="10" Height="50" 
                      Text="{Binding Username}"  ui:ControlHelper.PlaceholderText="{Binding Path=Client.Username, StringFormat='Имя пользователя: {0}'}" 
-                     Width="350" Style="{StaticResource TextBoxStyle}"></TextBox>
-            <TextBox HorizontalAlignment="Right" Grid.Row="1" Margin="10" Height="50" 
+                     Width="400" Style="{StaticResource TextBoxStyle}"></TextBox>
+                    <TextBox HorizontalAlignment="Right" Grid.Row="1" Margin="10" Height="50" 
                      Text="{Binding Password}"  ui:ControlHelper.PlaceholderText="{Binding Path=Client.Password, StringFormat='Пароль: {0}'}" 
-                     Width="350" Style="{StaticResource TextBoxStyle}"></TextBox>
-            <TextBox HorizontalAlignment="Right" Grid.Row="2" Margin="10" Height="50" 
+                     Width="400" Style="{StaticResource TextBoxStyle}"></TextBox>
+                    <TextBox HorizontalAlignment="Right" Grid.Row="2" Margin="10" Height="50" 
                      Text="{Binding Name}" ui:ControlHelper.PlaceholderText="{Binding Path=Client.Name, StringFormat='Имя: {0}'}" 
-                     Width="350" Style="{StaticResource TextBoxStyle}"></TextBox>
-            <TextBox HorizontalAlignment="Right" Grid.Row="3" Margin="10" Height="50" 
+                     Width="400" Style="{StaticResource TextBoxStyle}"></TextBox>
+                    <TextBox HorizontalAlignment="Right" Grid.Row="3" Margin="10" Height="50" 
                      Text="{Binding Surname}" ui:ControlHelper.PlaceholderText="{Binding Path=Client.Surname, StringFormat='Фамилия: {0}'}"  
-                     Width="350" Style="{StaticResource TextBoxStyle}"></TextBox>
-            <TextBox HorizontalAlignment="Right" Grid.Row="4" Margin="10" Height="50" 
+                     Width="400" Style="{StaticResource TextBoxStyle}"></TextBox>
+                    <TextBox HorizontalAlignment="Right" Grid.Row="4" Margin="10" Height="50" 
                      Text="{Binding Patronymic}" ui:ControlHelper.PlaceholderText="{Binding Path=Client.Patronymic, StringFormat='Отчество: {0}'}"  
-                     Width="350" Style="{StaticResource TextBoxStyle}"></TextBox>
-            <TextBox HorizontalAlignment="Right" Grid.Row="5" Margin="10" Height="50" 
+                     Width="400" Style="{StaticResource TextBoxStyle}"></TextBox>
+                    <TextBox HorizontalAlignment="Right" Grid.Row="5" Margin="10" Height="50" 
                      Text="{Binding Birthday}"  ui:ControlHelper.PlaceholderText="{Binding Path=Client.Birthday, StringFormat='День рождения: {0}'}"  
-                     Width="350" Style="{StaticResource TextBoxStyle}"></TextBox>
-            <TextBox HorizontalAlignment="Right" Grid.Row="6" Margin="10" Height="50" 
+                     Width="400" Style="{StaticResource TextBoxStyle}"></TextBox>
+                    <TextBox HorizontalAlignment="Right" Grid.Row="6" Margin="10" Height="50" 
                      Text="{Binding Email}" ui:ControlHelper.PlaceholderText="{Binding Path=Client.Email, StringFormat='Email: {0}'}"  
-                     Width="350" Style="{StaticResource TextBoxStyle}"></TextBox>
-            <TextBox HorizontalAlignment="Right" Grid.Row="7" Margin="10" Height="50" 
+                     Width="400" Style="{StaticResource TextBoxStyle}"></TextBox>
+                    <TextBox HorizontalAlignment="Right" Grid.Row="7" Margin="10" Height="50" 
                      Text="{Binding PhoneNumber}" ui:ControlHelper.PlaceholderText="{Binding Path=Client.PhoneNumber, StringFormat='Номер телефона: {0}'}"  
-                     Width="350" Style="{StaticResource TextBoxStyle}"></TextBox>
-            <ComboBox FontFamily="Tahoma"  Margin="0,10,260,0" HorizontalAlignment="Right" Height="50" 
-                      Width="100" SelectedValue="{Binding Sex}" ui:ControlHelper.PlaceholderText="{Binding Path=Client.Sex, StringFormat='Пол: {0}'}" Grid.Row="8">
-                <sys:Char>М</sys:Char>
-                <sys:Char>Ж</sys:Char>
-            </ComboBox>
-            <Button Grid.Row="9" Height="50" Width="200" Margin="10" HorizontalAlignment="Center"  
+                     Width="400" Style="{StaticResource TextBoxStyle}"></TextBox>
+                    <ComboBox FontFamily="Tahoma"  Margin="0,10,260,0" HorizontalAlignment="Right" Height="50" 
+                      Width="150" SelectedValue="{Binding Sex}" ui:ControlHelper.PlaceholderText="{Binding Path=Client.Sex, StringFormat='Пол: {0}'}" Grid.Row="8">
+                        <sys:Char>М</sys:Char>
+                        <sys:Char>Ж</sys:Char>
+                    </ComboBox>
+                    <Button Grid.Row="9" Height="50" Width="250" Margin="10" HorizontalAlignment="Center"  
                     Style="{StaticResource ButtonStyle}"
                     Command="{Binding ChangeClientDataCommand}" CommandParameter="{Binding ElementName=changeclientdatawnd}">Изменить данные</Button>
+                </Grid>
+            </ScrollViewer>
         </Grid>
-    </ScrollViewer>
+    </Border>
 </Window>

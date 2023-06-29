@@ -56,6 +56,7 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
         #region Выбранные услуги, товары и заказы
         public Service SelectedService { get; set; }
         public Product SelectedProduct { get; set; }
+        public Product SelectedProductInCart { get; set; }
         public ServiceOrder SelectedServiceOrder { get; set; }
         #endregion
 
@@ -67,105 +68,73 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
         #endregion
 
         #region Поиск услуг, товаров, заказов 
-        private string _searchservicetext;
-        public string SearchServiceText
+        private string _searchtext;
+        public string SearchText
         {
             get
             {
-                return _searchservicetext;
+                return _searchtext;
             }
             set
             { 
-                _searchservicetext = value;
+                _searchtext = value;
                 OnPropertyChanged("FilteredServices");
+                OnPropertyChanged("FilteredProducts");
+                OnPropertyChanged("FilteredProductCart");
+                OnPropertyChanged("FilteredServiceOrders");
             }
         }
         public IEnumerable<Service> FilteredServices
         {
             get
             { 
-                if(SearchServiceText != null)
+                if(SearchText != null)
                 {
-                    var SearchName = AllServices.Where(x => x.Name.ToUpper().StartsWith(SearchServiceText.ToUpper()));
+                    var SearchName = AllServices.Where(x => x.Name.ToUpper().StartsWith(SearchText.ToUpper()) || x.Description.ToUpper().StartsWith(SearchText.ToUpper()));
                     return SearchName;
                 }
                 else { return AllServices; }
                 
             }
         }
-        private string _searchproducttext;
-        public string SearchProductText
-        {
-            get
-            {
-                return _searchproducttext;
-            }
-            set
-            {
-                _searchproducttext = value;
-                OnPropertyChanged("FilteredProducts");
-            }
-        }
         public IEnumerable<Product> FilteredProducts
         {
             get
             {
-                if (SearchProductText != null)
+                if (SearchText != null)
                 {
-                    var SearchName = AllProducts.Where(x => x.Name.ToUpper().StartsWith(SearchProductText.ToUpper()));
+                    var SearchName = AllProducts.Where(x => x.Name.ToUpper().StartsWith(SearchText.ToUpper()) ||
+                    x.Description.ToUpper().StartsWith(SearchText.ToUpper()));
                     return SearchName;
                 }
                 else { return AllProducts; }
 
             }
         }
-        private string _searchproductcarttext;
-        public string SearchProductCartText
-        {
-            get
-            {
-                return _searchproductcarttext;
-            }
-            set
-            {
-                _searchproductcarttext = value;
-                OnPropertyChanged("FilteredProductCart");
-            }
-        }
         public IEnumerable<Product> FilteredProductCart
         {
             get
             {
-                if (SearchProductCartText != null)
+                if (SearchText != null)
                 {
-                    var SearchName = AllProductsInCart.Where(x => x.Name.ToUpper().StartsWith(SearchProductText.ToUpper()));
+                    if (AllProductsInCart == null)
+                        return null;
+                    var SearchName = AllProductsInCart.Where(x => x.Name.ToUpper().StartsWith(SearchText.ToUpper()) ||
+                    x.Description.ToUpper().StartsWith(SearchText.ToUpper()));
                     return SearchName;
                 }
                 else { return AllProductsInCart; }
 
             }
         }
-        private string _searchserviceordertext;
-        public string SearchServiceOrderText
-        {
-            get
-            {
-                return _searchserviceordertext;
-            }
-            set
-            {
-                _searchserviceordertext = value;
-                OnPropertyChanged("FilteredServiceOrders");
-            }
-        }
         public IEnumerable<ServiceOrder> FilteredServiceOrders
         {
             get
             {
-                if (SearchServiceOrderText != null)
+                if (SearchText != null)
                 {
-                    var SearchName = AllServiceOrders.Where(x => x.Service.Name.ToUpper().StartsWith(SearchServiceOrderText.ToUpper()) || 
-                    x.StartDate.ToUpper().StartsWith(SearchServiceOrderText.ToUpper()));
+                    var SearchName = AllServiceOrders.Where(x => x.Service.Name.ToUpper().StartsWith(SearchText.ToUpper()) || 
+                    x.StartDate.ToUpper().StartsWith(SearchText.ToUpper()) || x.Service.Description.ToUpper().StartsWith(SearchText.ToUpper()));
                     return SearchName;
                 }
                 else { return AllServiceOrders; }
@@ -421,6 +390,32 @@ namespace BeautyShopInternalAccountingSystem.ViewModels
                 AllProductsInCart.Clear();
             });
             
+        }
+        private AsyncRelayCommand _deleteproductincartcommand;
+        public AsyncRelayCommand DeleteProductInCartCommand
+        {
+            get
+            {
+                return _deleteproductincartcommand ?? new AsyncRelayCommand(async (obj) =>
+                {
+                    if (SelectedProductInCart == null)
+                    {
+                        OpenMessageWindow("Не выбран товар для удаления");
+                        return;
+                    }
+                    await Task.Run(() => DeleteProductInCartCommandMethod());
+                }
+                );
+            }
+        }
+        private void DeleteProductInCartCommandMethod()
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                AllProductsInCart.Remove(SelectedProductInCart);
+                OpenMessageWindow("Товар успешно удален из корзины");
+                return;
+            }); 
         }
         #endregion
 

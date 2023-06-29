@@ -24,7 +24,11 @@ namespace BeautyShopInternalAccountingSystem.Views.AuthorizationWindows
             InitializeComponent();
             
         }
+        private void Exitbtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
 
-        
+
     }
 }

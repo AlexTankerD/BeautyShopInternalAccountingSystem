@@ -9,7 +9,7 @@
         Title="Сообщение" Height="300" FontFamily="Tahoma" Width="400" 
         AllowsTransparency="True" WindowStyle="None" Background="Transparent"
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
-    <Border BorderThickness="2" BorderBrush="Black" CornerRadius="20" Background="{StaticResource MainBackground}">
+    <Border  BorderThickness="2" BorderBrush="Black" CornerRadius="20" Background="{StaticResource MainBackground}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="60"/>

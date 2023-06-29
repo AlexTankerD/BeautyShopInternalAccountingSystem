@@ -21,7 +21,7 @@ namespace BeautyShopInternalAccountingSystem
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            ManagerWindow wnd = new ManagerWindow(new ManagerViewModel());
+            AuthorizationWindow wnd = new AuthorizationWindow();
             wnd.Show();
         }
     }
